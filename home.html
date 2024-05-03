@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Dolphintellect </title>
+    <link rel = "stylesheet" href = "homeStyleSheet.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<body>
+    <section class="header">
+        <header>
+            <nav>
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="">Home</a></li>
+                        <li><a href="CourseCatalog.html">Course Catalog</a></li>
+                        <li><a href="AdvancedGPA.html">Advanced GPA Calculator</a></li>
+                        <li><a href="Login.html">Login</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <footer> 
+            <div class="navfooter">
+                <ul>
+                    <li><a href="AboutUs.html">About US</a></li>
+                    <li><a href="ContactUs.html"> Contact US</a></li>
+                    <li><a href="ReportAnIssue.html">Report An Issue</a></li>
+                </ul>
+            </div>
+        </footer>
+    
+    </section>
+
+    <form method="post" name="sample" class="courseTbl">
+    <br>
+        Course: <input type="text" name="courseName">
+        Grade: <input type="text" name="grade">
+        <input type="button" name="Add" value="Add" class="addbtn" onclick="courseGradeTable();"><hr>
+        <input type="button" name="calcGPA" value="Calculate GPA" class="calcbtn"><hr>
+        <br>
+            <table id="tbl" class="table">
+                <thread>
+                    <th>Course</th>
+                    <th>Grade</th>
+                    <th>Delete</th>
+                </thread>
+                <tbody>
+
+                </tbody>
+            </table>
+
+
+    </form>
+    <script type="text/javascript">
+        function courseGradeTable()
+        {
+            var courseName = document.sample.courseName.value;
+            var grade = document.sample.grade.value  ;
+
+            var tr = document.createElement('tr');
+
+            var td1 = tr.appendChild(document.createElement('td'));
+            var td2 = tr.appendChild(document.createElement('td'));
+            var td3 = tr.appendChild(document.createElement('td'));
+
+            td1.innerHTML= courseName;
+            td2.innerHTML = grade;
+            td3.innerHTML='<input type="button" name="Delete" value="delete" class="delbtn" onclick="deleteData(this);"><hr>'
+
+            document.getElementById("tbl").appendChild(tr);
+            
+        }
+
+        function deleteData(Stud){
+            var s = Stud.parentNode.parentNode;
+            s.parentNode.removeChild(s);
+        }
+
+
+    </script>
+
+    
+</body>
+
+</html>
