@@ -1,162 +1,245 @@
-*{
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+html, body {
+    height: 100%;
     margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ADD8E6; /* Light blue background for the entire page */
+    position: relative; /* Needed for absolute positioning of the footer */
+    min-height: 100vh; /* Full height of the viewport */
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-name {
+    font-family: 'Pacifico', cursive;
+    color: white;
+    padding: 20px;
+    font-size: 32px;
+    align-self: center; /* Centers our site name vertically within the header */
+}
+
+.header {
+    display: flex;
+    justify-content: center; /* Centers the entire header content */
+    align-items: center;
+    padding: 20px;
+    background-color: #000066;
+    width: 100%; /* Ensures the header spans the full width */
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center; /* Centers navigation links horizontally */
+    align-items: center;
     padding: 0;
 }
 
-/*setting the page in the center*/
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #9cc8ee ;
-}
-
-/*setting up the background*/
-.header{
-    min-height: 100vh;
-    width: 100%;
-    background-color: #9cc8ee;
-    color:white;
-}
-
-.nav-links{
-    flex: 1;
-    text-align: right;
-
-}
-.nav-links ul li{
+.nav-links ul {
     list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center; /* Aligns the menu items vertically */
+}
+
+.nav-links ul li a {
     display: inline-block;
-    padding: 8px 12px;
-    position: relative;
-
+    background-color: black; /* Button background */
+    color: white; /* Text color */
+    text-decoration: none;
+    padding: 15px 30px;
+    margin: 0 15px;
+    border-radius: 25px; /* Rounded corners */
+    transition: transform 0.3s, background-color 0.3s; /* Smooth transition for transform and background color */
+    font-size: 20px;
+    font-weight: 400; /* Makes the font slimmer */
+    font-family: 'Montserrat', sans-serif;
 }
 
-/*text color of footer*/
-.nav-links ul li a{
-    color: #fff;
-    text-decoration:none;
-    font-size: 20px
+.nav-links ul li a:hover {
+    transform: scale(1.1); /* Scales the button up to 110% of its size */
+    background-color: #808080; /* Changes background color to gray on hover */
 }
 
-/*a line that hover over the text of header*/
-.nav-links ul li::after{
-    content: '';
-    width: 0%;
-    height: 2px;
-    background: #ffffff;
-    display: block;
-    margin: auto;
-    transition: 0.5s;
-}
-.nav-links ul li:hover:after{
-    width: 100%;
+body.home-page .nav-links ul li a[href=""] {
+    display: none; /* Specific rule to hide the 'Home' link on the homepage */
 }
 
-/*header color for home page*/
-header{
-    position: absolute;
-    width: 100%;
-    height: 13vh;
-    background-color:#c7dff5;
-}
-
-
-/*----footer setting----*/
-.navfooter{
-    background-color: rgb(248, 248, 176);
-    width:100%;
-    margin: auto;
-    text-align: center;
-    padding-bottom: 13px;
-    position: fixed;
-    bottom: 0px;
-
-}
-
-
-.navfooter ul{
-    display: 30px 0;
+.main-content {
+    flex-grow: 1; /* Allows the content area to grow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
-.navfooter ul a{
-    color: black;
-    margin: 20px;
-    text-decoration: none;
-    font-size: 1.3em;
-    opacity: 0.7;
-    transition: 0.5s;
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px; /* Space above the button container */
 }
 
-/*Table placement in home Page*/
-.courseTbl{
-    position: absolute;
-    color: #fff;
+.calcbtn, .addbtn {
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    margin: 15px; /* Uniform margin for buttons */
+    border-radius: 25px;
+    transition: transform 0.3s, background-color 0.3s;
     font-size: 20px;
-    top: 100px;
-    left: 70px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    align-self: center; /* Center buttons within their container */
 }
 
-.table th{
-    box-sizing: border-box;
-    text-decoration: none;
-    border: 2px solid;
-    font-size: 16px;
-    color: #fff;
+.calcbtn:hover, .addbtn:hover {
+    transform: scale(1.1);
+    background-color: #808080;
+}
+
+.footer {
+    width: 100%;
+    padding: 20px 0;
+    background-color: #ADD8E6; /* Matches the page background */
     text-align: center;
-    height: 10px;
-    width: 10px;
+    position: fixed; /* Keeps the footer at the bottom */
+    bottom: 0; /* Ensures the footer is at the bottom of the viewport */
+    left: 0; /* Aligns the footer to start from the left edge */
+    display: flex;
+    justify-content: center; /* Center the footer content horizontally */
+    align-items: center; /* Center the footer content vertically */
+}
+
+.navfooter ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Ensures the list is centered */
+    align-items: center;
+}
+
+.navfooter ul li {
+    padding: 0 20px; /* Reduced padding for closer footer items */
+}
+
+.navfooter ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align items horizontally */
+    margin-bottom: 20px; /* Add some space between input sections */
+}
+
+.input-label {
+    margin-bottom: 5px; /* Add some space between label and input */
+    color: white;
+    font-size: 20px; /* Increase font size */
+}
+
+.input-text {
+    width: 100%;
     padding: 15px;
-    border-collapse: collapse;
-
-
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: white; /* Set background color to white */
+    color: #333; /* Set text color to dark */
+    text-align: center; /* Center align text within text boxes */
 }
 
-/*designing the add button*/
-.addbtn{
-    top:26px;
-    position: absolute;
-    text-decoration: none;
-    font-weight: 600;
-    background:transparent;
-    border-radius: 80px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
-    border: none;
+.input-text:focus {
     outline: none;
-    width: 10%;
-    color: white;
-    font-size: 18px;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/*designing delete button*/
-.delbtn{
-    text-decoration: none;
-    font-weight: 600;
-    background:transparent;
-    border-radius: 80px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
-    border: none;
-    outline: none;
-    width: 20%;
-    color: white;
-    font-size: 14px;
-}
-
-/*designing calculted GPA button*/
-.calcbtn{
-    top:150px;
-    right:100px;
+.popup {
     position: fixed;
-    text-decoration: none;
-    font-weight: 600;
-    background:transparent;
-    border-radius: 80px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
-    border: none;
-    outline: none;
-    width: 20%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: auto;
+    max-width: 600px;
+}
+
+.dismiss {
+    background-color: red;
     color: white;
-    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1001;
+}
+
+.error-text {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.table {
+    width: 80%;
+    margin: 20px auto; /* Center the table and provide some space above and below */
+    border-collapse: collapse;
+    background-color: #f8f9fa; /* Light background for the table */
+}
+
+.table th, .table td {
+    text-align: left; /* Align text to the left */
+    padding: 12px 20px; /* Padding inside cells */
+    border-bottom: 2px solid #dee2e6; /* Light grey border for each cell */
+}
+
+.table th {
+    background-color: #007bff; /* Blue background for headers */
+    color: white;
+    font-size: 16px;
+}
+
+.table tr:hover {
+    background-color: #f1f1f1; /* Light grey background on hover */
+}
+
+.delete-btn {
+    color: #dc3545; /* Bootstrap danger color for the delete button */
+    cursor: pointer; /* Cursor indicates clickable */
+    padding: 5px 10px; /* Padding for better touch area */
+    border-radius: 5px; /* Rounded corners for the button */
+    background-color: #f8d7da; /* Light red background */
+    border: 1px solid #dc3545; /* Red border */
+}
+
+.delete-btn:hover {
+    background-color: #dc3545; /* Darker red on hover */
+    color: white; /* White text on hover */
 }
