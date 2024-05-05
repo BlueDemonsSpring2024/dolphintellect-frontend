@@ -1,15 +1,545 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href = "courseCatalogStyleSheet.css">
-    <button type="submit" class="goback">
-        <a href="home.html"> Go Back</a>
-        
-    </button>
-<body>
-    <h1>Course Catalog</h1>
+    <meta charset="UTF-8">
+    <title>DePaul University Course Catalog</title>
+    <link rel="stylesheet" href="courseCatalogStyleSheet.css">
+    <link href='https://fonts.googleapis.com/css2?family=Pacifico&display=swap' rel='stylesheet'>
+</head>
+<body class="home-page">
+<header>
+    <div class="brand-name">Dolphintellect</div>
+    <nav>
+        <div class="nav-links">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="AdvancedGPA.html">Advanced GPA Calculator</a></li>
+                <li><a href="Login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<h1 class="page-title">DePaul University Course Catalog</h1>
 
-    
+<div class="search-container">
+    <label for="searchInput"></label><input type="text" id="searchInput" placeholder="Search By Number" onkeyup="filterCourses()">
+    <button onclick="filterCourses()">Search</button>
+</div>
+
+<div class="course-container">
+    <!-- THIS WAS AWFUL LOL-->
+    <div class="course" onclick="toggleDescription('csc200')">
+        <h2>CSC 200 - Survey of Computing <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc200" class="course-description" style="display:none;">
+        <p>This introductory course explores various careers in the field of information technology. A hands-on component will deal with state of the art personal computer operating systems, applications, database systems, Internet, email, and basic website construction. The structure of the course utilizes both classroom lectures and computer classroom labs. This course is geared toward the non-major and assumes no prior knowledge or experience in Computer Science.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc208')">
+        <h2>CSC 208 - Ethics in Technology <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc208" class="course-description" style="display:none;">
+        <p>Information Technology and the rapid pace in which it has advanced have had a tremendous impact on our lives. Changes have been swift and the human capacity to deal with them is limited. It has been said that our technology has outpaced our humanity. This course will research the new responsibilities technology presents and our ability to deal with these changes in an ethical manner. Students will employ ethical frameworks, which integrate computer science and ethics, to develop the skills required to examine different sets of assumptions and question them. Case studies will provide a historical perspective for analysis.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc241')">
+        <h2>CSC 241 - Introduction to Computer Science I <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc241" class="course-description" style="display:none;">
+        <p>An introduction to problem solving, algorithms and structured programming using a higher-level programming language. The course will focus on skills for developing algorithms, and for writing and debugging programs. Students will learn how and when to use loops, conditionals, and functional abstractions in the context of problems motivated by real world applications.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc242')">
+        <h2>CSC 242 - Introduction to Computer Science II <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc242" class="course-description" style="display:none;">
+        <p>An intermediate course in problem solving, algorithms and programming. Programming skills are further strengthened through more complex and larger programming assignments. The assignments will also be used to introduce different Computer Science areas (e.g., a Client/Server application for the Distributed Systems area). Classes and object oriented programming are motivated and introduced.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+    <div class="course" onclick="toggleDescription('csc211')">
+        <h2>CSC 211 - Programming in Java I <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc211" class="course-description" style="display:none;">
+        <p>Introduction to programming in Java and problem solving. Variables, data types, input/output, using objects and methods from the standard classes (such as String and Scanner), control structures, writing methods, arrays. Solving problems with algorithms and implementing algorithms in Java. (Not for CS majors)</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc212')">
+        <h2>CSC 212 - Programming in Java II <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc212" class="course-description" style="display:none;">
+        <p>Intermediate programming in Java and problem solving. Writing Java programs with multiple classes: constructors, visibility modifiers, static members, accessor and mutator methods, and arrays of objects. Inheritance, polymorphism, and interfaces. Sorting arrays of primitive data and arrays of objects. Exception handling. (Not for CS majors)</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc223')">
+        <h2>CSC 223 - The Impact of Computing Technology on Our Lives <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc223" class="course-description" style="display:none;">
+        <p>This course will introduce students to an overview of social analysis techniques and the theories of social change. These tools will be used to explore social impact issues of computing technology. Counts for Liberal Studies SCBI credit.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc233')">
+        <h2>CSC 233 - Codes and Ciphers <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc233" class="course-description" style="display:none;">
+        <p>This course is an introduction to the science and history of secret writing (cryptography) and how codes and ciphers can be broken (cryptanalysis). In historical settings we will encounter the main ideas and methods devised to secure communication channels. Possible topics include: substitution ciphers, transposition ciphers, the Vigenere cipher, statistical methods in cryptanalysis, public-key cryptography, and quantum cryptography.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc235')">
+        <h2>CSC 235 - Problem Solving <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc235" class="course-description" style="display:none;">
+        <p>How do you solve a problem? In this course we discuss different problem solving techniques and strategies such as modeling, establishing subgoals, and searching and pruning. The techniques will be presented as part of a theoretical framework, but there will be significant emphasis on solving problems in familiar domains such as games, newspaper articles, philosophy, and simple geometry and logic. At the end of the course, students will have built a repertoire of problem solving tools that will allow them to make an informed choice of approach towards new problems.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+    <div class="course" onclick="toggleDescription('csc243')">
+        <h2>CSC 243 - Introduction to Computer Science for Programmers <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc243" class="course-description" style="display:none;">
+        <p>An accelerated course covering the essentials of programming, with a focus on problem-solving, structured programming, and algorithm design. The concepts covered include collection types, conditional and iterative structures, functions, file input/output, exceptions, namespaces, recursion, and Internet client programming. Students are expected to have successfully completed at least one high-level, object-oriented programming class prior to enrollment.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc250')">
+        <h2>CSC 250 - Computers and Human Intelligence <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc250" class="course-description" style="display:none;">
+        <p>Students taking this course will study human problem-solving and its simulation by computers. Artificial intelligence, pattern recognition and learning programs will be discussed. PREREQUISITE(S): Familiarity with basic computer productivity tools and the Web.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc270')">
+        <h2>CSC 270 - From Fireflies to Facebook: The Science of Networks <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc270" class="course-description" style="display:none;">
+        <p>This course explores complex systems both natural and man-made, characterized by the relationships between interacting entities. Network structures can be found in the Internet and its many applications, but also in social relationships, marketplaces, ecosystems, even cells. We will examine a wide range of networks including technological, social, and natural. Students will learn basic concepts from graph theory, algorithms and network analysis, apply tools for extracting, analyzing and visualizing network properties, using data sets drawn from a variety of areas.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc281')">
+        <h2>CSC 281 - Workshop: Java for Programmers <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc281" class="course-description" style="display:none;">
+        <p>This course introduces students to the Java programming language and eclipse development environment.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc282')">
+        <h2>CSC 282 - Workshop: Linux for Programmers <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc282" class="course-description" style="display:none;">
+        <p>This course provides an introduction to Linux, the command-line environment, C programming, and version control.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc297')">
+        <h2>CSC 297 - Applied AI Lab <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc297" class="course-description" style="display:none;">
+        <p>In this hands-on course, students will study AI technologies, develop AI models, and apply AI tools and libraries to solve problems in a particular domain. Safe and responsible use of AI will be addressed. Topics will vary by the faculty member's interest and perspective.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc298')">
+        <h2>CSC 298 - Internship <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc298" class="course-description" style="display:none;">
+        <p>This course satisfies the junior year experiential learning requirement. In cooperation with local employers, this course offers students the opportunity to integrate their academic experience with on-the-job training in computer related work areas. Admission to the program requires consent of internship course instructor. Current work experience plus classroom time is required. Supervisor evaluation will contribute to the final grade.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc299')">
+        <h2>CSC 299 - Sophomore Lab in Applied Computing <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc299" class="course-description" style="display:none;">
+        <p>In this course, students investigate a particular application of computing. Students learn tools, methodologies, and formalisms used in a particular computing area, and apply them to develop working systems. Courses stress student initiative in investigating the application context, learning new tools (including languages and APIs), studying algorithms and code examples, and working on projects. Topics will vary by the faculty member's interest and perspective.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc300')">
+        <h2>CSC 300 - Data Structures I <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc300" class="course-description" style="display:none;">
+        <p>This is the first course in a two-course sequence on data structures using Java. The course introduces basic Java programming, reviews recursion, introduces asymptotic notations, and focuses mainly on linear data structures including arrays, linked lists and their variants, stacks and queues, and data structures supporting disjoint-set operations. The implementation of the basic operations on each data structure are discussed and analyzed in terms of their efficiency. The applications covered highlight and exploit the unique characteristics of the data structures, and emphasize problem solving and recursive thinking.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc301')">
+        <h2>CSC 301 - Data Structures II <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc301" class="course-description" style="display:none;">
+        <p>This is the second course in a two-course sequence on data structures using Java. The course focuses mainly on the following data structures, their analysis, and their applications: trees (search trees, balanced search trees), heaps, associative arrays, hash tables, and data structures for representing graphs. The implementation of the basic operations on each data structure are discussed and analyzed in terms of their efficiency. The applications discussed highlight and exploit the unique characteristics of the different data structures, and emphasize problem solving and recursive thinking.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc308')">
+        <h2>CSC 308 - Frameworks for Web Application Development <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc308" class="course-description" style="display:none;">
+        <p>This course introduces concepts, techniques, technologies and APIs for web application development. The main focus of the course is on the Model-View-Controller design pattern employed by modern full-stack web frameworks. Concepts and techniques covered include client/server programming, database abstraction APIs, and asynchronous JavaScript. Examples of full-stack MVC frameworks include Ruby-on-Rails (written in Ruby), Django and TurboGears (written in Python).</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc309')">
+        <h2>CSC 309 - C++ for Programmers <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc309" class="course-description" style="display:none;">
+        <p>This course covers the essentials of C and C++ programming, focusing primarily on the topics of memory management and object-oriented programming. Topics include pointers and dynamic allocation, operator overloading, copy constructors and destructors, inheritance and polymorphism.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+    <div class="course" onclick="toggleDescription('csc321')">
+        <h2>CSC 321 - Design and Analysis of Algorithms <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc321" class="course-description" style="display:none;">
+        <p>Techniques for designing algorithms including: analyzing algorithms (big-O, recurrence relations) and divide-and-conquer (quicksort, mergesort). Additional topics chosen from: the greedy method, dynamic programming, backtracking, branch-and-bound and string matching.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc325')">
+        <h2>CSC 325 - Time Series Analysis and Forecasting <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc325" class="course-description" style="display:none;">
+        <p>The course introduces students to statistical models for time series analysis and forecasting. The course topics include: autocorrelated data analysis, Box-Jenkins models (autoregressive, moving average, and autoregressive moving average models), analysis of seasonality, volatility models (GARCH-type, GARCH-M type, etc.), forecasting evaluation and diagnostics checking. The course will emphasize applications to financial data, volatility modeling and risk management. Real examples will be used throughout the course. PREREQUISITE(S): (CSC 212 or CSC 224 CSC 262 or CSC 309) and (CSC324 or MAT356) or consent of instructor.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc327')">
+        <h2>CSC 327 - Problem Solving for Contests <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc327" class="course-description" style="display:none;">
+        <p>This course prepares students to compete in programming contests. More broadly, it covers problem solving techniques in an informal, fun, and hands-on setting. This course will improve your analytical and programming skills and is thus recommended for all students and not just the competitors among us. This course can be taken for credit twice.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc331')">
+        <h2>CSC 331 - Scientific Computing <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc331" class="course-description" style="display:none;">
+        <p>This course presents fundamental numerical algorithms for solving problems in scientific computing and computational finance. Areas covered include: error analysis, computer arithmetic, linear algebra, optimization problems, numerical integration (solvers), ordinary differential equations (ODE). The emphasis of the course is on the design of the algorithms, and their analysis. Algorithms will be implemented using mathematical software.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc333')">
+        <h2>CSC 333 - Cryptology <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc333" class="course-description" style="display:none;">
+        <p>Introduction to the methods of cryptography and cryptanalysis. Topics include classical cryptography (codes, substitution ciphers, transposition ciphers), block and stream ciphers (Feistel networks, DES), and public key cryptography (RSA, Key agreement, signature schemes). Optional topics include zero-knowledge protocols, quantum cryptography, and history.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc343')">
+        <h2>CSC 343 - Introduction to Operating Systems <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc343" class="course-description" style="display:none;">
+        <p>An advanced course on operating system design and implementation. Process management and scheduling, memory management, file systems, device drivers, access control, and virtualization will be covered. The emphasis of the course will be on implementing components of a functional operating system.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc344')">
+        <h2>CSC 344 - Automata Theory and Formal Grammars <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc344" class="course-description" style="display:none;">
+        <p>An introduction to the most important abstract models of computation and their applications: finite state machines and pushdown automata. Explores the relationship between regular expressions and formal grammars and automata.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc347')">
+        <h2>CSC 347 - Concepts of Programming Languages <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc347" class="course-description" style="display:none;">
+        <p>This course examines concepts and programming paradigms that are found in multiple programming languages. Topics include but are not limited to functional programming, type systems, and runtime systems.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc348')">
+        <h2>CSC 348 - Introduction to Compiler Design <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc348" class="course-description" style="display:none;">
+        <p>An overview of the design of a compiler for a general purpose programming language; tools for designing the components of the compiler; implementing the compiler; run time environments.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc352')">
+        <h2>CSC 352 - Database Programming <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc352" class="course-description" style="display:none;">
+        <p>Programming in a large-scale relational database environment using procedural languages. Topics covered in the course include: procedural extension of query languages, runtime error handling, subprograms (procedures and functions), packages, database triggers, dynamic query language. Optional topics include transaction management, reliability, and security.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc353')">
+        <h2>CSC 353 - Advanced Database Concepts <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc353" class="course-description" style="display:none;">
+        <p>An introduction to advanced selected topics in databases. Possible topics include: object-oriented databases, distributed databases, intelligent and deductive databases, temporal databases, multimedia databases, spatial and geographic databases, fuzzy databases, mobile databases, data mining and data warehousing, as well as emerging issues and concepts in database design, implementation and management.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+    <div class="course" onclick="toggleDescription('csc355')">
+        <h2>CSC 355 - Database Systems <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc355" class="course-description" style="display:none;">
+        <p>An introduction to modern database systems; the course covers the traditional concepts and techniques of database systems including the relational model, SQL, indexes and normalization as well as a selection of advanced topics such as constraints and triggers, transactions, database programming, semi-structured data, and recursive SQL.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc357')">
+        <h2>CSC 357 - Expert Systems <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc357" class="course-description" style="display:none;">
+        <p>A study of the development of expert systems. Students will use commercial packages to develop standalone and embedded expert systems. Topics will include rule-based systems, decision trees, forward and backward chaining, inference, reasoning with uncertainty, and intelligent agents.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc358')">
+        <h2>CSC 358 - Symbolic Programming <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc358" class="course-description" style="display:none;">
+        <p>Concepts of symbolic programming as embodied in the language LISP. Basic data and control structures of LISP: symbolic expressions, the interpreter, functions, recursion, iteration. Techniques for prototyping and building conceptually advanced systems in an environment that encourages procedural and data abstraction. Advanced topics may include Prolog, intelligent tutoring systems, intelligent agents, and natural language processing. Assignments will focus on basic AI techniques, but the class is intended for anyone who will need to rapidly develop large complex systems.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc360')">
+        <h2>CSC 360 - Web Applications <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc360" class="course-description" style="display:none;">
+        <p>This course covers the design and development of single-page web applications and their interaction with web services. Possible topics include: HTML; JavaScript/TypeScript; RxJS; Frameworks such as Angular and/or React; Node.js; programming and security models for browsers; client-side web applications with local storage; HTTP, proxies, and caching.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc361')">
+        <h2>CSC 361 - Optimized C++ <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc361" class="course-description" style="display:none;">
+        <p>Implementation techniques to improve the performance and resource usage of C++ programs. This class will provide low level understanding of C++'s internal behavior that can be exploited to create faster performing software. Identify existing SISD (single instruction single data) implementation and refactor into SIMD (single instruction multiple data) to improve math centric software segments. Understand a system's dynamic memory usage to design and implement a custom high performance memory system. Topics include: performance enhancements through extended SIMD instuction set, dynamic memory usage, caching, implicit behavior, C++ language extensions, algorithms, streaming and profiling.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc362')">
+        <h2>CSC 362 - Optimized C++ Multithreading <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc362" class="course-description" style="display:none;">
+        <p>Applied C++ concurrency and multithreading fundamentals. Basic threading concepts: process model, threads, stacks, fibers, mutexes, semaphores, atomics, and events. Understanding synchronous/ asynchronous interactions and behavior of threads. Using managed thread pools and queues in applications. Understanding advanced C++ language features relating to the memory model and the threading support.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc363')">
+        <h2>CSC 363 - Theory and Practice of Safe Systems Programming <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc363" class="course-description" style="display:none;">
+        <p>Modern developments in programming languages, toolchains, and package management reduce the risk of security vulnerabilities from programming errors and supply chain attacks. This course covers the theory and practice of ownership type systems, their application in systems programming, and discussion of the vulnerabilities they mitigate. Approaches to software integrity and distributed code review are investigated in the context of package management and supply chain attacks. Coursework includes development of a large systems program in a language with ownership types such as Rust.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc364')">
+        <h2>CSC 364 - Virtualization and Cloud Computing <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc364" class="course-description" style="display:none;">
+        <p>This course will cover underlying technologies that enable major cloud computing providers to deliver computing resources to consumers on-demand over the Internet, focusing primarily on virtualization and containers. Topics to be covered will include many aspects of the design and implementation of hypervisors and containers, ranging from isolation, namespaces, cgroups stackable file systems, copy-on-write, and scheduling of containers. Coursework includes development of a container project applying concepts learned in class and involves systems programming.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc366')">
+        <h2>CSC 366 - Introduction to Program Analysis <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc366" class="course-description" style="display:none;">
+        <p>A course on program analysis topics, focusing on control flow and data flow analysis, program slicing, pointer analysis, intra-procedure and inter-procedure analysis, fuzzing, symbolic execution, and applications of program analysis for addressing software and security issues.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc371')">
+        <h2>CSC 371 - Mobile Application Development for iOS <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc371" class="course-description" style="display:none;">
+        <p>This course introduces the core issues associated with application development for mobile devices using the iOS platform. Students will learn the Swift language, the XCode IDE, UIKit and other frameworks, the elements and architecture of the user interfaces, and more. Students will be exposed to the iOS system architecture including memory management, MVC, delegates and threads. Topics will also include understanding and handling of multi-touch events, gestures, and motion events.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc372')">
+        <h2>CSC 372 - Mobile Application Development for Android <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc372" class="course-description" style="display:none;">
+        <p>This course introduces the core issues associated with application development for mobile devices using the Android platform. Students will learn the Eclipse IDE, frameworks, the elements and architecture of user interfaces, graphics, and more. Students will be exposed to the Android system architecture, including Views, Widgets, Resources, Adapters, Intents and Activities. Topics will also include understanding and handling of threads, multi-touch events, gestures, and motion events.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc373')">
+        <h2>CSC 373 - Computer Systems I <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc373" class="course-description" style="display:none;">
+        <p>A course on computer systems topics, focusing on machine-level programming and architecture and their relevance for application programming. Information representations, assembly language, C programming, and debuggers, processor architecture.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc376')">
+        <h2>CSC 376 - Distributed Systems <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc376" class="course-description" style="display:none;">
+        <p>An introduction to distributed systems. Topics may include: architecture of distributed systems; networking; datagram-oriented and stream-oriented protocols; network programming (for example, the sockets API); remote procedure call and remote method invocation; processes and threads; code migration; software agents; naming of non-mobile and mobile entities; cryptography and security.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc379')">
+        <h2>CSC 379 - Technology Partnerships in Urban Schools <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc379" class="course-description" style="display:none;">
+        <p>Students in this course will have the opportunity to assess urban community needs in the technology arena and develop skills in assisting and developing methods for "bridging the digital divide" that exists. As a result, the student will be able to make a substantial difference in an underprivileged academic community group. This course is a CDM-sponsored community-based service learning course. Any student enrolled in this course can also satisfy the junior year experiential learning requirement.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc380')">
+        <h2>CSC 380 - Foundations of Artificial Intelligence <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc380" class="course-description" style="display:none;">
+        <p>An in-depth survey of important concepts, problems, and techniques in artificial intelligence, including search, knowledge representation, logical reasoning, and reasoning with uncertainty. A particular focus and a unifying theme of the course will be the concept of intelligent agents. No prior knowledge of AI is required. The course is particularly suitable for students who want to gain the technical background necessary to build intelligent systems, or who want to prepare for more advanced work in AI. The concepts and techniques learned in this course will be directly applicable to many other areas of computer science including software design, distributed systems, databases, and information management and retrieval.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+    <div class="course" onclick="toggleDescription('csc381')">
+        <h2>CSC 381 - Introduction to Digital Image Processing <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc381" class="course-description" style="display:none;">
+        <p>Components of an image processing system and its applications, elements of visual perception, sampling and quantization, image enhancement by histogram equalization, color spaces and transformations, introduction to segmentation (edge detection algorithms), and morphological image processing.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc382')">
+        <h2>CSC 382 - Applied Image Analysis <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc382" class="course-description" style="display:none;">
+        <p>Image analysis from classical computational imaging techniques to deep learning techniques. Fundamentals of computational image analysis in terms of image information extraction and modeling of image patterns. Specific topics include, but are not limited to: image segmentation, multi-scale representation, shape analysis, texture analysis, Fourier analysis, wavelets, Gabor and fractal analysis, and template matching. Deep learning models to extract image representations automatically. Classical and deep learning imaging techniques applied and compared in the context of different image analysis tasks such as image representation, segmentation, classification, retrieval, and object recognition. Applications of these techniques for autonomous driving, biometrics, sports analytics, smart and connected communities, and biomedical and health informatics.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc383')">
+        <h2>CSC 383 - Deep Learning <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc383" class="course-description" style="display:none;">
+        <p>Introduces the fundamental concepts of deep neural networks and deep learning. The course will cover deep learning applications in a variety of settings, from computer vision to self-driving cars, from Natural Language Processing to drones. Students will use existing AI/ML models and tools to solve problems.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc384')">
+        <h2>CSC 384 - Ethics in Artificial Intelligence <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc384" class="course-description" style="display:none;">
+        <p>This course examines a broad range of ethical issues we face in a future where AI becomes increasingly integrated into modern society. This is a lecture / discussion survey course.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc386')">
+        <h2>CSC 386 - Real-Time Networking (Formerly GAM 390) <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc386" class="course-description" style="display:none;">
+        <p>Applied real-time networking fundamentals. Topics include low-level TCP/UDP socket programming, serialization of data for network transportation, deterministic data flow and queuing in applications, dynamic configuration and session communications. Students will explore issues related to performance-based networking in different topologies: client/server and peer to peer. Students will create and build real-time applications using different protocols (TCP, UDP, RUDP) with active network simulation of loss, delayed, corrupted and out of order data packets.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc388')">
+        <h2>CSC 388 - Real-Time Multithreaded Architecture <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc388" class="course-description" style="display:none;">
+        <p>Real-time constrained multithreaded architecture. Topics include multithreaded handle development, inter-thread communication, creating systems for user-defined callbacks, asynchronous loading and streaming of resources, non-blocking threading synchronization, design patterns and data driven messaging with time delivery constraints Exploration of multithreaded interfaces to maintain uniqueness and control for contented resources. Wrapping and integrating a multithreaded solution into an application will be analyzed. Students will design, develop and implement a multithreaded real-time application (i.e. Audio engine) that integrates existing single and multithreaded middleware libraries.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc389')">
+        <h2>CSC 389 - Theory of Computation <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc389" class="course-description" style="display:none;">
+        <p>Advanced topics in the mathematical foundations of computation. Topics may include random access and Turing machines, recursive functions, algorithms, computability and computational complexity, intractable problems, NP-complete problems.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc391')">
+        <h2>CSC 391 - Mobile Application Development for iOS II <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc391" class="course-description" style="display:none;">
+        <p>This course will cover advanced topics in mobile application development for iOS. The topics covered will be made explicit by the course instructor when the course is offered.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc392')">
+        <h2>CSC 392 - Mobile Application Development for Android II <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc392" class="course-description" style="display:none;">
+        <p>This course will cover advanced topics in mobile application development for Android. The topics covered will be made explicit by the course instructor when the course is offered.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc393')">
+        <h2>CSC 393 - Data Structures in C++ <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc393" class="course-description" style="display:none;">
+        <p>This course covers the design, implementation, application and analysis of algorithms on a variety of data structures, including lists, stacks, queues, trees, heaps, hash tables and graphs. Implementation is done in C++, in particular with the use of templates and the C++ standard template library (STL).</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc394')">
+        <h2>CSC 394 - Software Projects <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc394" class="course-description" style="display:none;">
+        <p>Students will be provided with experience in team design, implementation and testing of a large software project.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+    <div class="course" onclick="toggleDescription('csc396')">
+        <h2>CSC 396 - AI Projects <span class="dropdown-indicator">+</span></h2>
+    </div>
+    <div id="csc396" class="course-description" style="display:none;">
+        <p>Students will work on the design, implementation, and testing of an AI project.</p>
+        <p><strong>Credits:</strong> 4.00</p>
+    </div>
+
+</div>
+
+<footer>
+    <div class="navfooter">
+        <ul>
+            <li><a href="AboutUs.html">About Us</a></li>
+            <li><a href="ContactUs.html">Contact Us</a></li>
+            <li><a href="ReportAnIssue.html">Report An Issue</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+    function toggleDescription(courseId) {
+        var description = document.getElementById(courseId);
+        var indicator = description.previousElementSibling.querySelector('.dropdown-indicator');
+        if (description.style.display === 'none') {
+            description.style.display = 'block';
+            indicator.textContent = '-';
+        } else {
+            description.style.display = 'none';
+            indicator.textContent = '+';
+        }
+    }
+</script>
+
+<script>
+    function filterCourses() {
+        let input = document.getElementById('searchInput').value.toUpperCase();
+        let courseContainer = document.getElementsByClassName('course-container')[0];
+        let courses = courseContainer.getElementsByClassName('course');
+        let searchText, txtValue;
+
+        for (let i = 0; i < courses.length; i++) {
+            let h2 = courses[i].getElementsByTagName("h2")[0];
+            txtValue = h2.textContent || h2.innerText;
+            searchText = txtValue.substring(txtValue.indexOf('CSC ') + 4, txtValue.indexOf(' -'));
+            if (searchText.indexOf(input) > -1 || input === '') {
+                courses[i].style.display = "";
+            } else {
+                courses[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
 </body>
-
 </html>
