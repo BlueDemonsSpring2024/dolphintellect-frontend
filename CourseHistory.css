@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ADD8E6; /* Light blue background for the entire page */
+    position: relative; /* Needed for absolute positioning of the footer */
+    min-height: 100vh; /* Full height of the viewport */
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-name {
+    font-family: 'Pacifico', cursive;
+    color: white;
+    padding: 20px;
+    font-size: 32px;
+    align-self: center; /* Centers our site name vertically within the header */
+}
+
+.header {
+    display: flex;
+    justify-content: center; /* Centers the entire header content */
+    align-items: center;
+    padding: 20px;
+    background-color: #000066;
+    width: 100%; /* Ensures the header spans the full width */
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center; /* Centers navigation links horizontally */
+    align-items: center;
+    padding: 0;
+}
+
+.nav-links ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center; /* Aligns the menu items vertically */
+}
+
+.nav-links ul li a {
+    display: inline-block;
+    background-color: black; /* Button background */
+    color: white; /* Text color */
+    text-decoration: none;
+    padding: 15px 30px;
+    margin: 0 15px;
+    border-radius: 25px; /* Rounded corners */
+    transition: transform 0.3s, background-color 0.3s; /* Smooth transition for transform and background color */
+    font-size: 20px;
+    font-weight: 400; /* Makes the font slimmer */
+    font-family: 'Montserrat', sans-serif;
+}
+
+.nav-links ul li a:hover {
+    transform: scale(1.1); /* Scales the button up to 110% of its size */
+    background-color: #808080; /* Changes background color to gray on hover */
+}
+
+.page-header {
+    font-size: 50px;
+    font-weight: 400; /* Makes the font slimmer */
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    padding: 20px;
+    text-align: center; /* Centers our site name vertically within the header */
+}
+
+
+.table {
+    table-layout: fixed;
+    width: 40%;
+    min-width: 350px;
+    margin: 20px auto; /* Center the table and provide some space above and below */
+    border-collapse: collapse;
+    background-color: #f8f9fa; /* Light background for the table */
+}
+
+.table th, .table td {
+    text-align: left; /* Align text to the left */
+    padding: 12px 20px; /* Padding inside cells */
+    border-bottom: 2px solid #dee2e6; /* Light grey border for each cell */
+}
+
+.table th {
+    background-color: #007bff; /* Blue background for headers */
+    color: white;
+    font-size: 16px;
+}
+
+.table tr:hover {
+    background-color: #f1f1f1; /* Light grey background on hover */
+}
+
+.table-container {
+    width: 40%;
+    margin: 5px auto; 
+}
+.table-header {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 400; /* Makes the font slimmer */
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    margin: 20px;
+
+}
+
+.delete-btn {
+    color: #dc3545; /* Bootstrap danger color for the delete button */
+    cursor: pointer; /* Cursor indicates clickable */
+    padding: 5px 10px; /* Padding for better touch area */
+    border-radius: 5px; /* Rounded corners for the button */
+    background-color: #f8d7da; /* Light red background */
+    border: 1px solid #dc3545; /* Red border */
+}
+
+tr {
+    font-size: 15px;
+    font-weight: 400; /* Makes the font slimmer */
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+}
+
+th:last-child,td:last-child, th:first-child, td:first-child  {
+    width: 50px; 
+}
+
+.edit-btn {
+    width: 30px;
+    transition: transform 0.3s ease; 
+}
+
+img:hover {
+    transform: scale(1.1);
+}
