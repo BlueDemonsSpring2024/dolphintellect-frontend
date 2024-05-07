@@ -2,15 +2,94 @@
 <html>
 <head>
     <link rel="stylesheet" href = "AdvancedGPAStyleSheet.css">
-    <button type="submit" class="goback">
-        <a href="home.html"> Go Back</a>
-        
-    </button>
 <body>
-    <h1>Advanced GPA Calculator</h1>
+    <header>
+        <div class="brand-name">Dolphintellect</div>
+        <nav>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="CourseCatalog.html">Course Catalog</a></li>
+                    <li><a href="AdvancedGPA.html">Advanced GPA Calculator</a></li>
+                    <li><a href="Login.html">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
+    <main class="main-content">
+        
+        <div id="table-container">
+        <!-- Tables go here -->
+    </div>
+    </main>
+<!--
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // List of items
+            const itemArray = [
+                { item: 'Assignment 1', score: '50/100', weight: '10%' },
+                { item: 'Assignment 2', score: '100/100', weight: '10%' },
+                { item: 'Quiz 1', score: '75/100', weight: '20%' },
+                { item: 'Assignment 3', score: '80/100', weight: '10%' }
+            ];
 
-    
+            const container = document.getElementById('table-container');
+
+            function createTable() {
+                // Build table
+                const table = document.createElement('table');
+                table.className = 'table';
+                const thead = document.createElement('thead');
+                // Build initial row
+                const tr = document.createElement('tr');
+                ['Edit', 'Item', 'Score', 'Weight', 'Delete'].forEach(text => {
+                    const th = document.createElement('th');
+                    th.textContent = text;
+                    tr.appendChild(th);
+                });
+                thead.appendChild(tr);
+                table.appendChild(thead);
+                const tbody = document.createElement('tbody');
+                table.appendChild(tbody);
+
+                return table;
+            }
+
+            function addRow(table, item) {
+                const tbody = table.getElementsByTagName('tbody')[0];
+                const row = tbody.insertRow();
+                const cellEdit = row.insertCell(0);
+                const cellItem = row.insertCell(1);
+                const cellScore = row.insertCell(2);
+                const cellWeight = row.insertCell(3);
+                const cellDelete = row.insertCell(4);
+                cellEdit.innerHTML = '<img class="edit-btn" src="/images/edit-square-icon.png">';
+                cellItem.textContent = item.item;
+                cellScore.textContent = item.score;
+                cellWeight.textContent = item.weight;
+                cellDelete.innerHTML = '<span class="delete-btn" onclick="deleteRow(this)">X</span>';
+            }
+
+            // Delete row function
+            function deleteRow(button) {
+                const row = button.closest('tr');
+                const tbody = row.parentNode;
+                const table = tbody.parentNode;
+                // Delete row
+                tbody.removeChild(row);
+                if (tbody.rows.length === 0) {
+                    table.parentNode.removeChild(table);
+                }
+            }
+
+            // Create table and add rows
+            const table = createTable();
+            container.appendChild(table);
+            itemArray.forEach(item => addRow(table, item));
+        });
+    </script>
+-->
 </body>
 
 </html>
