@@ -149,30 +149,6 @@ h1{
     color: #fff;
 }
 
-
-.updatebtn{
-    display: inline-block;
-    background-color: black; /* Button background */
-    color: white; /* Text color */
-    text-decoration: none;
-    padding: 15px 30px;
-    margin: 0 15px;
-    border-radius: 25px; /* Rounded corners */
-    transition: transform 0.3s, background-color 0.3s; /* Smooth transition for transform and background color */
-    font-size: 20px;
-    font-weight: 400; /* Makes the font slimmer */
-    font-family: 'Montserrat', sans-serif;
-    position: absolute;
-    bottom: 150px;
-    right: 100px;
-    width: 20%;
-}
-
-.updatebtn a{
-    text-decoration: none;
-    color:#fff;
-}
-
 .addClassbtn{
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
