@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href = "AdvancedGPADashboard.css">
+</head>
+<body>
+    <header>
+        <div class="brand-logo">
+            <img src = "images/dolphintellect.png" alt="Dolphintellect Logo">
+        </div>
+        <nav>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="CourseCatalog.html">Course Catalog</a></li>
+                    <li><a href="AdvancedGPADashboard.html">Advanced GPA Calculator</a></li>
+                    <li><a href="Login.html">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <table id="tbl" class="table">
+            <tr>
+                <td>Student Name: </td>
+            </tr>
+            <tr> 
+                <td>Cumulative GPA: </td>
+            </tr>
+        </table>
+        <div class="create-term-container">
+            <div class="create-term">
+                <label for="seasondropdown">Create Term</label>
+                <select id="seasondropdown">
+                    <option value="Autumn">Autumn</option>
+                    <option value="Winter">Winter</option>
+                    <option value="Spring">Spring</option>
+                    <option value="Summer I">Summer I</option>
+                    <option value="Summer II">Summer II</option>
+                </select>
+                <input type="number" id="yeartext" name="yeardropdown" min="2000" max="2080" placeholder="Year" required>
+                <button type="submit" class="btn create-btn">Create</button>
+            </div>
+        </div>
+        <button type="submit" class="btn"><a href="CourseHistory.html">Course History</a></button>
+        <div class="dropdown-container">
+            <label for="termdropdown">Select Term</label>
+            <select id="termdropdown"></select>
+        </div>
+        <div id="table-container">
+            <table class="course-table">
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Progress</th>
+                        <th>Final Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table rows go here -->
+                </tbody>
+            </table>
+        </div>
+        <button type="button" class="add-class-btn"><i class='bx bx-plus'></i> +</button>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var terms = ["Fall 2020", "Winter 2021", "Spring 2021", "Fall 2021"];
+            var termdropdown = document.getElementById("termdropdown");
+            for (var i = 0; i < terms.length; i++) {
+                var option = document.createElement("option");
+                option.text = terms[i];
+                termdropdown.add(option);
+            }
+
+            const createTermButton = document.querySelector('.create-term-container .create-btn');
+            createTermButton.addEventListener('click', function() {
+                // Display the "Create Class" popup
+                createClassPopup();
+            });
+
+            const container = document.getElementById('table-container');
+
+            // Create table for term if not exist, otherwise add row for corresponding term
+            const courseArray = [
+                { term: 'Winter 2021', course: 'CSC373', progress: '20%', grade: 'A' },
+                { term: 'Fall 2020', course: 'CSC374', progress: '20%', grade: 'B' },
+                { term: 'Spring 2021', course: 'CSC394', progress: '20%', grade: 'A-' },
+                { term: 'Spring 2024', course: 'CSC347', progress: '20%', grade: 'B+' }
+            ];
+
+            courseArray.forEach(course => {
+                let table = document.getElementById(`table-${course.term}`);
+                if (!table) {
+                    table = createTable(course.term);
+                    container.appendChild(table);
+                }
+                addRow(table, course);
+            });
+            
+            function createClassPopup() {
+                // Create popup container
+                const popupContainer = document.createElement('div');
+                popupContainer.classList.add('popup-container');
+                
+                // Create a popup content
+                const popupContent = document.createElement('div');
+                popupContent.classList.add('popup-content');
+
+                // Create a classname input
+                const classnameInput = document.createElement('input');
+                classnameInput.setAttribute('type', 'text');
+                classnameInput.setAttribute('maxlength', '8');
+                classnameInput.setAttribute('placeholder', 'Enter Course Name');
+                popupContent.appendChild(classnameInput);
+
+                // Create a "Finish Creation" button
+                const finishCreationButton = document.createElement('button');
+                finishCreationButton.textContent = 'Finish Creation';
+                finishCreationButton.classList.add('btn');
+                finishCreationButton.addEventListener('click', function() {
+                    const classname = classnameInput.value.trim();
+                    if (classname.length > 0) {
+                        const term = document.getElementById("seasondropdown").value;
+                        const year = document.getElementById("yeartext").value;
+                        const termyear = term + " " + year;
+                        courseArray.push({ term: termyear, course: classname, progress: '0%', grade: 'N/A' });
+                        updateTerms();
+                        // Close the popup
+                        document.body.removeChild(popupContainer);
+                    } else {
+                        alert('Please enter a class name.');
+                    }
+                });
+                popupContent.appendChild(finishCreationButton);
+
+                popupContainer.appendChild(popupContent);
+                document.body.appendChild(popupContainer);
+            }
+
+            function updateTerms() {
+                courseArray.forEach(course => {
+                    if (!terms.includes(course.term)) {
+                        terms.push(course.term);
+                        var option = document.createElement("option");
+                        option.text = course.term;
+                        termdropdown.add(option);
+                    }
+                });
+            }
+
+            function createTable(term) {
+                const table = document.createElement('table');
+                table.id = `table-${term}`;
+                table.classList.add('course-table');
+                const thead = table.createTHead();
+                const row = thead.insertRow();
+                const headers = ['Course', 'Progress', 'Final Grade'];
+                headers.forEach(headerText => {
+                    const th = document.createElement('th');
+                    th.textContent = headerText;
+                    row.appendChild(th);
+                });
+                return table;
+            }
+
+            function addRow(table, course) {
+                const tbody = table.createTBody();
+                const row = tbody.insertRow();
+                const values = [course.course, course.progress, course.grade];
+                values.forEach(value => {
+                    const cell = row.insertCell();
+                    cell.textContent = value;
+                });
+            }
+        });
+    </script>
+    
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0773f8;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    width: 100%;
+    background-color: #5ba5f9; /* Dark blue background for the header */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.brand-logo img {
+    width: 100px; /* Set the width of the logo */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: auto;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links ul li a {
+    display: inline-block;
+    background-color: black; /* Button background */
+    color: white; /* Text color */
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 20px;
+    transition: transform 0.3s, background-color 0.3s; /* Smooth transition for hover effects */
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif; /* Font family */
+}
+
+.nav-links ul li a:hover {
+    transform: scale(1.1); /* Button grows in size on hover */
+    background-color: #808080; /* Background color changes on hover */
+}
+
+.nav-links ul {
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+    margin: 0 auto; // Ensures the navigation links are centered
+    align-items: center; // Ensures vertical alignment
+}
+
+.page-title {
+    color: white; /* Set page title color */
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+.create-term-container {
+    background-color: #f0f0f0; /* Background color */
+    padding: 10px; /* Add padding for spacing */
+    border-radius: 5px; /* Add rounded corners */
+    margin-bottom: 20px; /* Add margin for spacing */
+    max-width: 400px; /* Limit the maximum width */
+    margin-right: auto; /* Auto margin to push container to the left */
+    margin-left: 0; /* Reset margin-left */
+}
+
+.create-term {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-term label {
+    margin-bottom: 10px; /* Add spacing between label and dropdowns */
+}
+
+.create-term select {
+    margin-bottom: 10px; /* Add spacing between dropdowns and button */
+}
+
+.create-term button {
+    margin-top: 10px;
+    width: 100%; /* Make button fill container width */
+}
+
+.dropdown-container {
+    max-width: 400px; /* Limit the maximum width */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 10px; /* Add padding for spacing */
+    background-color: #f0f0f0; /* Background color */
+    border-radius: 5px; /* Add rounded corners */
+    margin-bottom: 20px; /* Add margin for spacing */
+}
+
+.dropdown-container label {
+    display: block; /* Ensure label takes full width */
+    margin-bottom: 5px; /* Add margin below the label */
+}
+
+.dropdown-container select {
+    width: 100%; /* Make the dropdown fill the container width */
+    padding: 5px; /* Add padding for spacing */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.table-container {
+    align-self: flex-start; /* Align table container to the start (left) */
+}
+
+.course-table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.add-class-btn {
+    align-self: flex-end; /* Align "+" button to the end (right) */
+}
