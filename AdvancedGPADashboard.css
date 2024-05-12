@@ -1,110 +1,129 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
+/* Global styles reset to ensure consistent styling across browsers */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Main body styling to align content and set background properties */
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     min-height: 100vh;
-    background-color: #0773f8;
     font-family: Arial, sans-serif;
+    background-image: url('images/Course_Catalog_Blue.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden; /* Prevents scrolling beyond the viewport */
 }
 
+/* Header styling including background color and alignment of elements */
 header {
     width: 100%;
-    background-color: #5ba5f9; /* Dark blue background for the header */
+    background-color: #c7c7f7;
     color: white;
     padding: 10px 20px;
     display: flex;
     align-items: center;
 }
 
+/* Styling for the brand name with specific font settings */
 .brand-logo img {
-    width: 100px; /* Set the width of the logo */
-    height: auto; /* Maintain aspect ratio */
+    width: 80px;
     margin-right: auto;
 }
 
+/* Container for navigation links with center alignment */
 .nav-links {
     display: flex;
     justify-content: center;
 }
 
-.nav-links ul li a {
-    display: inline-block;
-    background-color: black; /* Button background */
-    color: white; /* Text color */
-    text-decoration: none;
-    padding: 10px 20px;
-    margin: 0 10px;
-    border-radius: 20px;
-    transition: transform 0.3s, background-color 0.3s; /* Smooth transition for hover effects */
-    font-size: 16px;
-    font-weight: 400;
-    font-family: 'Montserrat', sans-serif; /* Font family */
-}
-
-.nav-links ul li a:hover {
-    transform: scale(1.1); /* Button grows in size on hover */
-    background-color: #808080; /* Background color changes on hover */
-}
-
+/* Unordered list in navigation links with no default styling */
 .nav-links ul {
     list-style-type: none;
     display: flex;
     padding: 0;
-    margin: 0 auto; // Ensures the navigation links are centered
-    align-items: center; // Ensures vertical alignment
-}
-
-.page-title {
-    color: white; /* Set page title color */
-    margin-top: 20px;
-    font-size: 24px;
-}
-
-.create-term-container {
-    background-color: #f0f0f0; /* Background color */
-    padding: 10px; /* Add padding for spacing */
-    border-radius: 5px; /* Add rounded corners */
-    margin-bottom: 20px; /* Add margin for spacing */
-    max-width: 400px; /* Limit the maximum width */
-    margin-right: auto; /* Auto margin to push container to the left */
-    margin-left: 0; /* Reset margin-left */
-}
-
-.create-term {
-    display: flex;
-    flex-direction: column;
+    margin: 0 auto;
     align-items: center;
 }
 
-.create-term label {
-    margin-bottom: 10px; /* Add spacing between label and dropdowns */
+/* Styling for each navigation link */
+.nav-links ul li a {
+    display: inline-block;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s ease-in-out;
 }
 
-.create-term select {
-    margin-bottom: 10px; /* Add spacing between dropdowns and button */
+/* Hover effect for navigation links */
+.nav-links ul li a:hover {
+    transform: scale(1.1);
+    background-color: #808080;
 }
 
-.create-term button {
-    margin-top: 10px;
-    width: 100%; /* Make button fill container width */
+.page-title {
+    color: black;
+    margin-top: 30px;
+    font-size: 50px;
+    font-family: 'Permanent Marker', cursive;
+    text-align: center;
+}
+
+.top-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.info {
+    width: 420px;
+    border-collapse: collapse;
+    font-weight: bold;
+    flex-direction: column;
+    margin-bottom: 50px; /* Add margin for spacing */
+    margin-left: 80px;
+    margin-top: 30px;
+}
+
+.info td {
+    padding: 10px;
+    border: 1px solid #000;
+    color: white;
+    background-color: #6f99f9; /* Dark blue background for the table */
+}
+
+.info tr:nth-child(even) {
+    background-color: #5ba5f9; /* Light blue background for even rows */
+}
+
+.info td:first-child {
+    width: 150px; /* Set a fixed width for the left column */
+}
+
+.info td:nth-child(2) {
+    width: calc(100% - 150px); /* Set the width of the right column to be wider than the left column */
 }
 
 .dropdown-container {
-    max-width: 400px; /* Limit the maximum width */
-    margin: 0 auto; /* Center the container horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 420px; /* Limit the maximum width */
+    height: 80px;
+    margin-left: 150px; /* Position about 80px from the right side */
+    margin-top: 10px; /* Position about 100px below the top */
     padding: 10px; /* Add padding for spacing */
-    background-color: #f0f0f0; /* Background color */
+    background-color: rgb(140, 160, 250); /* Background color */
     border-radius: 5px; /* Add rounded corners */
-    margin-bottom: 20px; /* Add margin for spacing */
 }
+
 
 .dropdown-container label {
     display: block; /* Ensure label takes full width */
@@ -117,15 +136,113 @@ header {
     box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
 
-.table-container {
-    align-self: flex-start; /* Align table container to the start (left) */
+.history-button {
+    background-color: rgb(143, 247, 240); /* Background color */
+    padding: 10px; /* Add padding for spacing */
+    border-radius: 5px; /* Add rounded corners */
+    width: 300px; /* Limit the maximum width */
+    margin-left: 135px;
 }
 
-.course-table {
-    width: 100%;
-    margin-bottom: 20px;
+.bottom-container {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.create-term {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e5c7f9; /* Background color */
+    padding: 10px; /* Add padding for spacing */
+    border-radius: 5px; /* Add rounded corners */
+    margin-bottom: 50px; /* Add margin for spacing */
+    width: 420px; /* Limit the maximum width */
+    height: 140px;
+    margin-top: 50px;
+    margin-left: 80px; /* Auto margin to horizontally center */
+}
+
+.create-term label {
+    margin-bottom: 10px; /* Add spacing between label and dropdowns */
+    align-self: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+}
+
+.create-term select {
+    margin-bottom: 10px; /* Add spacing between dropdowns and button */
+    align-self: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+}
+
+.create-term button {
+    margin-top: 10px;
+    width: 60%; /* Make button fill container width */
+    align-self: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+}
+
+.table-container {
+    display: flex;
+    align-items: center;
+}
+
+
+.table {
+    table-layout: auto;
+    width: 500px;
+    min-width: 350px;
+    margin: 10px auto; /* Center the table and provide some space above and below */
+    margin-left: 110px;
+    border-collapse: collapse;
+    background-color: #f8f9fa; /* Light background for the table */
+}
+
+.table th, .table td {
+    text-align: left; /* Align text to the left */
+    padding: 15px 15px; /* Padding inside cells */
+    border-bottom: 2px solid #dee2e6; /* Light grey border for each cell */
+}
+
+.table th {
+    width: 200px;
+    background-color: #007bff; /* Blue background for headers */
+    color: white;
+    font-size: 16px;
+}
+
+.table tr:hover {
+    background-color: #f1f1f1; /* Light grey background on hover */
+}
+
+
+
+.delete-btn {
+    color: #dc3545; /* Bootstrap danger color for the delete button */
+    cursor: pointer; /* Cursor indicates clickable */
+    padding: 5px 10px; /* Padding for better touch area */
+    border-radius: 5px; /* Rounded corners for the button */
+    background-color: #f8d7da; /* Light red background */
+    border: 1px solid #dc3545; /* Red border */
+}
+
+tr {
+    font-size: 15px;
+    font-weight: 400; /* Makes the font slimmer */
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+}
+
+th:last-child,td:last-child, th:first-child, td:first-child  {
+    width: 50px; 
+}
+
+img:hover {
+    transform: scale(1.1);
 }
 
 .add-class-btn {
-    align-self: flex-end; /* Align "+" button to the end (right) */
+    margin-left:30px;
+    align-self: center;
 }
