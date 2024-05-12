@@ -1,170 +1,179 @@
+/* Google Font text styles */
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
+/* General styles for the whole page */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #ADD8E6; /* Light blue background for the entire page */
-    position: relative; /* Needed for absolute positioning of the footer */
-    min-height: 100vh; /* Full height of the viewport */
+    /* Background image with cover and centered positioning */
+    background-image: url('images/vector-abstract-gradiente-background-blue-wallpaper_901408-861.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
+/* Styling for the brand name at the top of the page */
 .brand-name {
     font-family: 'Pacifico', cursive;
     color: white;
     padding: 20px;
     font-size: 32px;
-    align-self: center; /* Centers our site name vertically within the header */
+    align-self: center;
 }
 
+/* Header styling, centered and with a specific background color */
 .header {
     display: flex;
-    justify-content: center; /* Centers the entire header content */
+    justify-content: center;
     align-items: center;
     padding: 20px;
     background-color: #000066;
-    width: 100%; /* Ensures the header spans the full width */
+    width: 100%;
 }
 
+/* Navigation container styling */
 .nav-links {
-    display: flex;
-    justify-content: center; /* Centers navigation links horizontally */
-    align-items: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex; /* Ensures the nav items are in a row */
+    list-style: none;
+    margin: 0;
     padding: 0;
 }
 
 .nav-links ul {
-    list-style: none;
-    display: flex;
+    list-style-type: none;
     margin: 0;
     padding: 0;
-    align-items: center; /* Aligns the menu items vertically */
+    display: flex; /* Keeps links in a horizontal line */
+}
+
+.nav-links ul li {
+    padding-left: 20px; /* Adds spacing between items */
 }
 
 .nav-links ul li a {
-    display: inline-block;
-    background-color: black; /* Button background */
-    color: white; /* Text color */
+    display: block; /* Makes the link fill the li element */
+    background-color: black;
+    color: white;
     text-decoration: none;
-    padding: 15px 30px;
-    margin: 0 15px;
-    border-radius: 25px; /* Rounded corners */
-    transition: transform 0.3s, background-color 0.3s; /* Smooth transition for transform and background color */
-    font-size: 20px;
-    font-weight: 400; /* Makes the font slimmer */
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
     font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .nav-links ul li a:hover {
-    transform: scale(1.1); /* Scales the button up to 110% of its size */
-    background-color: #808080; /* Changes background color to gray on hover */
+    transform: scale(1.1);
+    background-color: #808080;
 }
 
-body.home-page .nav-links ul li a[href=""] {
-    display: none; /* Specific rule to hide the 'Home' link on the homepage */
-}
-
+/* Main content area styling, centered and allowing for flexible growth */
 .main-content {
-    flex-grow: 1; /* Allows the content area to grow */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.button-container {
+/* Form container styling, aligning child elements */
+.form-container {
+    width: 100%;
+    padding-right: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px; /* Space above the button container */
 }
 
-.calcbtn, .addbtn {
+/* Button container styling to ensure button alignment */
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Styling for buttons to match input fields above them */
+.addbtn {
+    width: 50%;
     background-color: black;
     color: white;
     text-decoration: none;
-    padding: 15px 30px;
-    margin: 15px; /* Uniform margin for buttons */
-    border-radius: 25px;
-    transition: transform 0.3s, background-color 0.3s;
-    font-size: 20px;
-    font-weight: 400;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     border: none;
-    align-self: center; /* Center buttons within their container */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-.calcbtn:hover, .addbtn:hover {
-    transform: scale(1.1);
-    background-color: #808080;
+.addbtn:hover {
+    transform: scale(1.05);
+    background-color: #505050;
 }
 
+/* Styling for the fixed footer at the bottom of the page */
 .footer {
     width: 100%;
     padding: 20px 0;
-    background-color: #ADD8E6; /* Matches the page background */
+    background-color: #ADD8E6;
     text-align: center;
-    position: fixed; /* Keeps the footer at the bottom */
-    bottom: 0; /* Ensures the footer is at the bottom of the viewport */
-    left: 0; /* Aligns the footer to start from the left edge */
+    position: fixed;
+    bottom: 0;
+    left: 0;
     display: flex;
-    justify-content: center; /* Center the footer content horizontally */
-    align-items: center; /* Center the footer content vertically */
-}
-
-.navfooter ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center; /* Ensures the list is centered */
+    justify-content: center;
     align-items: center;
 }
 
-.navfooter ul li {
-    padding: 0 20px; /* Reduced padding for closer footer items */
-}
-
-.navfooter ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-}
-
+/* Input section styling, centered with space between elements */
 .input-section {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center align items horizontally */
-    margin-bottom: 20px; /* Add some space between input sections */
+    align-items: center;
+    margin-bottom: 20px;
 }
 
+/* Label styling for input fields */
 .input-label {
-    margin-bottom: 5px; /* Add some space between label and input */
+    margin-bottom: 5px;
     color: white;
-    font-size: 20px; /* Increase font size */
+    font-size: 20px;
 }
 
+/* Input field styling, ensuring they are centered and styled consistently */
 .input-text {
-    width: 100%;
+    width: 100%; /* Full width to align with button width */
     padding: 15px;
     font-size: 16px;
     border-radius: 10px;
     border: 1px solid #ccc;
-    background-color: white; /* Set background color to white */
-    color: #333; /* Set text color to dark */
-    text-align: center; /* Center align text within text boxes */
+    background-color: white;
+    color: #333;
+    text-align: center;
 }
 
+/* Focus styling for input fields to enhance visibility */
 .input-text:focus {
     outline: none;
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
+/* Popup overlay styling for modal-like interactions */
 .popup {
     position: fixed;
     top: 0;
@@ -177,6 +186,7 @@ body.home-page .nav-links ul li a[href=""] {
     justify-content: center;
 }
 
+/* Content within the popup, styled to be visually separate */
 .popup-content {
     position: relative;
     background-color: white;
@@ -188,58 +198,176 @@ body.home-page .nav-links ul li a[href=""] {
     max-width: 600px;
 }
 
+/* Dismiss button within the popup, styled for clarity and accessibility */
 .dismiss {
     background-color: red;
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
     cursor: pointer;
-    text-decoration: none;
-    position: absolute;
+    position:absolute;
     bottom: -50px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1001;
 }
 
 .error-text {
-    color: red;
-    margin-bottom: 10px;
+    color: black;
+    margin-top: 5px;
+    font-size: 14px;
+    position: relative;
+    top: 10px;
 }
 
 .table {
-    width: 80%;
-    margin: 20px auto; /* Center the table and provide some space above and below */
-    border-collapse: collapse;
-    background-color: #f8f9fa; /* Light background for the table */
+    border-collapse: separate;
+    border-spacing: 0;
+    width: auto;
+    max-width: 90%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+    margin: 0 auto; /* Center the table */
 }
 
 .table th, .table td {
-    text-align: left; /* Align text to the left */
-    padding: 12px 20px; /* Padding inside cells */
-    border-bottom: 2px solid #dee2e6; /* Light grey border for each cell */
+    padding: 8px 10px;
+    text-align: center; /* Center text within cells */
+    border-bottom: 1px solid #ddd;
 }
 
-.table th {
-    background-color: #007bff; /* Blue background for headers */
-    color: white;
-    font-size: 16px;
+
+.table th:nth-child(1), .table td:nth-child(1) { /* Course column */
+    width: 40%;
 }
 
-.table tr:hover {
-    background-color: #f1f1f1; /* Light grey background on hover */
+.table th:nth-child(2), .table td:nth-child(2) { /* Grade column */
+    width: 35%;
+}
+
+.table th:nth-child(3), .table td:nth-child(3) { /* Delete column */
+    width: 25%;
+}
+
+.table th:first-child, .table td:first-child {
+    padding-left: 15px; /* Maintain aesthetic spacing */
+}
+
+.table th:last-child, .table td:last-child {
+    padding-right: 20px; /* Increase padding on the right to push content away from the edge */
+}
+
+.table th:first-child {
+    border-top-left-radius: 10px; /* Rounded top-left corner */
+}
+
+.table th:last-child {
+    border-top-right-radius: 10px; /* Rounded top-right corner */
+}
+
+.table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px; /* Rounded bottom-left corner */
+}
+
+.table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px; /* Rounded bottom-right corner */
 }
 
 .delete-btn {
-    color: #dc3545; /* Bootstrap danger color for the delete button */
-    cursor: pointer; /* Cursor indicates clickable */
-    padding: 5px 10px; /* Padding for better touch area */
-    border-radius: 5px; /* Rounded corners for the button */
-    background-color: #f8d7da; /* Light red background */
-    border: 1px solid #dc3545; /* Red border */
+    padding: 5px 10px;
+    width: 100%; /* Button fills the cell */
+    box-sizing: border-box;
 }
 
 .delete-btn:hover {
-    background-color: #dc3545; /* Darker red on hover */
-    color: white; /* White text on hover */
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Styling for the motto section, aligned and styled to fit the page's theme */
+.motto {
+    color: white;
+    font-size: 32px;
+    font-family: 'Permanent Marker', cursive;
+    text-align: center;
+    margin: 40px 0;
+}
+
+/* Styling for the motto and logo container */
+.motto-container {
+    text-align: center;
+    margin-bottom: 40px; /
+}
+
+/* Styling for the DePaul logo container */
+.logo-container {
+    position:relative;
+    margin-bottom: 100px;
+}
+
+/* Styling for the white line underneath the logo */
+.line {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 65%;
+    height: 3px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+/* Styling for the image */
+.depaul-logo {
+    border-radius: 10px;
+    max-width: 30%;
+    margin: auto;
+    display: block;
+}
+
+/* Styling for the subtext below the image */
+.subtext {
+    color: white;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.content-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Table container styling, ensuring alignment and layout */
+.table-container {
+    width: calc(100% - 240px);
+    float: right;
+}
+
+
+.gpa-box {
+    background-color: white;
+    color: black; /* Ensure text visibility against the white background */
+    border-radius: 5px;
+    padding: 3px 5px;
+    margin: 20px auto 10px;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+    width: 10%; /
+    text-align: center;
+    font-size: 14px; /
+}
+
+.form-container {
+    width: calc(50% - 10px);
+    margin-right: 10px; /
+}
+
+.table-container {
+    width: calc(50% - 10px);
+    margin-left: 10px;
 }

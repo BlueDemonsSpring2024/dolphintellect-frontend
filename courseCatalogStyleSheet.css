@@ -76,6 +76,16 @@ header {
     background-color: #808080;
 }
 
+.nav-links ul li a.active {
+    background-color: #4CAF50; /* Green background for the active (current) page */
+    color: white; /* White text color */
+}
+
+.nav-links ul li a:not(.active):hover {
+    transform: scale(1.1); /* Scales the button up to 110% of its size on hover */
+    background-color: #808080; /* Changes background color to gray on hover */
+}
+
 /* Main title styling with background and typography */
 .page-title {
     color: black;
