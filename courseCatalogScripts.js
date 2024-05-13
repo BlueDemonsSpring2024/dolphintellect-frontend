@@ -1,0 +1,393 @@
+document.addEventListener('DOMContentLoaded', function () {
+    let courseArray = [
+        {
+                course: 'CSC 200',
+                name: 'Survey of Computing',
+                description: 'This introductory course explores various careers in the field of information technology. A hands-on component will deal with state of the art personal computer operating systems, applications, database systems, Internet, email, and basic website construction. The structure of the course utilizes both classroom lectures and computer classroom labs. This course is geared toward the non-major and assumes no prior knowledge or experience in Computer Science.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 208',
+                name: 'Ethics in Technology',
+                description: 'Information Technology and the rapid pace in which it has advanced have had a tremendous impact on our lives. Changes have been swift and the human capacity to deal with them is limited. It has been said that our technology has outpaced our humanity. This course will research the new responsibilities technology presents and our ability to deal with these changes in an ethical manner. Students will employ ethical frameworks, which integrate computer science and ethics, to develop the skills required to examine different sets of assumptions and question them. Case studies will provide a historical perspective for analysis.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 241',
+                name: 'Introduction to Computer Science I',
+                description: 'An introduction to problem solving, algorithms and structured programming using a higher-level programming language. The course will focus on skills for developing algorithms, and for writing and debugging programs. Students will learn how and when to use loops, conditionals, and functional abstractions in the context of problems motivated by real world applications.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 242',
+                name: 'Introduction to Computer Science II',
+                description: 'An intermediate course in problem solving, algorithms and programming. Programming skills are further strengthened through more complex and larger programming assignments. The assignments will also be used to introduce different Computer Science areas (e.g., a Client/Server application for the Distributed Systems area). Classes and object oriented programming are motivated and introduced.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 211',
+                name: 'Programming in Java I',
+                description: 'Introduction to programming in Java and problem solving. Variables, data types, input/output, using objects and methods from the standard classes (such as String and Scanner), control structures, writing methods, arrays. Solving problems with algorithms and implementing algorithms in Java. (Not for CS majors)',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 212',
+                name: 'Programming in Java II',
+                description: 'Intermediate programming in Java and problem solving. Writing Java programs with multiple classes: constructors, visibility modifiers, static members, accessor and mutator methods, and arrays of objects. Inheritance, polymorphism, and interfaces. Sorting arrays of primitive data and arrays of objects. Exception handling. (Not for CS majors)',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 223',
+                name: 'The Impact of Computing Technology on Our Lives',
+                description: 'This course will introduce students to an overview of social analysis techniques and the theories of social change. These tools will be used to explore social impact issues of computing technology. Counts for Liberal Studies SCBI credit.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 233',
+                name: 'Codes and Ciphers',
+                description: 'This course is an introduction to the science and history of secret writing (cryptography) and how codes and ciphers can be broken (cryptanalysis). In historical settings we will encounter the main ideas and methods devised to secure communication channels. Possible topics include: substitution ciphers, transposition ciphers, the Vigenere cipher, statistical methods in cryptanalysis, public-key cryptography, and quantum cryptography.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 235',
+                name: 'Problem Solving',
+                description: 'How do you solve a problem? In this course we discuss different problem solving techniques and strategies such as modeling, establishing subgoals, and searching and pruning. The techniques will be presented as part of a theoretical framework, but there will be significant emphasis on solving problems in familiar domains such as games, newspaper articles, philosophy, and simple geometry and logic. At the end of the course, students will have built a repertoire of problem solving tools that will allow them to make an informed choice of approach towards new problems.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 243',
+                name: 'Introduction to Computer Science for Programmers',
+                description: 'An accelerated course covering the essentials of programming, with a focus on problem-solving, structured programming, and algorithm design. The concepts covered include collection types, conditional and iterative structures, functions, file input/output, exceptions, namespaces, recursion, and Internet client programming. Students are expected to have successfully completed at least one high-level, object-oriented programming class prior to enrollment.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 250',
+                name: 'Computers and Human Intelligence',
+                description: 'Students taking this course will study human problem-solving and its simulation by computers. Artificial intelligence, pattern recognition and learning programs will be discussed. PREREQUISITE(S): Familiarity with basic computer productivity tools and the Web.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 270',
+                name: 'From Fireflies to Facebook: The Science of Networks',
+                description: 'This course explores complex systems both natural and man-made, characterized by the relationships between interacting entities. Network structures can be found in the Internet and its many applications, but also in social relationships, marketplaces, ecosystems, even cells. We will examine a wide range of networks including technological, social, and natural. Students will learn basic concepts from graph theory, algorithms and network analysis, apply tools for extracting, analyzing and visualizing network properties, using data sets drawn from a variety of areas.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 281',
+                name: 'Workshop: Java for Programmers',
+                description: 'This course introduces students to the Java programming language and eclipse development environment.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 282',
+                name: 'Workshop: Linux for Programmers',
+                description: 'This course provides an introduction to Linux, the command-line environment, C programming, and version control.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 297',
+                name: 'Applied AI Lab',
+                description: 'In this hands-on course, students will study AI technologies, develop AI models, and apply AI tools and libraries to solve problems in a particular domain. Safe and responsible use of AI will be addressed. Topics will vary by the faculty members interest and perspective.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 298',
+                name: 'Internship',
+                description: 'This course satisfies the junior year experiential learning requirement. In cooperation with local employers, this course offers students the opportunity to integrate their academic experience with on-the-job training in computer related work areas. Admission to the program requires consent of internship course instructor. Current work experience plus classroom time is required. Supervisor evaluation will contribute to the final grade.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 299',
+                name: 'Sophomore Lab in Applied Computing',
+                description: 'In this course, students investigate a particular application of computing. Students learn tools, methodologies, and formalisms used in a particular computing area, and apply them to develop working systems. Courses stress student initiative in investigating the application context, learning new tools (including languages and APIs), studying algorithms and code examples, and working on projects. Topics will vary by the faculty members interest and perspective.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 300',
+                name: 'Data Structures I',
+                description: 'This is the first course in a two-course sequence on data structures using Java. The course introduces basic Java programming, reviews recursion, introduces asymptotic notations, and focuses mainly on linear data structures including arrays, linked lists and their variants, stacks and queues, and data structures supporting disjoint-set operations. The implementation of the basic operations on each data structure are discussed and analyzed in terms of their efficiency. The applications covered highlight and exploit the unique characteristics of the data structures, and emphasize problem solving and recursive thinking.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 301',
+                name: 'Data Structures II',
+                description: 'This is the second course in a two-course sequence on data structures using Java. The course focuses mainly on the following data structures, their analysis, and their applications: trees (search trees, balanced search trees), heaps, associative arrays, hash tables, and data structures for representing graphs. The implementation of the basic operations on each data structure are discussed and analyzed in terms of their efficiency. The applications discussed highlight and exploit the unique characteristics of the different data structures, and emphasize problem solving and recursive thinking.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 308',
+                name: 'Frameworks for Web Application Development',
+                description: 'This course introduces concepts, techniques, technologies and APIs for web application development. The main focus of the course is on the Model-View-Controller design pattern employed by modern full-stack web frameworks. Concepts and techniques covered include client/server programming, database abstraction APIs, and asynchronous JavaScript. Examples of full-stack MVC frameworks include Ruby-on-Rails (written in Ruby), Django and TurboGears (written in Python).',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 309',
+                name: 'C++ for Programmers',
+                description: 'This course covers the essentials of C and C++ programming, focusing primarily on the topics of memory management and object-oriented programming. Topics include pointers and dynamic allocation, operator overloading, copy constructors and destructors, inheritance and polymorphism.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 321',
+                name: 'Design and Analysis of Algorithms',
+                description: 'Techniques for designing algorithms including: analyzing algorithms (big-O, recurrence relations) and divide-and-conquer (quicksort, mergesort). Additional topics chosen from: the greedy method, dynamic programming, backtracking, branch-and-bound and string matching.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 325',
+                name: 'Time Series Analysis and Forecasting',
+                description: 'The course introduces students to statistical models for time series analysis and forecasting. The course topics include: autocorrelated data analysis, Box-Jenkins models (autoregressive, moving average, and autoregressive moving average models), analysis of seasonality, volatility models (GARCH-type, GARCH-M type, etc.), forecasting evaluation and diagnostics checking. The course will emphasize applications to financial data, volatility modeling and risk management. Real examples will be used throughout the course. PREREQUISITE(S): (CSC 212 or CSC 224 CSC 262 or CSC 309) and (CSC324 or MAT356) or consent of instructor.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 327',
+                name: 'Problem Solving for Contests',
+                description: 'This course prepares students to compete in programming contests. More broadly, it covers problem solving techniques in an informal, fun, and hands-on setting. This course will improve your analytical and programming skills and is thus recommended for all students and not just the competitors among us. This course can be taken for credit twice.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 331',
+                name: 'Scientific Computing',
+                description: 'This course presents fundamental numerical algorithms for solving problems in scientific computing and computational finance. Areas covered include: error analysis, computer arithmetic, linear algebra, optimization problems, numerical integration (solvers), ordinary differential equations (ODE). The emphasis of the course is on the design of the algorithms, and their analysis. Algorithms will be implemented using mathematical software.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 333',
+                name: 'Cryptology',
+                description: 'Introduction to the methods of cryptography and cryptanalysis. Topics include classical cryptography (codes, substitution ciphers, transposition ciphers), block and stream ciphers (Feistel networks, DES), and public key cryptography (RSA, Key agreement, signature schemes). Optional topics include zero-knowledge protocols, quantum cryptography, and history.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 343',
+                name: 'Introduction to Operating Systems',
+                description: 'An advanced course on operating system design and implementation. Process management and scheduling, memory management, file systems, device drivers, access control, and virtualization will be covered. The emphasis of the course will be on implementing components of a functional operating system.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 344',
+                name: 'Automata Theory and Formal Grammars',
+                description: 'An introduction to the most important abstract models of computation and their applications: finite state machines and pushdown automata. Explores the relationship between regular expressions and formal grammars and automata.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 347',
+                name: 'Concepts of Programming Languages',
+                description: 'This course examines concepts and programming paradigms that are found in multiple programming languages. Topics include but are not limited to functional programming, type systems, and runtime systems.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 348',
+                name: 'Introduction to Compiler Design',
+                description: 'An overview of the design of a compiler for a general purpose programming language; tools for designing the components of the compiler; implementing the compiler; run time environments.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 352',
+                name: 'Database Programming',
+                description: 'Programming in a large-scale relational database environment using procedural languages. Topics covered in the course include: procedural extension of query languages, runtime error handling, subprograms (procedures and functions), packages, database triggers, dynamic query language. Optional topics include transaction management, reliability, and security.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 353',
+                name: 'Advanced Database Concepts',
+                description: 'An introduction to advanced selected topics in databases. Possible topics include: object-oriented databases, distributed databases, intelligent and deductive databases, temporal databases, multimedia databases, spatial and geographic databases, fuzzy databases, mobile databases, data mining and data warehousing, as well as emerging issues and concepts in database design, implementation and management.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 355',
+                name: 'Database Systems',
+                description: 'An introduction to modern database systems; the course covers the traditional concepts and techniques of database systems including the relational model, SQL, indexes and normalization as well as a selection of advanced topics such as constraints and triggers, transactions, database programming, semi-structured data, and recursive SQL.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 357',
+                name: 'Expert Systems',
+                description: 'A study of the development of expert systems. Students will use commercial packages to develop standalone and embedded expert systems. Topics will include rule-based systems, decision trees, forward and backward chaining, inference, reasoning with uncertainty, and intelligent agents.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 358',
+                name: 'Symbolic Programming',
+                description: 'Concepts of symbolic programming as embodied in the language LISP. Basic data and control structures of LISP: symbolic expressions, the interpreter, functions, recursion, iteration. Techniques for prototyping and building conceptually advanced systems in an environment that encourages procedural and data abstraction. Advanced topics may include Prolog, intelligent tutoring systems, intelligent agents, and natural language processing. Assignments will focus on basic AI techniques, but the class is intended for anyone who will need to rapidly develop large complex systems.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 360',
+                name: 'Web Applications',
+                description: 'This course covers the design and development of single-page web applications and their interaction with web services. Possible topics include: HTML; JavaScript/TypeScript; RxJS; Frameworks such as Angular and/or React; Node.js; programming and security models for browsers; client-side web applications with local storage; HTTP, proxies, and caching.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 361',
+                name: 'Optimized C++',
+                description: 'Implementation techniques to improve the performance and resource usage of C++ programs. This class will provide low level understanding of C++s internal behavior that can be exploited to create faster performing software. Identify existing SISD (single instruction single data) implementation and refactor into SIMD (single instruction multiple data) to improve math centric software segments. Understand a systems dynamic memory usage to design and implement a custom high performance memory system. Topics include: performance enhancements through extended SIMD instuction set, dynamic memory usage, caching, implicit behavior, C++ language extensions, algorithms, streaming and profiling.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 362',
+                name: 'Optimized C++ Multithreading',
+                description: 'Applied C++ concurrency and multithreading fundamentals. Basic threading concepts: process model, threads, stacks, fibers, mutexes, semaphores, atomics, and events. Understanding synchronous/ asynchronous interactions and behavior of threads. Using managed thread pools and queues in applications. Understanding advanced C++ language features relating to the memory model and the threading support.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 363',
+                name: 'Theory and Practice of Safe Systems Programming',
+                description: 'Modern developments in programming languages, toolchains, and package management reduce the risk of security vulnerabilities from programming errors and supply chain attacks. This course covers the theory and practice of ownership type systems, their application in systems programming, and discussion of the vulnerabilities they mitigate. Approaches to software integrity and distributed code review are investigated in the context of package management and supply chain attacks. Coursework includes development of a large systems program in a language with ownership types such as Rust.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 364',
+                name: 'Virtualization and Cloud Computing',
+                description: 'This course will cover underlying technologies that enable major cloud computing providers to deliver computing resources to consumers on-demand over the Internet, focusing primarily on virtualization and containers. Topics to be covered will include many aspects of the design and implementation of hypervisors and containers, ranging from isolation, namespaces, cgroups stackable file systems, copy-on-write, and scheduling of containers. Coursework includes development of a container project applying concepts learned in class and involves systems programming.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 366',
+                name: 'Introduction to Program Analysis',
+                description: 'A course on program analysis topics, focusing on control flow and data flow analysis, program slicing, pointer analysis, intra-procedure and inter-procedure analysis, fuzzing, symbolic execution, and applications of program analysis for addressing software and security issues.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 371',
+                name: 'Mobile Application Development for iOS',
+                description: 'This course introduces the core issues associated with application development for mobile devices using the iOS platform. Students will learn the Swift language, the XCode IDE, UIKit and other frameworks, the elements and architecture of the user interfaces, and more. Students will be exposed to the iOS system architecture including memory management, MVC, delegates and threads. Topics will also include understanding and handling of multi-touch events, gestures, and motion events.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 372',
+                name: 'Mobile Application Development for Android',
+                description: 'This course introduces the core issues associated with application development for mobile devices using the Android platform. Students will learn the Eclipse IDE, frameworks, the elements and architecture of user interfaces, graphics, and more. Students will be exposed to the Android system architecture, including Views, Widgets, Resources, Adapters, Intents and Activities. Topics will also include understanding and handling of threads, multi-touch events, gestures, and motion events.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 373',
+                name: 'Computer Systems I',
+                description: 'A course on computer systems topics, focusing on machine-level programming and architecture and their relevance for application programming. Information representations, assembly language, C programming, and debuggers, processor architecture.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 376',
+                name: 'Distributed Systems',
+                description: 'An introduction to distributed systems. Topics may include: architecture of distributed systems; networking; datagram-oriented and stream-oriented protocols; network programming (for example, the sockets API); remote procedure call and remote method invocation; processes and threads; code migration; software agents; naming of non-mobile and mobile entities; cryptography and security.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 379',
+                name: 'Technology Partnerships in Urban Schools',
+                description: 'Students in this course will have the opportunity to assess urban community needs in the technology arena and develop skills in assisting and developing methods for "bridging the digital divide" that exists. As a result, the student will be able to make a substantial difference in an underprivileged academic community group. This course is a CDM-sponsored community-based service learning course. Any student enrolled in this course can also satisfy the junior year experiential learning requirement.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 380',
+                name: 'Foundations of Artificial Intelligence',
+                description: 'An in-depth survey of important concepts, problems, and techniques in artificial intelligence, including search, knowledge representation, logical reasoning, and reasoning with uncertainty. A particular focus and a unifying theme of the course will be the concept of intelligent agents. No prior knowledge of AI is required. The course is particularly suitable for students who want to gain the technical background necessary to build intelligent systems, or who want to prepare for more advanced work in AI. The concepts and techniques learned in this course will be directly applicable to many other areas of computer science including software design, distributed systems, databases, and information management and retrieval.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 381',
+                name: 'Introduction to Digital Image Processing',
+                description: 'Components of an image processing system and its applications, elements of visual perception, sampling and quantization, image enhancement by histogram equalization, color spaces and transformations, introduction to segmentation (edge detection algorithms), and morphological image processing.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 382',
+                name: 'Applied Image Analysis',
+                description: 'Image analysis from classical computational imaging techniques to deep learning techniques. Fundamentals of computational image analysis in terms of image information extraction and modeling of image patterns. Specific topics include, but are not limited to: image segmentation, multi-scale representation, shape analysis, texture analysis, Fourier analysis, wavelets, Gabor and fractal analysis, and template matching. Deep learning models to extract image representations automatically. Classical and deep learning imaging techniques applied and compared in the context of different image analysis tasks such as image representation, segmentation, classification, retrieval, and object recognition. Applications of these techniques for autonomous driving, biometrics, sports analytics, smart and connected communities, and biomedical and health informatics.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 383',
+                name: 'Deep Learning',
+                description: 'Introduces the fundamental concepts of deep neural networks and deep learning. The course will cover deep learning applications in a variety of settings, from computer vision to self-driving cars, from Natural Language Processing to drones. Students will use existing AI/ML models and tools to solve problems.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 384',
+                name: 'Ethics in Artificial Intelligence',
+                description: 'This course examines a broad range of ethical issues we face in a future where AI becomes increasingly integrated into modern society. This is a lecture / discussion survey course.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 386',
+                name: 'Real-Time Networking (Formerly GAM 390)',
+                description: 'Applied real-time networking fundamentals. Topics include low-level TCP/UDP socket programming, serialization of data for network transportation, deterministic data flow and queuing in applications, dynamic configuration and session communications. Students will explore issues related to performance-based networking in different topologies: client/server and peer to peer. Students will create and build real-time applications using different protocols (TCP, UDP, RUDP) with active network simulation of loss, delayed, corrupted and out of order data packets.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 388',
+                name: 'Real-Time Multithreaded Architecture',
+                description: 'Real-time constrained multithreaded architecture. Topics include multithreaded handle development, inter-thread communication, creating systems for user-defined callbacks, asynchronous loading and streaming of resources, non-blocking threading synchronization, design patterns and data driven messaging with time delivery constraints Exploration of multithreaded interfaces to maintain uniqueness and control for contented resources. Wrapping and integrating a multithreaded solution into an application will be analyzed. Students will design, develop and implement a multithreaded real-time application (i.e. Audio engine) that integrates existing single and multithreaded middleware libraries.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 389',
+                name: 'Theory of Computation',
+                description: 'Advanced topics in the mathematical foundations of computation. Topics may include random access and Turing machines, recursive functions, algorithms, computability and computational complexity, intractable problems, NP-complete problems.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 391',
+                name: 'Mobile Application Development for iOS II',
+                description: 'This course will cover advanced topics in mobile application development for iOS. The topics covered will be made explicit by the course instructor when the course is offered.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 392',
+                name: 'Mobile Application Development for Android II',
+                description: 'This course will cover advanced topics in mobile application development for Android. The topics covered will be made explicit by the course instructor when the course is offered.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 393',
+                name: 'Data Structures in C++',
+                description: 'This course covers the design, implementation, application and analysis of algorithms on a variety of data structures, including lists, stacks, queues, trees, heaps, hash tables and graphs. Implementation is done in C++, in particular with the use of templates and the C++ standard template library (STL).',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 394',
+                name: 'Software Projects',
+                description: 'Students will be provided with experience in team design, implementation and testing of a large software project.',
+                credits: '4.00'
+            },
+            {
+                course: 'CSC 396',
+                name: 'AI Projects',
+                description: 'Students will work on the design, implementation, and testing of an AI project.',
+                credits: '4.00'
+            }
+        ];
+
+    const courseContainer = document.getElementById('course-container');
+    // Loop through each course in the array and create course boxes dynamically
+    courseArray.forEach(course => {
+        const courseBox = document.createElement('div');
+        courseBox.className = 'course-box';
+        courseBox.innerHTML = `<div class="course-front"><h3 class="course-number">${course.course}</h3><p class="course-name">${course.name}</p></div>`;
+        courseBox.addEventListener('click', function() {
+            document.getElementById('modal-course-number').innerText = course.course;
+            document.getElementById('modal-course-name').innerText = course.name;
+            document.getElementById('modal-course-description').innerText = course.description;
+            document.getElementById('modal-course-credits').innerText = `Credits: ${course.credits}`;
+            document.getElementById('modal').style.display = 'flex';
+        });
+        courseContainer.appendChild(courseBox);
+    });
+
+    // Add event listener to close the modal when close button is clicked
+    document.querySelector('.close').addEventListener('click', function() {
+        document.getElementById('modal').style.display = 'none';
+    });
+});
+
+// Function to filter courses
+function filterCourses() {
+    let input = document.getElementById('searchInput').value.toUpperCase();
+    let courses = document.querySelectorAll('.course-box');
+    for (let i = 0; i < courses.length; i++) {
+        let courseInfo = courses[i].querySelector(".course-front").innerText;
+        if (courseInfo.toUpperCase().includes(input)) {
+            courses[i].style.display = "";
+        } else {
+            courses[i].style.display = "none";
+        }
+    }
+}

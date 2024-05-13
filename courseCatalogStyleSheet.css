@@ -1,5 +1,7 @@
 /* Importing Google Fonts for custom typography */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 /* Global styles reset to ensure consistent styling across browsers */
 * {
@@ -13,26 +15,26 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centers content vertically */
+    justify-content: flex-start;
     min-height: 100vh;
     font-family: Arial, sans-serif;
-    background-image: url('images/Course_Catalog_Blue.jpg');
+    background-image: url('images/vector-abstract-gradiente-background-blue-wallpaper_901408-861.avif');
     background-size: cover;
     background-position: center;
-    overflow: hidden; /* Prevents scrolling beyond the viewport */
+    overflow-x: hidden;
 }
 
-/* Header styling including background color and alignment of elements */
+/* Header styling */
 header {
     width: 100%;
-    background-color: #000066;
+    background-color: transparent;
     color: white;
     padding: 10px 20px;
     display: flex;
     align-items: center;
 }
 
-/* Styling for the brand name with specific font settings */
+/* Brand name styling */
 .brand-name {
     font-family: 'Pacifico', cursive;
     font-size: 32px;
@@ -40,13 +42,13 @@ header {
     margin-right: auto;
 }
 
-/* Container for navigation links with center alignment */
+/* Navigation links styling */
 .nav-links {
     display: flex;
     justify-content: center;
 }
 
-/* Unordered list in navigation links with no default styling */
+/* Navigation list styling */
 .nav-links ul {
     list-style-type: none;
     display: flex;
@@ -55,7 +57,7 @@ header {
     align-items: center;
 }
 
-/* Styling for each navigation link */
+/* Navigation link item styling */
 .nav-links ul li a {
     display: inline-block;
     background-color: black;
@@ -70,158 +72,108 @@ header {
     transition: all 0.3s ease-in-out;
 }
 
-/* Hover effect for navigation links */
+/* Active navigation link styling */
+.nav-links ul li a.active {
+    background-color: #808080;
+    pointer-events: none;
+    cursor: default;
+}
+
+/* Hover effect on navigation links */
 .nav-links ul li a:hover {
     transform: scale(1.1);
     background-color: #808080;
 }
 
-.nav-links ul li a.active {
-    background-color: #4CAF50; /* Green background for the active (current) page */
-    color: white; /* White text color */
-}
-
-.nav-links ul li a:not(.active):hover {
-    transform: scale(1.1); /* Scales the button up to 110% of its size on hover */
-    background-color: #808080; /* Changes background color to gray on hover */
-}
-
-/* Main title styling with background and typography */
+/* Page title styling */
 .page-title {
-    color: black;
-    margin-top: 20px;
-    font-size: 36px;
+    color: white;
+    font-size: 32px;
     font-family: 'Permanent Marker', cursive;
-    padding: 10px 20px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 25px;
+    text-align: center;
+    margin: 40px 0;
 }
 
-/* Carousel container with relative positioning for navigation buttons */
-.carousel-container {
-    position: relative;
-    width: 80%; /* Specifies width of carousel */
-    margin: auto; /* Centers carousel horizontally */
+/* Custom Scrollbar Styles */
+/* Works for Chrome, Edge, and Safari */
+.grid-container::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
 }
 
-/* Styling for the container holding courses */
-.course-container {
-    display: flex;
-    justify-content: center; /* Centers courses horizontally within the container */
-    align-items: center; /* Aligns courses vertically */
-    flex-wrap: nowrap;
-    overflow: hidden;
-    width: 100%;
-    height: 360px; /* Fixed height for visual consistency */
-    transition: transform 0.5s ease; /* Smooth transition for scrolling */
+.grid-container::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1);
+    border-radius: 10px;
 }
 
-/* Individual course box styling */
+.grid-container::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+/* Firefox Scrollbar Styles */
+.grid-container {
+    scrollbar-width: thin;
+    scrollbar-color: white rgba(0,0,0,0.1);
+}
+
+/* Grid container styling */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-gap: 20px;
+    width: 90%;
+    max-height: 80vh;
+    margin: 20px auto;
+    padding: 10px;
+    overflow-y: auto;
+    align-content: start;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Course box styling */
 .course-box {
-    width: 240px;
-    height: 320px;
-    margin: 0 15px; /* Spacing between course boxes */
-    flex: 0 0 auto;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-    border-radius: 20px;
-    perspective: 1000px; /* Enables 3D effect on flip */
-    position: relative;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
     cursor: pointer;
-}
-
-/* Front and back of the course box */
-.course-front, .course-back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    overflow: hidden;
+    padding: 20px;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    backface-visibility: hidden;
-    border-radius: 20px;
-    padding: 20px;
-    overflow: hidden;
-    transition: transform 0.6s;
-}
-
-/* Back face of the course box */
-.course-back {
-    background-color: rgba(255, 255, 255, 0.9);
-    transform: rotateY(180deg);
-    overflow: auto;
-}
-
-/* Hover effects for flipping the course box */
-.course-box:hover .course-front {
-    transform: rotateY(-180deg);
-}
-
-.course-box:hover .course-back {
-    transform: rotateY(0deg);
-}
-
-.course-box.is-flipped .course-front {
-    transform: rotateY(-180deg);
-}
-
-.course-box.is-flipped .course-back {
-    transform: rotateY(0deg);
-}
-
-/* Carousel navigation button styling */
-.carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.left-button {
-    left: -50px; /* Move outside the carousel */
-}
-
-.right-button {
-    right: -50px; /* Move outside the carousel */
-}
-
-/* Footer styling */
-footer {
-    width: 100%;
-    padding: 20px 0;
-    background-color: #000066;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    height: 150px;
 }
 
-/* Footer navigation links */
-.navfooter ul {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
+/* Hover effect on course box */
+.course-box:hover {
+    transform: translateY(-5px);
 }
 
-.navfooter ul li {
-    padding: 0 20px;
+/* Course number styling */
+.course-number {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
-.navfooter ul li a {
-    color: white;
-    text-decoration: none;
+/* Course name styling */
+.course-name {
+    font-weight: normal;
     font-size: 18px;
+}
+
+/* Front and back of course card styling */
+.course-front, .course-back {
+    padding: 15px;
+    text-align: center;
 }
 
 /* Search container styling */
@@ -230,12 +182,14 @@ footer {
     text-align: center;
 }
 
+/* Search input and button styling */
 #searchInput, button {
     padding: 10px 20px;
     border-radius: 25px;
     font-size: 16px;
 }
 
+/* Search input styling */
 #searchInput {
     border: 2px solid #ccc;
     margin-right: 8px;
@@ -253,21 +207,63 @@ button {
     text-align: center;
 }
 
+/* Hover effect on button */
 button:hover {
     background-color: #0056b3;
 }
 
-/* Course number styling */
+/* Additional styling for course number and name within the modal */
 .course-number {
     font-weight: bold;
-    font-size: 20px; /* Adjust size as needed */
+    font-size: 20px;
     text-align: center;
-    margin-bottom: 5px; /* Space between course number and name */
+    margin-bottom: 5px;
 }
 
-/* Course name styling */
 .course-name {
     font-weight: normal;
     text-align: center;
-    font-size: 18px; /* Adjust size as needed */
+    font-size: 18px;
+}
+
+/* Modal styling */
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Modal content styling */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+}
+
+/* Close button styling */
+.close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* Hover effect on close button */
+.close:hover {
+    color: red;
+}
+
+/* Styling for headings and paragraphs within the modal */
+.modal h2, .modal h3, .modal p {
+    margin-bottom: 20px;
 }
