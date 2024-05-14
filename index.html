@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>Welcome to Dolphintellect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="homeStyleSheet.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body class="home-page">
+<header>
+    <div class="brand-name">Dolphintellect</div>
+    <nav>
+        <div class="nav-links">
+            <ul>
+                <li><a href="CourseCatalog.html">Course Catalog</a></li>
+                <li><a href="AdvancedGPA.html">Advanced GPA Calculator</a></li>
+                <li><a href="Login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main class="main-content">
+    <div class="form-container">
+        <form method="post" name="sample" class="courseTbl">
+            <div class="input-section">
+                <label for="courseName" class="input-label">Course Number</label>
+                <input type="text" name="courseName" id="courseName" placeholder="Ex: CSC394" class="input-text">
+                <div id="courseNameError" class="error-text"></div>
+            </div>
+            <div class="input-section">
+                <label for="grade" class="input-label">Course Grade</label>
+                <input type="text" name="grade" id="grade" placeholder="Ex: A" class="input-text">
+                <div id="gradeError" class="error-text"></div>
+            </div>
+
+            <input type="button" name="Add" value="Add" class="nav-btn addbtn" onclick="addCourse();">
+            <input type="button" name="calcGPA" value="Calculate GPA" class="nav-btn calcbtn" onclick="validateForm();">
+        </form>
+    </div>
+    <table id="tbl" class="table">
+        <thead>
+        <tr>
+            <th>Course</th>
+            <th>Grade</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</main>
+
+<footer>
+    <div class="navfooter">
+        <ul>
+            <li><a href="AboutUs.html">About US</a></li>
+            <li><a href="ContactUs.html">Contact US</a></li>
+            <li><a href="ReportAnIssue.html">Report An Issue</a></li>
+        </ul>
+    </div>
+</footer>
+
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <div id="popupMessage"></div>
+        <button class="dismiss" onclick="dismissPopup()">Dismiss</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        const addButton = document.querySelector('.addbtn');
+        const calcButton = document.querySelector('.calcbtn');
+        const courseNumberInput = document.getElementById('courseName');
+        const courseGradeInput = document.getElementById('grade');
+        const popup = document.getElementById('popup');
+
+        // Initially hide the popup and its contents because the site decides to start with it displaying
+        popup.style.display = 'none';
+        document.querySelector('.popup-content').style.display = 'none';
+
+        function checkInputsAndShowPopup() {
+            const tableRows = document.querySelectorAll('#tbl tbody tr');
+            const popup = document.getElementById('popup');
+            const popupContent = document.querySelector('.popup-content');
+            const popupMessage = document.getElementById('popupMessage');
+
+            if ((!courseNumberInput.value || !courseGradeInput.value) && tableRows.length === 0) {
+                popupMessage.innerText = 'Invalid Entry: Missing ' +
+                    (!courseNumberInput.value ? 'Course Number' : '') +
+                    (!courseNumberInput.value && !courseGradeInput.value ? ' and ' : '') +
+                    (!courseGradeInput.value ? 'Course Grade' : '');
+                popup.style.display = 'flex';
+                popupContent.style.display = 'block';
+            }
+        }
+
+        addButton.addEventListener('click', checkInputsAndShowPopup);
+        calcButton.addEventListener('click', checkInputsAndShowPopup);
+    });
+
+
+    function addCourse() {
+    var courseName = document.getElementById('courseName').value.trim();
+    var grade = document.getElementById('grade').value.trim().toUpperCase(); // Normalize to uppercase
+    var table = document.getElementById('tbl').getElementsByTagName('tbody')[0];
+    var courseNameError = document.getElementById('courseNameError');
+    var gradeError = document.getElementById('gradeError');
+    var popup = document.getElementById('popup');
+
+    courseNameError.innerHTML = '';
+    gradeError.innerHTML = '';
+
+    if (!courseName && !grade) {
+        displayPopup('Invalid Entry: Missing Course Number and Grade');
+        courseNameError.innerHTML = 'Missing Course Number';
+        gradeError.innerHTML = 'Missing Course Grade';
+    } else if (!courseName) {
+        displayPopup('Invalid Entry: Missing Course Number');
+        courseNameError.innerHTML = 'Missing Course Number';
+    } else if (!grade) {
+        displayPopup('Invalid Entry: Missing Course Grade');
+        gradeError.innerHTML = 'Missing Course Grade';
+    } else if (!['A', 'B', 'C', 'D', 'F'].includes(grade)) {
+        displayPopup('Invalid Entry: Please Enter A Valid Grade'); // Specific validation for the grade
+        gradeError.innerHTML = 'Invalid Grade Entered';
+    } else {
+        var newRow = table.insertRow(table.length);
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+
+        cell1.innerHTML = courseName.toUpperCase(); // Convert to uppercase
+        cell2.innerHTML = grade; // Already converted to uppercase
+        cell3.innerHTML = '<span class="delete-btn" onclick="deleteRow(this)">X</span>'; // Adds the delete button
+
+        document.getElementById('courseName').value = ''; // Clears input field
+        document.getElementById('grade').value = ''; // Clears input field
+        dismissPopup(); // Hides popup after adding courses
+    }
+}
+
+
+    function deleteRow(row) {
+        var rowIndex = row.parentNode.parentNode.rowIndex;
+        document.getElementById('tbl').deleteRow(rowIndex);
+    }
+
+    function dismissPopup() {
+        var popup = document.getElementById('popup');
+        popup.style.display = 'none';
+        document.querySelector('.popup-content').style.display = 'none'; // Hide the popup content
+    }
+
+    function displayPopup(message) {
+        var popup = document.getElementById('popup');
+        var popupMessage = document.getElementById('popupMessage');
+        popupMessage.innerText = message;
+        popup.style.display = 'flex';
+        document.querySelector('.popup-content').style.display = 'block'; // Show the popup content
+    }
+
+    function validateForm() {
+        // Placeholder function for GPA calculation maybe??
+    }
+
+</script>
+</body>
+</html>
