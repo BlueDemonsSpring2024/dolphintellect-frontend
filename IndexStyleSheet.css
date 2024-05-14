@@ -75,7 +75,7 @@ html, body {
 
 .nav-links ul li a.active {
     background-color: #808080; /* Grey color to indicate active state */
-    pointer-events: none; /* Disables the link functionality */
+    pointer-events: none;
     cursor: default;
 }
 
@@ -84,22 +84,22 @@ html, body {
     background-color: #808080;
 }
 
-/* Main content area styling */
+/* Adjust the main content area to center both containers */
 .main-content {
-    flex-grow: 1;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 20px;
+    flex-wrap: wrap;
 }
 
 /* Form container styling, aligning child elements */
 .form-container {
     width: 100%;
-    padding-right: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 /* Button container styling to ensure button alignment */
@@ -161,7 +161,7 @@ html, body {
 
 /* Input field styling, ensuring they are centered and styled consistently */
 .input-text {
-    width: 100%; /* Full width to align with button width */
+    width: 100%;
     padding: 15px;
     font-size: 16px;
     border-radius: 10px;
@@ -216,6 +216,7 @@ html, body {
     transform: translateX(-50%);
 }
 
+/* Styling for error messages */
 .error-text {
     color: black;
     margin-top: 5px;
@@ -224,42 +225,33 @@ html, body {
     top: 10px;
 }
 
+/* Table styling for equal column width and proper centering */
 .table {
-    border-collapse: separate;
-    border-spacing: 0;
-    width: auto;
-    max-width: 90%;
+    width: 50%;
+    max-width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
     border-radius: 10px;
     overflow: hidden;
     background-color: #f8f9fa;
-    margin: 0 auto; /* Center the table */
 }
 
 .table th, .table td {
-    padding: 8px 10px;
-    text-align: center; /* Center text within cells */
+    padding: 12px;
+    text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
-
-.table th:nth-child(1), .table td:nth-child(1) { /* Course column */
-    width: 40%;
-}
-
-.table th:nth-child(2), .table td:nth-child(2) { /* Grade column */
-    width: 35%;
-}
-
-.table th:nth-child(3), .table td:nth-child(3) { /* Delete column */
-    width: 25%;
+.table th, .table td {
+    width: 33.33%; /* Ensure equal width for each column */
 }
 
 .table th:first-child, .table td:first-child {
-    padding-left: 15px; /* Maintain aesthetic spacing */
+    border-left: 0;
 }
 
 .table th:last-child, .table td:last-child {
-    padding-right: 20px; /* Increase padding on the right to push content away from the edge */
+    border-right: 0;
 }
 
 .table th:first-child {
@@ -278,10 +270,19 @@ html, body {
     border-bottom-right-radius: 10px; /* Rounded bottom-right corner */
 }
 
+/* Ensure table container is properly centered */
+.table-container {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Ensure delete button has a pointer cursor on hover */
 .delete-btn {
     padding: 5px 10px;
-    width: 100%; /* Button fills the cell */
+    width: 100%;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .delete-btn:hover {
@@ -301,12 +302,12 @@ html, body {
 /* Styling for the motto and logo container */
 .motto-container {
     text-align: center;
-    margin-bottom: 40px; /
+    margin-bottom: 40px;
 }
 
 /* Styling for the DePaul logo container */
 .logo-container {
-    position:relative;
+    position: relative;
     margin-bottom: 100px;
 }
 
@@ -339,6 +340,7 @@ html, body {
     margin-top: 20px;
 }
 
+/* Content wrapper styling, including layout and alignment */
 .content-wrapper {
     position: relative;
     display: flex;
@@ -348,31 +350,22 @@ html, body {
     padding: 20px;
 }
 
-/* Table container styling, ensuring alignment and layout */
-.table-container {
-    width: calc(100% - 240px);
-    float: right;
-}
-
-
+/* GPA box styling */
 .gpa-box {
     background-color: white;
-    color: black; /* Ensure text visibility against the white background */
+    color: black;
     border-radius: 5px;
     padding: 3px 5px;
     margin: 20px auto 10px;
     box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
-    width: 10%; /
+    width: 10%;
     text-align: center;
-    font-size: 14px; /
+    font-size: 14px;
 }
 
+/* Adjusting form container to bring it closer to the center */
 .form-container {
-    width: calc(50% - 10px);
-    margin-right: 10px; /
-}
-
-.table-container {
-    width: calc(50% - 10px);
-    margin-left: 10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Selecting the add and calculate buttons, course number input, course grade input, and popup
     const addButton = document.querySelector('.addbtn');
-    const calcButton = document.querySelector('.calcbtn');
     const courseNumberInput = document.getElementById('courseName');
     const courseGradeInput = document.getElementById('grade');
     const popup = document.getElementById('popup');
@@ -39,9 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Adding event listeners to the add and calculate buttons to check inputs and show popup if necessary
+    // Adding event listeners to the add button to check inputs and show popup if necessary
     addButton.addEventListener('click', checkInputsAndShowPopup);
-    calcButton.addEventListener('click', checkInputsAndShowPopup);
 });
 
 // Function to add a new course to the table
@@ -67,7 +65,7 @@ function addCourse() {
     } else if (!grade) {
         displayPopup('Invalid Entry: Missing Course Grade');
         gradeError.innerHTML = 'Missing Course Grade';
-    } else if (!['A', 'B', 'C', 'D', 'F'].includes(grade)) {
+    } else if (!['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'F'].includes(grade)) {
         displayPopup('Invalid Entry: Please Enter A Valid Grade'); // Specific validation for the grade
         gradeError.innerHTML = 'Invalid Grade Entered';
     } else {
@@ -86,6 +84,9 @@ function addCourse() {
         document.getElementById('courseName').value = '';
         document.getElementById('grade').value = '';
         dismissPopup();
+
+        // Update GPA after adding a course
+        updateGPA();
     }
 }
 
@@ -93,6 +94,8 @@ function addCourse() {
 function deleteRow(row) {
     var rowIndex = row.parentNode.parentNode.rowIndex;
     document.getElementById('tbl').deleteRow(rowIndex);
+    // Update GPA after deleting a course
+    updateGPA();
 }
 
 // Function to dismiss the popup
@@ -111,7 +114,33 @@ function displayPopup(message) {
     document.querySelector('.popup-content').style.display = 'block'; // Show the popup content
 }
 
-// Placeholder function for form validation or GPA calculation
-function validateForm() {
-    // Placeholder function for GPA calculation maybe??
+// Function to update the GPA display
+function updateGPA() {
+    const gradeToPoints = {
+        'A': 4.0,
+        'A-': 3.7,
+        'B+': 3.3,
+        'B': 3.0,
+        'B-': 2.7,
+        'C+': 2.3,
+        'C': 2.0,
+        'C-': 1.7,
+        'D+': 1.3,
+        'D': 1.0,
+        'F': 0.0
+    };
+    const rows = document.querySelectorAll('#tbl tbody tr');
+    let totalPoints = 0;
+    const creditHours = 4; // all courses are 4 credit hours
+
+    rows.forEach(row => {
+        const grade = row.cells[1].textContent;
+        if (gradeToPoints.hasOwnProperty(grade)) {
+            totalPoints += gradeToPoints[grade] * creditHours;
+        }
+    });
+
+    const totalCourses = rows.length;
+    const gpa = totalCourses > 0 ? (totalPoints / (totalCourses * creditHours)).toFixed(2) : '--';
+    document.getElementById('gpa').textContent = gpa;
 }
