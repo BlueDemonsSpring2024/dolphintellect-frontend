@@ -26,10 +26,10 @@
     document.addEventListener('DOMContentLoaded', function() {
     //List of courses
     const courseArray = [
-        { term: 'Winter 2001', course: 'CSC373', grade: 'A' },
-        { term: 'Fall 1998', course: 'CSC374', grade: 'B' },
-        { term: 'Spring 2001', course: 'CSC394', grade: 'A-' },
-        { term: 'Spring 2004', course: 'CSC347', grade: 'B+' }
+        { term: 'December Intersession 2024', course: 'CSC373', progress: '95%', grade: 'A' },
+        { term: 'Fall 1998', course: 'CSC374', progress: '85%', grade: 'B' },
+        { term: 'Spring 2001', course: 'CSC394', progress: '90%', grade: 'A-' },
+        { term: 'Spring 2004', course: 'CSC347', progress: '89%', grade: 'B+' }
     ];
     //Sort terms by quarter and year
     sortCoursesByTerm(courseArray)
@@ -54,7 +54,7 @@
         const thead = document.createElement('thead');
         //build initial row
         const tr = document.createElement('tr');
-        ['Edit','Course', 'Grade', 'Delete'].forEach(text => {
+        ['Course', 'Progress','Grade'].forEach(text => {
             const th = document.createElement('th');
             th.textContent = text;
             tr.appendChild(th);
@@ -75,30 +75,17 @@
     function addRow(table, course) {
         const tbody = table.getElementsByTagName('tbody')[0];
         const row = tbody.insertRow();
-        const cellEdit = row.insertCell(0);
-        const cellCourse = row.insertCell(1);
+        const cellCourse = row.insertCell(0);
+        const cellProgress = row.insertCell(1);
         const cellGrade = row.insertCell(2);
-        const cellDelete = row.insertCell(3);
-        cellEdit.innerHTML = '<img class="edit-btn" src = "/images/edit-square-icon.png">';
         cellCourse.textContent = course.course;
+        cellProgress.textContent = course.progress;
         cellGrade.textContent = course.grade;
-        cellDelete.innerHTML = '<span class="delete-btn" onclick="deleteRow(this)">X</span>';
     }
 });
 
-function deleteRow(button) {
-    const row = button.closest('tr');
-    const tbody = row.parentNode;
-    const table = row.parentNode.parentNode;
-    //delete row
-    tbody.removeChild(row);
-    if (tbody.rows.length == 0){
-        table.parentNode.removeChild(table);
-    }
-    }
-
 function sortCoursesByTerm(courses) {
-    var quarters = ['Winter', 'Spring', 'Fall'];
+    var quarters = ['Winter', 'Spring', 'Summer I', 'Summer II','Fall','December Intersession'];
     courses.sort(function(a, b) {
         //get Years from the Term
         firstYear = parseInt(a.term.split(' ')[1],10);

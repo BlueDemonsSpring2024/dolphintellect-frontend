@@ -65,14 +65,16 @@ html, body {
 }
 
 .page-header {
-    font-size: 50px;
-    font-weight: 400; /* Makes the font slimmer */
-    font-family: 'Montserrat', sans-serif;
-    color: white;
-    padding: 20px;
-    text-align: center; /* Centers our site name vertically within the header */
+    text-align: center;
+    width: 250px;
+    color: black;
+    margin: 20px auto;
+    font-size: 36px;
+    font-family: 'Permanent Marker', cursive;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
 }
-
 
 .table {
     table-layout: fixed;
@@ -84,7 +86,7 @@ html, body {
 }
 
 .table th, .table td {
-    text-align: left; /* Align text to the left */
+    text-align: center; /* Align text to the left */
     padding: 12px 20px; /* Padding inside cells */
     border-bottom: 2px solid #dee2e6; /* Light grey border for each cell */
 }
@@ -103,24 +105,18 @@ html, body {
     width: 40%;
     margin: 5px auto; 
 }
+
 .table-header {
     text-align: center;
     font-size: 25px;
     font-weight: 400; /* Makes the font slimmer */
     font-family: 'Montserrat', sans-serif;
     color: white;
-    margin: 20px;
-
+    background-color: #000066;
+    margin: 20px 20px 10px; /* Adjusted margin */
+    border-radius: 10px; /* Rounded corners */
 }
 
-.delete-btn {
-    color: #dc3545; /* Bootstrap danger color for the delete button */
-    cursor: pointer; /* Cursor indicates clickable */
-    padding: 5px 10px; /* Padding for better touch area */
-    border-radius: 5px; /* Rounded corners for the button */
-    background-color: #f8d7da; /* Light red background */
-    border: 1px solid #dc3545; /* Red border */
-}
 
 tr {
     font-size: 15px;
@@ -133,10 +129,6 @@ th:last-child,td:last-child, th:first-child, td:first-child  {
     width: 50px; 
 }
 
-.edit-btn {
-    width: 30px;
-    transition: transform 0.3s ease; 
-}
 
 img:hover {
     transform: scale(1.1);
