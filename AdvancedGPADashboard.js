@@ -101,7 +101,18 @@ const courseArray = [
 
 const container = document.getElementById('table-container');
 
-//create table for term if not exist, otherwise add row for corresponding term
+
+//create modal for each course
+function EditGradeCourseModal(course) {
+    document.getElementById('modal-course-number').innerText = course.course;
+    document.getElementById('modal').style.display = 'flex';
+    document.querySelector('.close').addEventListener('click', function() {
+        document.getElementById('modal').style.display = 'none';
+        removeTable();
+    });
+}
+
+//creaste table for term if not exist, otherwise add row for corresponding term
 courseArray.forEach(course => {
 let table = document.getElementById(`table-${course.term}`);
 if (!table) {
@@ -139,9 +150,17 @@ const cellProgress = row.insertCell(1);
 const cellGrade = row.insertCell(2);
 const cellDelete = row.insertCell(3);
 cellCourse.textContent = course.course;
+cellCourse.classList.add('clickable');
 cellProgress.textContent = course.progress;
 cellGrade.textContent = course.grade;
 cellDelete.innerHTML = '<span class="delete-btn" onclick="deleteRow(this)">X</span>';
+//displays modal when clicked
+cellCourse.addEventListener('click', function() {
+    EditGradeCourseModal(course);
+    initTable();
+});
+
+console.log('Event listener added to cellCourse');
 }
 });
 
@@ -180,6 +199,94 @@ secondYear = b.term.split(' ');
 });
 
 }
+
+//------------------------------This is popup table when they click on the cpurse------------------------------------------------------//
+
+            // List of items
+            const itemArray = [
+                { item: 'Assignment 1', score: '50/100', weight: '10%' },
+                { item: 'Assignment 2', score: '100/100', weight: '10%' },
+                { item: 'Quiz 1', score: '75/100', weight: '20%' },
+                { item: 'Assignment 3', score: '80/100', weight: '10%' }
+            ];
+
+            const itemArrayContainer = document.getElementById('grade-table-container');
+
+            function createTable() {
+                // Build table
+                const table = document.createElement('table');
+                table.className = 'table';
+                table.id = 'grade-table';
+                table.classList.add('edit-grade-table');
+                const thead = document.createElement('thead');
+                // Build initial row
+                const tr = document.createElement('tr');
+                [ 'Item', 'Score', 'Weight', 'Delete'].forEach(text => {
+                    const th = document.createElement('th');
+                    th.textContent = text;
+                    tr.appendChild(th);
+                });
+                thead.appendChild(tr);
+                table.appendChild(thead);
+                const tbody = document.createElement('tbody');
+                table.appendChild(tbody);
+
+                return table;
+            }
+
+            function addRow(table, item) {
+                const tbody = table.getElementsByTagName('tbody')[0];
+                const row = tbody.insertRow();
+                const cellItem = row.insertCell(0);
+                const cellScore = row.insertCell(1);
+                const cellWeight = row.insertCell(2);
+                const cellDelete = row.insertCell(3);
+                
+                
+                // Make "Item" cell editable
+                const itemInput = document.createElement('input');
+                itemInput.value = item.item;
+                cellItem.appendChild(itemInput);
+                
+                // Make "Score" cell editable
+                const scoreInput = document.createElement('input');
+                scoreInput.value = item.score;
+                cellScore.appendChild(scoreInput);
+                
+                // Make "Weight" cell editable
+                const weightInput = document.createElement('input');
+                weightInput.value = item.weight;
+                cellWeight.appendChild(weightInput);
+                
+                // Delete button
+                cellDelete.innerHTML = '<span class="delete-btn" onclick="deleteRow(this)">X</span>';
+                
+            }
+
+        
+            // Initialize the table and add rows
+            function initTable() {
+            const table = createTable();
+            itemArrayContainer.appendChild(table);
+            itemArray.forEach(item => addRow(table, item));
+            }
+            // Make table cells editable
+            $('body').on('click', '.edit-btn', function() {
+                var $cell = $(this).closest('tr').find('td:gt(0)');
+                $cell.each(function() {
+                    var $input = $('<input/>').val($(this).text());
+                    $(this).empty().append($input);
+                });
+            });
+
+            //remove table
+            function removeTable() {
+                const table = document.getElementById('grade-table');
+                if (table) {
+                    table.remove();
+                } 
+            }
+
 /*
 function createTable() {
 //build table

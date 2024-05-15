@@ -290,3 +290,58 @@ img:hover {
     margin-left:30px;
     align-self: center;
 }
+
+/* Modal styling */
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Modal content styling */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    max-width: 900px;
+    width: 90%;
+    text-align: center;
+}
+/* give course name breathing room on modal */
+#modal-course-number {
+    margin-bottom: 20px;
+}
+
+/* Close button styling */
+.close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* Hover effect on close button */
+.close:hover {
+    color: red;
+}
+.clickable {
+    color: blue;
+    cursor: pointer;
+}
+
+.grade-table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.edit-grade-table {
+    margin: auto;
+}
