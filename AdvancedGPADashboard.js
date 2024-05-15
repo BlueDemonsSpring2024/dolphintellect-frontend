@@ -92,10 +92,10 @@ document.addEventListener('DOMContentLoaded', function() {
 */
 //current classlist tables item
 const courseArray = [
-        { term: 'Winter 2021', course: 'CSC373', progress: '20%', grade: '-Select-' },
-        { term: 'Winter 2021', course: 'CSC374', progress: '20%', grade: '-Select-' },
-        { term: 'Winter 2021', course: 'CSC394', progress: '20%', grade: '-Select-' },
-        { term: 'Winter 2021', course: 'CSC347', progress: '20%', grade: '-Select-' }
+        { term: 'Winter 2021', course: 'CSC373', progress: '20%', grade: 'A' },
+        { term: 'Winter 2021', course: 'CSC374', progress: '20%', grade: 'B' },
+        { term: 'Winter 2021', course: 'CSC394', progress: '20%', grade: 'C' },
+        { term: 'Winter 2021', course: 'CSC347', progress: '20%', grade: 'D' }
     ];
     sortCoursesByTerm(courseArray)
 
@@ -152,7 +152,19 @@ const cellDelete = row.insertCell(3);
 cellCourse.textContent = course.course;
 cellCourse.classList.add('clickable');
 cellProgress.textContent = course.progress;
-cellGrade.textContent = course.grade;
+//select dropdown for course grade
+const selectGrade = document.createElement('select');
+const gradeOptions = ['-','A','A-','B+', 'B', 'B-','C+','C','C-','D+','D','D-','F'];
+gradeOptions.forEach(grade => {
+    const option = document.createElement('option');
+    option.value = grade;
+    option.textContent = grade;
+    if (course.grade == grade) {
+        option.selected = true; 
+    }
+    selectGrade.appendChild(option);
+});
+cellGrade.appendChild(selectGrade);
 cellDelete.innerHTML = '<span class="delete-btn" onclick="deleteRow(this)">X</span>';
 //displays modal when clicked
 cellCourse.addEventListener('click', function() {
