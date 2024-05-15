@@ -1,16 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
+/* Background styles from index.css */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #ADD8E6; /* Light blue background for the entire page */
-    position: relative; /* Needed for absolute positioning of the footer */
-    min-height: 100vh; /* Full height of the viewport */
+    background-image: url('images/vector-abstract-gradiente-background-blue-wallpaper_901408-861.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 .brand-name {
@@ -18,50 +23,72 @@ html, body {
     color: white;
     padding: 20px;
     font-size: 32px;
-    align-self: center; /* Centers our site name vertically within the header */
+    align-self: center;
 }
 
 .header {
     display: flex;
-    justify-content: center; /* Centers the entire header content */
+    justify-content: center;
     align-items: center;
     padding: 20px;
     background-color: #000066;
-    width: 100%; /* Ensures the header spans the full width */
+    width: 100%;
 }
 
 .nav-links {
+    position: absolute;
+    top: 20px;
+    right: 20px;
     display: flex;
-    justify-content: center; /* Centers navigation links horizontally */
-    align-items: center;
+    list-style: none;
+    margin: 0;
     padding: 0;
 }
 
 .nav-links ul {
-    list-style: none;
-    display: flex;
+    list-style-type: none;
     margin: 0;
     padding: 0;
-    align-items: center; /* Aligns the menu items vertically */
+    display: flex;
+}
+
+.nav-links ul li {
+    padding-left: 20px;
 }
 
 .nav-links ul li a {
-    display: inline-block;
-    background-color: black; /* Button background */
-    color: white; /* Text color */
+    display: block;
+    background-color: black;
+    color: white;
     text-decoration: none;
-    padding: 15px 30px;
-    margin: 0 15px;
-    border-radius: 25px; /* Rounded corners */
-    transition: transform 0.3s, background-color 0.3s; /* Smooth transition for transform and background color */
-    font-size: 20px;
-    font-weight: 400; /* Makes the font slimmer */
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
     font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.nav-links ul li a.active {
+    background-color: #808080; /* Grey color to indicate active state */
+    pointer-events: none;
+    cursor: default;
 }
 
 .nav-links ul li a:hover {
-    transform: scale(1.1); /* Scales the button up to 110% of its size */
-    background-color: #808080; /* Changes background color to gray on hover */
+    transform: scale(1.1);
+    background-color: #808080;
+}
+
+.motto-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.motto {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    color: white;
+    margin: 20px 0;
 }
 
 .page-header {
@@ -80,56 +107,80 @@ html, body {
     table-layout: fixed;
     width: 40%;
     min-width: 350px;
-    margin: 20px auto; /* Center the table and provide some space above and below */
+    margin: 20px auto;
     border-collapse: collapse;
-    background-color: #f8f9fa; /* Light background for the table */
+    background-color: #f8f9fa;
 }
 
 .table th, .table td {
-    text-align: center; /* Align text to the left */
-    padding: 12px 20px; /* Padding inside cells */
-    border-bottom: 2px solid #dee2e6; /* Light grey border for each cell */
+    text-align: center;
+    padding: 12px 20px;
+    border-bottom: 2px solid #dee2e6;
 }
 
 .table th {
-    background-color: #007bff; /* Blue background for headers */
+    background-color: #007bff;
     color: white;
     font-size: 16px;
 }
 
 .table tr:hover {
-    background-color: #f1f1f1; /* Light grey background on hover */
+    background-color: #f1f1f1;
 }
 
 .table-container {
     width: 40%;
-    margin: 5px auto; 
+    margin: 5px auto;
 }
 
 .table-header {
     text-align: center;
     font-size: 25px;
-    font-weight: 400; /* Makes the font slimmer */
+    font-weight: 400;
     font-family: 'Montserrat', sans-serif;
-    color: white;
+    color: white; /* Changed to white */
     background-color: #000066;
-    margin: 20px 20px 10px; /* Adjusted margin */
-    border-radius: 10px; /* Rounded corners */
+    margin: 20px 20px 10px;
+    border-radius: 10px;
+    padding: 10px;
 }
-
 
 tr {
     font-size: 15px;
-    font-weight: 400; /* Makes the font slimmer */
+    font-weight: 400;
     font-family: 'Montserrat', sans-serif;
     color: black;
 }
 
-th:last-child,td:last-child, th:first-child, td:first-child  {
-    width: 50px; 
+th:last-child, td:last-child, th:first-child, td:first-child {
+    width: 50px;
 }
-
 
 img:hover {
     transform: scale(1.1);
+}
+
+/* Styles for Add Course button matching menu buttons */
+#add-course-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 30px;
+    font-size: 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+
+#add-course-btn:hover {
+    transform: scale(1.1);
+    background-color: #808080;
+}
+
+.table + .table {
+    margin-top: 40px;
 }
