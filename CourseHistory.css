@@ -1,134 +1,162 @@
+/* Import Google Font styles */
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
+/* General styles for the whole page */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #ADD8E6; /* Light blue background for the entire page */
-    position: relative; /* Needed for absolute positioning of the footer */
-    min-height: 100vh; /* Full height of the viewport */
+    background-image: url('images/vector-abstract-gradiente-background-blue-wallpaper_901408-861.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
+/* Styling for text */
 .brand-name {
     font-family: 'Pacifico', cursive;
     color: white;
     padding: 20px;
     font-size: 32px;
-    align-self: center; /* Centers our site name vertically within the header */
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 
-.header {
+/* Header styling */
+header {
     display: flex;
-    justify-content: center; /* Centers the entire header content */
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
     padding: 20px;
-    background-color: #000066;
-    width: 100%; /* Ensures the header spans the full width */
+    background: transparent;
+    position: relative;
+    box-sizing: border-box;
 }
 
+/* Navigation container styling */
 .nav-links {
     display: flex;
-    justify-content: center; /* Centers navigation links horizontally */
     align-items: center;
+    list-style: none;
+    margin: 0;
     padding: 0;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    box-sizing: border-box;
 }
 
 .nav-links ul {
-    list-style: none;
-    display: flex;
+    list-style-type: none;
     margin: 0;
     padding: 0;
-    align-items: center; /* Aligns the menu items vertically */
+    display: flex;
+}
+
+.nav-links ul li {
+    padding-left: 20px;
 }
 
 .nav-links ul li a {
-    display: inline-block;
-    background-color: black; /* Button background */
-    color: white; /* Text color */
+    display: block;
+    background-color: black;
+    color: white;
     text-decoration: none;
-    padding: 15px 30px;
-    margin: 0 15px;
-    border-radius: 25px; /* Rounded corners */
-    transition: transform 0.3s, background-color 0.3s; /* Smooth transition for transform and background color */
-    font-size: 20px;
-    font-weight: 400; /* Makes the font slimmer */
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
     font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s, transform 0.3s;
+    white-space: nowrap; /* Ensure text does not wrap */
+}
+
+.nav-links ul li a.active {
+    background-color: #808080;
+    pointer-events: none;
+    cursor: default;
 }
 
 .nav-links ul li a:hover {
-    transform: scale(1.1); /* Scales the button up to 110% of its size */
-    background-color: #808080; /* Changes background color to gray on hover */
+    transform: scale(1.1);
+    background-color: #808080;
 }
 
-.page-header {
-    text-align: center;
-    width: 250px;
-    color: black;
-    margin: 20px auto;
-    font-size: 36px;
+/* Styling for the motto section */
+.motto {
+    color: white;
+    font-size: 32px;
     font-family: 'Permanent Marker', cursive;
-    padding: 10px 20px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 25px;
+    text-align: center;
+    margin: 40px 0;
 }
 
+/* Styling for the motto container */
+.motto-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Table styling */
 .table {
     table-layout: fixed;
     width: 40%;
     min-width: 350px;
-    margin: 20px auto; /* Center the table and provide some space above and below */
+    margin: 20px auto;
     border-collapse: collapse;
-    background-color: #f8f9fa; /* Light background for the table */
+    background-color: #f8f9fa;
 }
 
 .table th, .table td {
-    text-align: center; /* Align text to the left */
-    padding: 12px 20px; /* Padding inside cells */
-    border-bottom: 2px solid #dee2e6; /* Light grey border for each cell */
+    text-align: center;
+    padding: 12px 20px;
+    border-bottom: 2px solid #dee2e6;
 }
 
 .table th {
-    background-color: #007bff; /* Blue background for headers */
+    background-color: #007bff;
     color: white;
     font-size: 16px;
 }
 
 .table tr:hover {
-    background-color: #f1f1f1; /* Light grey background on hover */
+    background-color: #f1f1f1;
 }
 
-.table-container {
-    width: 40%;
-    margin: 5px auto; 
-}
-
+/* Styling for the table header */
 .table-header {
     text-align: center;
     font-size: 25px;
-    font-weight: 400; /* Makes the font slimmer */
+    font-weight: 400;
     font-family: 'Montserrat', sans-serif;
     color: white;
     background-color: #000066;
-    margin: 20px 20px 10px; /* Adjusted margin */
-    border-radius: 10px; /* Rounded corners */
+    margin: 20px 20px 10px;
+    border-radius: 10px;
 }
 
-
+/* Row styling */
 tr {
     font-size: 15px;
-    font-weight: 400; /* Makes the font slimmer */
+    font-weight: 400;
     font-family: 'Montserrat', sans-serif;
     color: black;
 }
 
-th:last-child,td:last-child, th:first-child, td:first-child  {
-    width: 50px; 
+/* Styling for the first and last cells in each row */
+th:last-child, td:last-child, th:first-child, td:first-child {
+    width: 50px;
 }
-
 
 img:hover {
     transform: scale(1.1);
