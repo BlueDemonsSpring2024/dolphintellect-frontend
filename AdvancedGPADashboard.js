@@ -64,12 +64,12 @@ document.addEventListener('DOMContentLoaded', function() {
 */
 //current classlist tables item
 const courseArray = [
-        { term: 'Winter 2021', course: 'CSC373', progress: '20%', grade: 'A' },
-        { term: 'Winter 2021', course: 'CSC374', progress: '20%', grade: 'B' },
-        { term: 'Winter 2021', course: 'CSC394', progress: '20%', grade: 'C' },
-        { term: 'Winter 2021', course: 'CSC347', progress: '20%', grade: 'D' }
-    ];
-    sortCoursesByTerm(courseArray)
+        { term: 'Winter 2021', course: 'CSC373', progress: '20%', grade: 'Select Final Grade' },
+        { term: 'Winter 2021', course: 'CSC374', progress: '20%', grade: 'Select Final Grade' },
+        { term: 'Winter 2021', course: 'CSC394', progress: '20%', grade: 'Select Final Grade' },
+        { term: 'Winter 2021', course: 'CSC347', progress: '20%', grade: 'Select Final Grade' }
+];
+sortCoursesByTerm(courseArray)
 
 const container = document.getElementById('table-container');
 
@@ -102,7 +102,7 @@ table.className = 'table';
 const thead = document.createElement('thead');
 //build initial row
 const tr = document.createElement('tr');
-['Action','Course','Progress', 'Grade', 'Delete'].forEach(text => {
+['Course','Calculated Grade', 'Final Grade', 'Save', 'Delete'].forEach(text => {
     const th = document.createElement('th');
     th.textContent = text;
     tr.appendChild(th);
@@ -116,18 +116,18 @@ return table;
 
 function addRow(table, course) {
 const tbody = table.getElementsByTagName('tbody')[0];
-const row = tbody.insertRow();1
-const cellAction = row.insertCell(0);
-const cellCourse = row.insertCell(1);
-const cellProgress = row.insertCell(2);
-const cellGrade = row.insertCell(3);
+const row = tbody.insertRow();
+const cellCourse = row.insertCell(0);
+const cellProgress = row.insertCell(1);
+const cellGrade = row.insertCell(2);
+const cellSave = row.insertCell(3);
 const cellDelete = row.insertCell(4);
 cellCourse.textContent = course.course;
 cellCourse.classList.add('clickable');
 cellProgress.textContent = course.progress;
 //select dropdown for course grade
 const selectGrade = document.createElement('select');
-const gradeOptions = ['-','A','A-','B+', 'B', 'B-','C+','C','C-','D+','D','D-','F'];
+const gradeOptions = ['Select Final Grade','A','A-','B+', 'B', 'B-','C+','C','C-','D+','D','D-','F'];
 gradeOptions.forEach(grade => {
     const option = document.createElement('option');
     option.value = grade;
@@ -139,12 +139,23 @@ gradeOptions.forEach(grade => {
 });
 cellGrade.appendChild(selectGrade);
 cellDelete.innerHTML = '<span class="delete-btn" onclick="deleteRow(this)">X</span>';
-cellAction.innerHTML = "<button><i class='bx bx-save'></i></button>" ;
+cellSave.innerHTML = "<button class= 'savebtn'><i class='bx bx-save'></i></button>" ;
 //displays modal when clicked
 cellCourse.addEventListener('click', function() {
     EditGradeCourseModal(course);
     initTable();
 });
+
+cellSave.querySelector('.savebtn').addEventListener('click', function() {
+    const selectedGrade = selectGrade.value;
+    if (selectedGrade !== 'Select Final Grade') {
+        window.location.href = 'courseHistory.html';
+    } else {
+        alert('Please select a final grade.');
+    }
+});
+
+
 
 console.log('Event listener added to cellCourse');
 }
@@ -195,9 +206,9 @@ secondYear = b.term.split(' ');
                 { item: 'Quiz 1', score: '75/100', weight: '20%' },
                 { item: 'Assignment 3', score: '80/100', weight: '10%' }
             ];
-
+            
             const itemArrayContainer = document.getElementById('grade-table-container');
-
+            
             function createTable() {
                 // Build table
                 const table = document.createElement('table');
@@ -216,11 +227,11 @@ secondYear = b.term.split(' ');
                 table.appendChild(thead);
                 const tbody = document.createElement('tbody');
                 table.appendChild(tbody);
-
+            
                 return table;
             }
-
-            function addRow(table, item) {
+            
+            function addRow(table, item = { item: '', score: '', weight: '' }) {
                 const tbody = table.getElementsByTagName('tbody')[0];
                 const row = tbody.insertRow();
                 const cellItem = row.insertCell(0);
@@ -229,58 +240,91 @@ secondYear = b.term.split(' ');
                 const cellEdit = row.insertCell(3);
                 const cellSave = row.insertCell(4);
                 const cellDelete = row.insertCell(5);
-
-                
-                
+            
                 // Make "Item" cell editable
                 const itemInput = document.createElement('input');
                 itemInput.value = item.item;
+                itemInput.disabled = true;
                 cellItem.appendChild(itemInput);
-                
+            
                 // Make "Score" cell editable
                 const scoreInput = document.createElement('input');
                 scoreInput.value = item.score;
+                scoreInput.disabled = true; 
                 cellScore.appendChild(scoreInput);
-                
+            
                 // Make "Weight" cell editable
                 const weightInput = document.createElement('input');
                 weightInput.value = item.weight;
+                weightInput.disabled = true;
                 cellWeight.appendChild(weightInput);
-                
+            
+                // Edit button
+                const editButton = document.createElement('button');
+                editButton.innerHTML = "<i class='bx bxs-pencil'></i>";
+                editButton.className = 'edit-btn';
+                editButton.addEventListener('click', function() {
+                    itemInput.disabled = false;
+                    scoreInput.disabled = false;
+                    weightInput.disabled = false;
+                });
+                cellEdit.appendChild(editButton);
+            
+                // Save button
+                const saveButton = document.createElement('button');
+                saveButton.innerHTML = "<i class='bx bx-save'></i>";
+                saveButton.addEventListener('click', function() {
+                    itemInput.disabled = true;
+                    scoreInput.disabled = true;
+                    weightInput.disabled = true;
+            
+                    // Update itemArray with new values or add new item
+                    const rowIndex = row.rowIndex - 1; 
+                    if (rowIndex >= itemArray.length) {
+                        itemArray.push({ item: itemInput.value, score: scoreInput.value, weight: weightInput.value });
+                    } else {
+                        itemArray[rowIndex].item = itemInput.value;
+                        itemArray[rowIndex].score = scoreInput.value;
+                        itemArray[rowIndex].weight = weightInput.value;
+                    }
+                });
+                cellSave.appendChild(saveButton);
+            
                 // Delete button
-                cellDelete.innerHTML = '<span class="delete-btn" onclick="deleteRow(this)">X</span>';
-
-                //Action button such as save and edit
-                cellSave.innerHTML = "<button><i class='bx bx-save'></i></button>";
-                cellEdit.innerHTML = "<button><i class='bx bxs-pencil'></i></button>" ;
-                
+                const deleteButton = document.createElement('button');
+                deleteButton.innerHTML = 'X';
+                deleteButton.addEventListener('click', function() {
+                    row.remove();
+                    itemArray.splice(row.rowIndex - 1, 1); // Remove the item from itemArray
+                });
+                cellDelete.appendChild(deleteButton);
             }
-
-        
+            
             // Initialize the table and add rows
             function initTable() {
-            const table = createTable();
-            itemArrayContainer.appendChild(table);
-            itemArray.forEach(item => addRow(table, item));
+                const table = createTable();
+                itemArrayContainer.appendChild(table);
+                itemArray.forEach(item => addRow(table, item));
             }
-
-
-            // Make table cells editable
-            $('body').on('click', '.edit-btn', function() {
-                var $cell = $(this).closest('tr').find('td:gt(0)');
-                $cell.each(function() {
-                    var $input = $('<input/>').val($(this).text());
-                    $(this).empty().append($input);
-                });
+            
+            // Add new row button
+            const addNewRowButton = document.createElement('button');
+            addNewRowButton.textContent = 'Add New Row';
+            addNewRowButton.addEventListener('click', function() {
+                const table = document.getElementById('grade-table');
+                addRow(table);
             });
-
-            //remove table
+            itemArrayContainer.appendChild(addNewRowButton);
+            
+            // Remove table
             function removeTable() {
                 const table = document.getElementById('grade-table');
                 if (table) {
                     table.remove();
-                } 
+                }
             }
+            
+
 
 /*
 function createTable() {
