@@ -24,14 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         popupContent.classList.add('popup-content');
 
         // Create a classname input
-        const classnameInput = document.createElement('input');
-        classnameInput.setAttribute('type', 'text');
-        classnameInput.setAttribute('maxlength', '8');
-        classnameInput.setAttribute('placeholder', 'Enter Course Name');
-        popupContent.appendChild(classnameInput);
-        // Create a "Finish Creation" button
-        const finishCreationButton = document.createElement('button');
-        finishCreationButton.textContent = 'Add';
+        
         finishCreationButton.classList.add('btn');
         finishCreationButton.addEventListener('click', function() {
             const classname = classnameInput.value.trim();
@@ -130,7 +123,7 @@ table.className = 'table';
 const thead = document.createElement('thead');
 //build initial row
 const tr = document.createElement('tr');
-['Course','Progress', 'Grade', 'Delete'].forEach(text => {
+['Action','Course','Progress', 'Grade', 'Delete'].forEach(text => {
     const th = document.createElement('th');
     th.textContent = text;
     tr.appendChild(th);
@@ -144,11 +137,12 @@ return table;
 
 function addRow(table, course) {
 const tbody = table.getElementsByTagName('tbody')[0];
-const row = tbody.insertRow();
-const cellCourse = row.insertCell(0);
-const cellProgress = row.insertCell(1);
-const cellGrade = row.insertCell(2);
-const cellDelete = row.insertCell(3);
+const row = tbody.insertRow();1
+const cellAction = row.insertCell(0);
+const cellCourse = row.insertCell(1);
+const cellProgress = row.insertCell(2);
+const cellGrade = row.insertCell(3);
+const cellDelete = row.insertCell(4);
 cellCourse.textContent = course.course;
 cellCourse.classList.add('clickable');
 cellProgress.textContent = course.progress;
@@ -166,6 +160,7 @@ gradeOptions.forEach(grade => {
 });
 cellGrade.appendChild(selectGrade);
 cellDelete.innerHTML = '<span class="delete-btn" onclick="deleteRow(this)">X</span>';
+cellAction.innerHTML = "<button><i class='bx bx-save'></i></button>" ;
 //displays modal when clicked
 cellCourse.addEventListener('click', function() {
     EditGradeCourseModal(course);
@@ -233,7 +228,7 @@ secondYear = b.term.split(' ');
                 const thead = document.createElement('thead');
                 // Build initial row
                 const tr = document.createElement('tr');
-                [ 'Item', 'Score', 'Weight', 'Delete'].forEach(text => {
+                ['Item', 'Score', 'Weight', 'Edit', 'Save', 'Delete'].forEach(text => {
                     const th = document.createElement('th');
                     th.textContent = text;
                     tr.appendChild(th);
@@ -252,7 +247,10 @@ secondYear = b.term.split(' ');
                 const cellItem = row.insertCell(0);
                 const cellScore = row.insertCell(1);
                 const cellWeight = row.insertCell(2);
-                const cellDelete = row.insertCell(3);
+                const cellEdit = row.insertCell(3);
+                const cellSave = row.insertCell(4);
+                const cellDelete = row.insertCell(5);
+
                 
                 
                 // Make "Item" cell editable
@@ -272,6 +270,10 @@ secondYear = b.term.split(' ');
                 
                 // Delete button
                 cellDelete.innerHTML = '<span class="delete-btn" onclick="deleteRow(this)">X</span>';
+
+                //Action button such as save and edit
+                cellSave.innerHTML = "<button><i class='bx bx-save'></i></button>";
+                cellEdit.innerHTML = "<button><i class='bx bxs-pencil'></i></button>" ;
                 
             }
 
@@ -282,6 +284,8 @@ secondYear = b.term.split(' ');
             itemArrayContainer.appendChild(table);
             itemArray.forEach(item => addRow(table, item));
             }
+
+
             // Make table cells editable
             $('body').on('click', '.edit-btn', function() {
                 var $cell = $(this).closest('tr').find('td:gt(0)');
