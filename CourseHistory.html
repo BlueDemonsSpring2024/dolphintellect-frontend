@@ -1,35 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Course History - Dolphintellect</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CourseHistory.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body class="home-page">
-<header>
-    <div class="brand-name">Dolphintellect</div>
-    <nav>
-        <div class="nav-links">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="CourseCatalog.html">Course Catalog</a></li>
-                <li><a href="AdvancedGPADashboard.html">Advanced GPA Calculator</a></li>
-                <li><a href="Login.html">Login</a></li>
-            </ul>
-        </div>
-    </nav>
-</header>
+    <link rel="stylesheet" href = "CourseHistory.css">
+<body>
+    <header>
+        <div class="brand-name">Dolphintellect</div>
+        <nav>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="CourseCatalog.html">Course Catalog</a></li>
+                    <li><a href="AdvancedGPA.html">Advanced GPA Calculator</a></li>
+                    <li><a href="Login.html">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="main-content">
+        <h1 class="page-header">Course History</h1>
+        <div id="table-container">
+        <!-- Tables go here -->
+    </div>
+    </main>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    //List of courses
+    const courseArray = [
+        { term: 'December Intersession 2024', course: 'CSC373', progress: '95%', grade: 'A' },
+        { term: 'Fall 1998', course: 'CSC374', progress: '85%', grade: 'B' },
+        { term: 'Spring 2001', course: 'CSC394', progress: '90%', grade: 'A-' },
+        { term: 'Spring 2004', course: 'CSC347', progress: '89%', grade: 'B+' }
+    ];
+    //Sort terms by quarter and year
+    sortCoursesByTerm(courseArray)
 
-<div class="motto-container">
-    <p class="motto">Course History</p>
-</div>
+    const container = document.getElementById('table-container');
 
-<main class="main-content">
-    <button id="add-course-btn">Add Course</button>
-    <div id="table-container" class="table-container"></div>
-</main>
+    //create table for term if not exist, otherwise add row for corresponding term
+    courseArray.forEach(course => {
+        let table = document.getElementById(`table-${course.term}`);
+        if (!table) {
+            table = createTable(course.term);
+            container.appendChild(table);
+        }
+        addRow(table, course);
+    });
 
-<script src="CourseHistory.js"></script>
+    function createTable(term) {
+        //build table
+        const table = document.createElement('table');
+        table.id = `table-${term}`;
+        table.className = 'table';
+        const thead = document.createElement('thead');
+        //build initial row
+        const tr = document.createElement('tr');
+        ['Course', 'Progress','Grade'].forEach(text => {
+            const th = document.createElement('th');
+            th.textContent = text;
+            tr.appendChild(th);
+        });
+        thead.appendChild(tr);
+        table.appendChild(thead);
+        const tbody = document.createElement('tbody');
+        table.appendChild(tbody);
+        //build header
+        const tableHeader = document.createElement('caption');
+        tableHeader.textContent = `${term} Term`;
+        tableHeader.className = 'table-header';
+        table.appendChild(tableHeader);
+
+        return table;
+    }
+
+    function addRow(table, course) {
+        const tbody = table.getElementsByTagName('tbody')[0];
+        const row = tbody.insertRow();
+        const cellCourse = row.insertCell(0);
+        const cellProgress = row.insertCell(1);
+        const cellGrade = row.insertCell(2);
+        cellCourse.textContent = course.course;
+        cellProgress.textContent = course.progress;
+        cellGrade.textContent = course.grade;
+    }
+});
+
+function sortCoursesByTerm(courses) {
+    var quarters = ['Winter', 'Spring', 'Summer I', 'Summer II','Fall','December Intersession'];
+    courses.sort(function(a, b) {
+        //get Years from the Term
+        firstYear = parseInt(a.term.split(' ')[1],10);
+        secondYear = parseInt(b.term.split(' ')[1],10);
+        firstQuarter = a.term.split(' ')[0];
+        secondQuarter = b.term.split(' ')[0];
+        if(firstYear !== secondYear){
+            return firstYear - secondYear;}
+        else {
+            return quarters.indexOf(firstQuarter) - quarters.indexOf(secondQuarter);
+        }
+      });
+
+}
+function sortCoursesByYear(courses) {
+    courses.sort(function(a, b) {
+        firstYear = a.term.split(' ');
+        secondYear = b.term.split(' ');
+         return sortOrder.indexOf(a.term) - sortOrder.indexOf(b.term);
+      });
+
+}
+    </script>
 </body>
+
 </html>
