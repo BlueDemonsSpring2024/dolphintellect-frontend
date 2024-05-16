@@ -1,4 +1,6 @@
+/* Import Google Font styles */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
 /* Global styles reset to ensure consistent styling across browsers */
 * {
@@ -7,193 +9,230 @@
     box-sizing: border-box;
 }
 
-/* Main body styling to align content and set background properties */
+/* Main body styling */
 body {
     min-height: 100vh;
     font-family: Arial, sans-serif;
-    background-image: url('images/Course_Catalog_Blue.jpg');
+    background-image: url('images/vector-abstract-gradiente-background-blue-wallpaper_901408-861.avif');
     background-size: cover;
     background-position: center;
-    overflow: hidden; /* Prevents scrolling beyond the viewport */
+    overflow: hidden;
 }
 
-/* Header styling including background color and alignment of elements */
+/* Header styling */
 header {
-    width: 100%;
-    background-color: #c7c7f7;
-    color: white;
-    padding: 10px 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    padding: 20px;
+    background: transparent;
+    position: relative;
+    box-sizing: border-box;
 }
 
-/* Styling for the brand name with specific font settings */
+/* Brand logo styling */
 .brand-logo img {
-    width: 80px;
+    width: 120px;
     margin-right: auto;
 }
 
-/* Container for navigation links with center alignment */
+/* Navigation container styling */
 .nav-links {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    box-sizing: border-box;
 }
 
-/* Unordered list in navigation links with no default styling */
 .nav-links ul {
     list-style-type: none;
-    display: flex;
+    margin: 0;
     padding: 0;
-    margin: 0 auto;
-    align-items: center;
+    display: flex;
 }
 
-/* Styling for each navigation link */
+.nav-links ul li {
+    padding-left: 20px;
+}
+
 .nav-links ul li a {
-    display: inline-block;
+    display: block;
     background-color: black;
     color: white;
     text-decoration: none;
     padding: 10px 20px;
-    margin: 0 10px;
     border-radius: 20px;
     font-size: 16px;
-    font-weight: 400;
     font-family: 'Montserrat', sans-serif;
-    transition: all 0.3s ease-in-out;
+    transition: background-color 0.3s, transform 0.3s;
+    white-space: nowrap;
 }
 
-/* Hover effect for navigation links */
+.nav-links ul li a.active {
+    background-color: #808080;
+    pointer-events: none;
+    cursor: default;
+}
+
 .nav-links ul li a:hover {
     transform: scale(1.1);
     background-color: #808080;
 }
 
-.page-title {
-    color: black;
-    margin-top: 30px;
-    font-size: 50px;
+/* Styling for the motto section */
+.motto {
+    color: white;
+    font-size: 32px;
     font-family: 'Permanent Marker', cursive;
     text-align: center;
+    margin: 40px 0;
 }
 
+/* Styling for the motto container */
+.motto-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Top container styling */
 .top-container {
     display: flex;
     flex-direction: row;
 }
 
+/* Info table styling */
 .info {
     width: 420px;
     border-collapse: collapse;
     font-weight: bold;
     flex-direction: column;
-    margin-bottom: 50px; /* Add margin for spacing */
+    margin-bottom: 50px;
     margin-left: 80px;
     margin-top: 30px;
 }
 
+/* Info table cell styling */
 .info td {
     padding: 10px;
     border: 1px solid #000;
     color: white;
-    background-color: #6f99f9; /* Dark blue background for the table */
+    background-color: #6f99f9;
 }
 
+/* Info table even row styling */
 .info tr:nth-child(even) {
-    background-color: #5ba5f9; /* Light blue background for even rows */
+    background-color: #5ba5f9;
 }
 
+/* Info table first cell styling */
 .info td:first-child {
-    width: 150px; /* Set a fixed width for the left column */
+    width: 150px;
 }
 
+/* Info table second cell styling */
 .info td:nth-child(2) {
-    width: calc(100% - 150px); /* Set the width of the right column to be wider than the left column */
+    width: calc(100% - 150px);
 }
 
+/* Dropdown container styling */
 .dropdown-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 420px; /* Limit the maximum width */
+    width: 420px;
     height: 80px;
-    margin-left: 150px; /* Position about 80px from the right side */
-    margin-top: 10px; /* Position about 100px below the top */
-    padding: 10px; /* Add padding for spacing */
-    background-color: rgb(140, 160, 250); /* Background color */
-    border-radius: 5px; /* Add rounded corners */
+    margin-left: 150px;
+    margin-top: 10px;
+    padding: 10px; /
+    background-color: rgb(140, 160, 250);
+    border-radius: 5px;
 }
 
-
+/* Dropdown container label styling */
 .dropdown-container label {
-    display: block; /* Ensure label takes full width */
-    margin-bottom: 5px; /* Add margin below the label */
+    display: block;
+    margin-bottom: 5px;
 }
 
+/* Dropdown container select styling */
 .dropdown-container select {
-    width: 100%; /* Make the dropdown fill the container width */
-    padding: 5px; /* Add padding for spacing */
-    box-sizing: border-box; /* Ensure padding doesn't affect width */
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
 }
 
+/* History button styling */
 .history-button {
-    background-color: rgb(143, 247, 240); /* Background color */
-    padding: 10px; /* Add padding for spacing */
-    border-radius: 5px; /* Add rounded corners */
-    width: 300px; /* Limit the maximum width */
+    background-color: rgb(143, 247, 240);
+    padding: 10px;
+    border-radius: 5px;
+    width: 300px;
     margin-left: 135px;
 }
 
+/* Bottom container styling */
 .bottom-container {
     display: flex;
     flex-direction: row;
 }
 
-
+/* Create term section styling */
 .create-term {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #e5c7f9; /* Background color */
-    padding: 10px; /* Add padding for spacing */
-    border-radius: 5px; /* Add rounded corners */
-    margin-bottom: 50px; /* Add margin for spacing */
-    width: 420px; /* Limit the maximum width */
+    background-color: #e5c7f9;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 50px;
+    width: 420px;
     height: 165px;
     margin-top: 50px;
-    margin-left: 80px; /* Auto margin to horizontally center */
+    margin-left: 80px;
 }
 
+/* Create term label styling */
 .create-term label {
-    margin-bottom: 10px; /* Add spacing between label and dropdowns */
-    align-self: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
+    margin-bottom: 10px;
+    align-self: center;
+    justify-content: center;
 }
 
+/* Create term select styling */
 .create-term select {
-    margin-bottom: 10px; /* Add spacing between dropdowns and button */
-    align-self: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
+    margin-bottom: 10px;
+    align-self: center;
+    justify-content: center;
 }
 
+/* Create term input styling */
 .create-term input {
-    margin-bottom: 10px; /* Add spacing between dropdowns and button */
-    align-self: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
+    margin-bottom: 10px;
+    align-self: center;
+    justify-content: center;
 }
 
+/* Create term button styling */
 .create-term button {
     background-color: rgb(89, 249, 166);
-    width: 30%; /* Make button fill container width */
-    align-self: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
+    width: 30%;
+    align-self: center;
+    justify-content: center;
 }
 
+/* Table container styling */
 .table-container {
     display: flex;
     align-items: center;
 }
 
+/* Popup container styling */
 .popup-container {
     position: fixed;
     top: 50%;
@@ -202,27 +241,30 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px; /* Add padding for spacing */
-    border-radius: 5px; /* Add rounded corners */
-    width: 300px; /* Limit the maximum width */
+    padding: 10px;
+    border-radius: 5px;
+    width: 300px;
 }
 
+/* Popup content styling */
 .popup-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color:rgb(110, 144, 245); /* Background color */
+    background-color: rgb(110, 144, 245);
     padding: 10px;
-    border-radius: 5px; /* Add rounded corners */
-    width: 100%; /* Set width to 100% */
+    border-radius: 5px;
+    width: 100%;
 }
 
+/* Popup content input styling */
 .popup-content input {
-    margin-bottom: 15px; /* Add some space between input and button */
+    margin-bottom: 15px;
 }
 
-.popup-content button{
+/* Popup content button styling */
+.popup-content button {
     width: 80px;
     background-color: rgb(107, 247, 107);
 }
@@ -239,61 +281,68 @@ header {
     color: red;
 }
 
+/* Table styling */
 .table {
     table-layout: auto;
     width: 500px;
     min-width: 350px;
-    margin: 10px auto; /* Center the table and provide some space above and below */
+    margin: 10px auto;
     margin-left: 110px;
     border-collapse: collapse;
-    background-color: #f8f9fa; /* Light background for the table */
+    background-color: #f8f9fa;
 }
 
+/* Table cell styling */
 .table th, .table td {
-    text-align: center; /* Align text to the left */
-    padding: 15px 15px; /* Padding inside cells */
-    border-bottom: 2px solid #dee2e6; /* Light grey border for each cell */
+    text-align: center;
+    padding: 15px 15px;
+    border-bottom: 2px solid #dee2e6;
 }
 
+/* Table header styling */
 .table th {
     width: 200px;
-    background-color: #007bff; /* Blue background for headers */
+    background-color: #007bff;
     color: white;
     font-size: 16px;
 }
 
+/* Table row hover effect */
 .table tr:hover {
-    background-color: #f1f1f1; /* Light grey background on hover */
+    background-color: #f1f1f1;
 }
 
-
-
+/* Delete button styling */
 .delete-btn {
-    color: #dc3545; /* Bootstrap danger color for the delete button */
-    cursor: pointer; /* Cursor indicates clickable */
-    padding: 5px 10px; /* Padding for better touch area */
-    border-radius: 5px; /* Rounded corners for the button */
-    background-color: #f8d7da; /* Light red background */
-    border: 1px solid #dc3545; /* Red border */
+    color: #dc3545;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #f8d7da;
+    border: 1px solid #dc3545;
 }
 
+/* Row styling */
 tr {
     font-size: 15px;
-    font-weight: 400; /* Makes the font slimmer */
+    font-weight: 400;
     font-family: 'Montserrat', sans-serif;
     color: black;
 }
 
-th:last-child,td:last-child, th:first-child, td:first-child  {
-    width: 50px; 
+/* Styling for the first and last cells in each row */
+th:last-child, td:last-child, th:first-child, td:first-child {
+    width: 50px;
 }
 
+/* Image hover effect */
 img:hover {
     transform: scale(1.1);
 }
 
+/* Add class button styling */
 .add-class-btn {
-    margin-left:30px;
+    margin-left: 30px;
     align-self: center;
 }
 
@@ -304,7 +353,7 @@ img:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     display: none;
     align-items: center;
     justify-content: center;
@@ -316,12 +365,13 @@ img:hover {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 900px;
     width: 90%;
     text-align: center;
 }
-/* give course name breathing room on modal */
+
+/* Margin for course name in modal */
 #modal-course-number {
     margin-bottom: 20px;
 }
@@ -337,17 +387,21 @@ img:hover {
 .close:hover {
     color: red;
 }
+
+/* Clickable class styling */
 .clickable {
     color: blue;
     cursor: pointer;
 }
 
+/* Grade table container styling */
 .grade-table-container {
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
 }
 
+/* Edit grade table styling */
 .edit-grade-table {
     margin: auto;
 }

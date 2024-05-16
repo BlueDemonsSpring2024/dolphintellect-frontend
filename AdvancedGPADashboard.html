@@ -1,87 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<link rel="stylesheet" href = "AdvancedGPADashboard.css">
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+    <title>Advanced GPA Dashboard - Dolphintellect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="AdvancedGPADashboard.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-<body>
-    <header>
-        <div class="brand-logo">
-            <img src = "images/dolphintellect.png" alt="Dolphintellect Logo">
+<body class="dashboard-page">
+<header>
+    <!-- Brand logo -->
+    <div class="brand-logo">
+        <img src="images/dolphintellect.png" alt="Dolphintellect Logo">
+    </div>
+    <!-- Navigation menu -->
+    <nav>
+        <div class="nav-links">
+            <ul>
+                <!-- Navigation links -->
+                <li><a href="index.html">Home</a></li>
+                <li><a href="CourseCatalog.html">Course Catalog</a></li>
+                <li><a href="AdvancedGPADashboard.html" class="active" onclick="return false;">Advanced GPA Calculator</a></li>
+                <li><a href="Login.html">Login</a></li>
+            </ul>
         </div>
-        <nav>
-            <div class="nav-links">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="CourseCatalog.html">Course Catalog</a></li>
-                    <li><a href="AdvancedGPADashboard.html">Advanced GPA Calculator</a></li>
-                    <li><a href="Login.html">Login</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <main class="main-content">
-        <h1 class="page-title">Dashboard</h1>
-        <div class="top-container">
-                <table id="tbl" class="info">
-                    <tr>
-                        <td>Student Name</td>
-                        <td id="studentName"></td>
-                    </tr>
-                    <tr> 
-                        <td>Cumulative GPA</td>
-                        <td id="cumulativeGPA"></td>
-                    </tr>
-                </table>
-                <div class="dropdown-container">
-                    <label for="termdropdown">Current Term</label>
-                    <select id="termdropdown">
-                        <option value="" disabled selected>Term</option>
-                    </select>
-                </div>
+    </nav>
+</header>
+<main class="main-content">
+    <!-- Dashboard Header Styled as Motto -->
+    <div class="motto-container">
+        <h1 class="motto">Dashboard</h1>
+    </div>
+    <div class="top-container">
+        <table id="tbl" class="info">
+            <tr>
+                <td>Student Name</td>
+                <td id="studentName"></td>
+            </tr>
+            <tr>
+                <td>Cumulative GPA</td>
+                <td id="cumulativeGPA"></td>
+            </tr>
+        </table>
+        <div class="dropdown-container">
+            <label for="termdropdown">Current Term</label>
+            <select id="termdropdown">
+                <option value="" disabled selected>Term</option>
+            </select>
         </div>
-        <button type="submit" class="history-button"><a href="CourseHistory.html">Course History</a></button>
-        <div class="bottom-container">
-            <div class="create-term">
-                <label for="seasondropdown">Add Course</label>
-                <select id="seasondropdown">
-                    <option value="" disabled selected>Season</option>
-                    <option value="Autumn">Autumn</option>
-                    <option value="December Intersession">December Intersession</option>
-                    <option value="Winter">Winter</option>
-                    <option value="Spring">Spring</option>
-                    <option value="Summer I">Summer I</option>
-                    <option value="Summer II">Summer II</option>
-                </select>
-                <input type="number" id="yeartext" name="yeardropdown" min="2000" max="2080" placeholder="Year" required>
-                <select id="coursedropdown">
-                    <option value="" disabled selected>Course Name</option>
-                </select>
-                <button type="submit" class="btn create-btn">Add</button>
-            </div>
-            <div id="table-container">
-                <table id = 'tbl' class="table">
-                    <!--table goes here-->
-                
-                </table>
-            </div>
+    </div>
+    <button type="submit" class="history-button"><a href="CourseHistory.html">Course History</a></button>
+    <div class="bottom-container">
+        <div class="create-term">
+            <label for="seasondropdown">Add Course</label>
+            <select id="seasondropdown">
+                <option value="" disabled selected>Season</option>
+                <option value="Autumn">Autumn</option>
+                <option value="December Intersession">December Intersession</option>
+                <option value="Winter">Winter</option>
+                <option value="Spring">Spring</option>
+                <option value="Summer I">Summer I</option>
+                <option value="Summer II">Summer II</option>
+            </select>
+            <input type="number" id="yeartext" name="yeardropdown" min="2000" max="2080" placeholder="Year" required>
+            <select id="coursedropdown">
+                <option value="" disabled selected>Course Name</option>
+            </select>
+            <button type="submit" class="btn create-btn">Add</button>
         </div>
-        <div id="modal" class="modal" style="display:none;">
-            <div class="modal-content">
-                <!-- Close button for the modal -->
-                <span class="close">&times;</span>
-                <!-- Course number displayed in the modal -->
-                <h2 id="modal-course-number" style="text-align: center;"></h2>
-                <div id="grade-table-container">
-                    <!--table goes here-->
-                </div>
+        <div id="table-container">
+            <table id='tbl' class="table">
+                <!--table goes here-->
+            </table>
+        </div>
+    </div>
+    <div id="modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <!-- Close button for the modal -->
+            <span class="close">&times;</span>
+            <!-- Course number displayed in the modal -->
+            <h2 id="modal-course-number" style="text-align: center;"></h2>
+            <div id="grade-table-container">
+                <!--table goes here-->
             </div>
         </div>
-    </main>
-    <!-- JavaScript file -->
+    </div>
+</main>
+<!-- JavaScript file -->
 <script src="AdvancedGPADashboard.js"></script>
 </body>
-
 </html>
