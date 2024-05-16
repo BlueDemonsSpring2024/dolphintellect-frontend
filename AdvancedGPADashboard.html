@@ -36,16 +36,16 @@
                     </tr>
                 </table>
                 <div class="dropdown-container">
-                    <label for="termdropdown">Select Term</label>
+                    <label for="termdropdown">Current Term</label>
                     <select id="termdropdown">
-                        <option value="" disabled selected>Your Terms</option>
+                        <option value="" disabled selected>Term</option>
                     </select>
                 </div>
         </div>
         <button type="submit" class="history-button"><a href="CourseHistory.html">Course History</a></button>
         <div class="bottom-container">
             <div class="create-term">
-                <label for="seasondropdown">Create Term</label>
+                <label for="seasondropdown">Add Course</label>
                 <select id="seasondropdown">
                     <option value="" disabled selected>Season</option>
                     <option value="Autumn">Autumn</option>
@@ -56,8 +56,10 @@
                     <option value="Summer II">Summer II</option>
                 </select>
                 <input type="number" id="yeartext" name="yeardropdown" min="2000" max="2080" placeholder="Year" required>
-                <input type="Text" id="addCourseText" name="Add Course" placeholder="CSC 300" required>
-                <button type="submit" class="btn create-btn">Add Course</button>
+                <select id="coursedropdown">
+                    <option value="" disabled selected>Course Name</option>
+                </select>
+                <button type="submit" class="btn create-btn">Add</button>
             </div>
             <div id="table-container">
                 <table id = 'tbl' class="table">

@@ -159,7 +159,7 @@ header {
     border-radius: 5px; /* Add rounded corners */
     margin-bottom: 50px; /* Add margin for spacing */
     width: 420px; /* Limit the maximum width */
-    height: 140px;
+    height: 165px;
     margin-top: 50px;
     margin-left: 80px; /* Auto margin to horizontally center */
 }
@@ -176,9 +176,15 @@ header {
     justify-content: center; /* Center items vertically */
 }
 
+.create-term input {
+    margin-bottom: 10px; /* Add spacing between dropdowns and button */
+    align-self: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+}
+
 .create-term button {
-    margin-top: 10px;
-    width: 60%; /* Make button fill container width */
+    background-color: rgb(89, 249, 166);
+    width: 30%; /* Make button fill container width */
     align-self: center; /* Center items horizontally */
     justify-content: center; /* Center items vertically */
 }
@@ -244,7 +250,7 @@ header {
 }
 
 .table th, .table td {
-    text-align: left; /* Align text to the left */
+    text-align: center; /* Align text to the left */
     padding: 15px 15px; /* Padding inside cells */
     border-bottom: 2px solid #dee2e6; /* Light grey border for each cell */
 }

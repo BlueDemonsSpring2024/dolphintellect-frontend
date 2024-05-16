@@ -7,44 +7,23 @@ document.addEventListener('DOMContentLoaded', function() {
         option.text = terms[i];
         termdropdown.add(option);
     }
-
-    const createTermButton = document.querySelector('.bottom-container .create-btn');
-    createTermButton.addEventListener('click', function() {
-        // Display the "Create Class" popup
-        createClassPopup();
+    var courses = ["CSC 241", "CSC 242", "CSC 243", "CSC 299","CSC 300","CSC 301","CSC 321","CSC 347","CSC 373","CSC 374"];
+    var coursedropdown = document.getElementById("coursedropdown");
+    for (var i = 0; i < courses.length; i++) {
+        var option = document.createElement("option");
+        option.text = courses[i];
+        coursedropdown.add(option);
+    }
+    const addCourseButton = document.querySelector('.bottom-container .create-btn');
+    addCourseButton.addEventListener('click', function() {
+        const term = document.getElementById("seasondropdown").value;
+        const year = document.getElementById("yeartext").value;
+        const termyear = term + " " + year;
+        const coursename = document.getElementById("coursedropdown").value;
+        courseArray.push({ term: termyear, course: coursename, progress: '0%', grade: '-' });
+        updateTerms();
     });
 
-    function createClassPopup() {
-        // Create popup container
-        const popupContainer = document.createElement('div');
-        popupContainer.classList.add('popup-container');
-        
-        // Create a popup content
-        const popupContent = document.createElement('div');
-        popupContent.classList.add('popup-content');
-
-        // Create a classname input
-        
-        finishCreationButton.classList.add('btn');
-        finishCreationButton.addEventListener('click', function() {
-            const classname = classnameInput.value.trim();
-            if (classname.length > 0) {
-                const term = document.getElementById("seasondropdown").value;
-                const year = document.getElementById("yeartext").value;
-                const termyear = term + " " + year;
-                courseArray.push({ term: termyear, course: classname, progress: '0%', grade: 'N/A' });
-                updateTerms();
-                // Close the popup
-                document.body.removeChild(popupContainer);
-            } else {
-                alert('Please enter a class name.');
-            }
-        });
-        popupContent.appendChild(finishCreationButton);
-
-        popupContainer.appendChild(popupContent);
-        document.body.appendChild(popupContainer);
-    }
 
     function updateTerms() {
         courseArray.forEach(course => {
