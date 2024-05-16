@@ -2,6 +2,8 @@
 <html>
 <head>
 <link rel="stylesheet" href = "AdvancedGPADashboard.css">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 </head>
 <body>
     <header>
@@ -54,14 +56,15 @@
                     <option value="Summer II">Summer II</option>
                 </select>
                 <input type="number" id="yeartext" name="yeardropdown" min="2000" max="2080" placeholder="Year" required>
-                <button type="submit" class="btn create-btn">Create</button>
+                <input type="Text" id="addCourseText" name="Add Course" placeholder="CSC 300" required>
+                <button type="submit" class="btn create-btn">Add Course</button>
             </div>
             <div id="table-container">
                 <table id = 'tbl' class="table">
                     <!--table goes here-->
+                
                 </table>
             </div>
-            <button type="button" class="add-class-btn"><i class='bx bx-plus'></i> +</button>
         </div>
         <div id="modal" class="modal" style="display:none;">
             <div class="modal-content">
