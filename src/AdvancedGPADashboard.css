@@ -88,22 +88,23 @@ header {
 /* Styling for the motto section */
 .motto {
     color: white;
-    font-size: 32px;
-    font-family: 'Permanent Marker', cursive;
+    font-size: 45px;
+    font-family: 'Merriweather',cursive;
     text-align: center;
-    margin: 40px 0;
 }
 
 /* Styling for the motto container */
 .motto-container {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 15px;
 }
 
 /* Top container styling */
 .top-container {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 140px;
 }
 
 /* Info table styling */
@@ -111,23 +112,21 @@ header {
     width: 420px;
     border-collapse: collapse;
     font-weight: bold;
-    flex-direction: column;
-    margin-bottom: 50px;
-    margin-left: 80px;
-    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-top: 20px;
 }
 
 /* Info table cell styling */
 .info td {
     padding: 10px;
     border: 1px solid #000;
-    color: white;
-    background-color: #6f99f9;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
 }
 
 /* Info table even row styling */
 .info tr:nth-child(even) {
-    background-color: #5ba5f9;
+    background-color: #ffffff;
 }
 
 /* Info table first cell styling */
@@ -140,22 +139,47 @@ header {
     width: calc(100% - 150px);
 }
 
-/* Dropdown container styling */
+/* History button styling */
+.history-button {
+    background-color: rgb(65, 226, 247);
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    border-radius: 5px;
+    height: 60px;
+    width: 300px;
+    font-size:medium;
+    width: 500px;
+}
+
+/* Bottom container styling */
+.bottom-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 140px;
+}
+
+/* Bottom left container styling*/
+.bottom-left-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .dropdown-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 420px;
     height: 80px;
-    margin-left: 150px;
-    margin-top: 10px;
-    padding: 10px; /
-    background-color: rgb(140, 160, 250);
+    margin-top: 30px;
+    padding: 10px;
+    background-color: rgb(4, 49, 212);
     border-radius: 5px;
 }
 
 /* Dropdown container label styling */
 .dropdown-container label {
+    color: #ffffff;
     display: block;
     margin-bottom: 5px;
 }
@@ -167,38 +191,23 @@ header {
     box-sizing: border-box;
 }
 
-/* History button styling */
-.history-button {
-    background-color: rgb(143, 247, 240);
-    padding: 10px;
-    border-radius: 5px;
-    width: 300px;
-    margin-left: 135px;
-}
-
-/* Bottom container styling */
-.bottom-container {
-    display: flex;
-    flex-direction: row;
-}
-
 /* Create term section styling */
 .create-term {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #e5c7f9;
+    background-color: rgb(4, 49, 212);
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 50px;
     width: 420px;
     height: 165px;
     margin-top: 50px;
-    margin-left: 80px;
 }
 
 /* Create term label styling */
 .create-term label {
+    color: #ffffff;
     margin-bottom: 10px;
     align-self: center;
     justify-content: center;
@@ -220,7 +229,7 @@ header {
 
 /* Create term button styling */
 .create-term button {
-    background-color: rgb(89, 249, 166);
+    background-color: rgb(143, 247, 240);
     width: 30%;
     align-self: center;
     justify-content: center;
@@ -287,7 +296,6 @@ header {
     width: 500px;
     min-width: 350px;
     margin: 10px auto;
-    margin-left: 110px;
     border-collapse: collapse;
     background-color: #f8f9fa;
 }

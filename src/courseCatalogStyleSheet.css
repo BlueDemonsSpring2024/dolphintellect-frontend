@@ -26,19 +26,19 @@ body {
 
 /* Header styling */
 header {
-    width: 100%;
-    background-color: transparent;
-    color: white;
-    padding: 10px 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    padding: 20px;
+    background: transparent;
+    position: relative;
+    box-sizing: border-box;
 }
 
-/* Brand name styling */
-.brand-name {
-    font-family: 'Pacifico', cursive;
-    font-size: 32px;
-    color: white;
+/* Brand logo styling */
+.brand-logo img {
+    width: 120px;
     margin-right: auto;
 }
 
@@ -88,10 +88,9 @@ header {
 /* Page title styling */
 .page-title {
     color: white;
-    font-size: 32px;
-    font-family: 'Permanent Marker', cursive;
+    font-size: 45px;
+    font-family: 'Merriweather',cursive;
     text-align: center;
-    margin: 40px 0;
 }
 
 /* Custom Scrollbar Styles */
