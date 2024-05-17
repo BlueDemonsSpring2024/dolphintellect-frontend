@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+
+
+
     let courseArray = [
         {
                 course: 'CSC 200',

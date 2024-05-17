@@ -1,0 +1,159 @@
+/* Apply default margin, padding, and box-sizing to all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General styles for the whole page */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('images/vector-abstract-gradiente-background-blue-wallpaper_901408-861.avif') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* Header styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: transparent;
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+/* Styling for the brand name at the top of the page */
+.brand-name {
+    font-family: 'Pacifico', cursive;
+    color: white;
+    font-size: 32px;
+}
+
+/* Navigation container styling */
+.nav-links {
+    display: flex;
+}
+
+/* Styling for the unordered list in the navigation */
+.nav-links ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+/* Styling for each list item in the navigation */
+.nav-links ul li {
+    padding-left: 20px;
+}
+
+/* Styling for each navigation link */
+.nav-links ul li a {
+    display: block;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Styling for the active (current) page link */
+.nav-links ul li a.active {
+    background-color: #808080;
+    pointer-events: none;
+    cursor: default;
+}
+
+/* Styling for the navigation link on hover */
+.nav-links ul li a:hover {
+    transform: scale(1.1);
+    background-color: #808080;
+}
+
+/* Setting the page in the center */
+body.login-page {
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 60px;
+}
+
+/* Styling for the login form container */
+.navlogin {
+    width: 420px;
+    background-attachment: white;
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, .2);
+}
+
+/* Styling for the login form heading */
+.navlogin h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+/* Styling for each input field container */
+.navlogin .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+/* Styling for each input field */
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px;
+}
+
+/* Styling for the placeholder text inside input fields */
+.input-box input::placeholder {
+    color: #fff;
+}
+
+/* Styling for the icons inside input fields */
+.input-box i {
+    position: absolute;
+    color: #fff;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+/* Styling for the login button */
+.navlogin .btn {
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+}
