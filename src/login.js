@@ -66,7 +66,7 @@ async function handleFormSubmit(event) {
 
 	console.log('accessToken', sessionStorage.getItem('accessToken'))
 	//need to handle bad login
-	// this.submit()
+	this.submit()
 
 }
 
