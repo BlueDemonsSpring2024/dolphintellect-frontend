@@ -1,8 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+const url ="/api/courses"
 
+function fetchData(url) {
+    return fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json(); 
+      })
+      .then(data => {
+        return data; 
+      })
+    }
 
-
+    /*
     let courseArray = [
         {
                 course: 'CSC 200',
@@ -359,23 +372,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 credits: '4.00'
             }
         ];
-
-    const courseContainer = document.getElementById('course-container');
+*/fetchData(url).then(
+    data => {
+        const courseArray = data;
+        const courseContainer = document.getElementById('course-container');
     // Loop through each course in the array and create course boxes dynamically
     courseArray.forEach(course => {
         const courseBox = document.createElement('div');
         courseBox.className = 'course-box';
-        courseBox.innerHTML = `<div class="course-front"><h3 class="course-number">${course.course}</h3><p class="course-name">${course.name}</p></div>`;
+        courseBox.innerHTML = `<div class="course-front"><h3 class="course-number">${course.subject} ${course.number}</h3><p class="course-name">${course.title}</p></div>`;
         courseBox.addEventListener('click', function() {
-            document.getElementById('modal-course-number').innerText = course.course;
-            document.getElementById('modal-course-name').innerText = course.name;
+            document.getElementById('modal-course-number').innerText = course.subject + ' ' + course.number;
+            document.getElementById('modal-course-name').innerText = course.title;
             document.getElementById('modal-course-description').innerText = course.description;
-            document.getElementById('modal-course-credits').innerText = `Credits: ${course.credits}`;
+            document.getElementById('modal-course-credits').innerText = `Credits: 4.00`;
             document.getElementById('modal').style.display = 'flex';
         });
         courseContainer.appendChild(courseBox);
     });
 
+    }
+)
+    
     // Add event listener to close the modal when close button is clicked
     document.querySelector('.close').addEventListener('click', function() {
         document.getElementById('modal').style.display = 'none';
