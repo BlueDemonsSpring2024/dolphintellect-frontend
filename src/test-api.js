@@ -25,36 +25,53 @@ healthCheck().then(r => {}); // Call the async function
 
 
 
-// attempt login and JWT retrieval
+async function loginUser(user, password) {
+	try {
+		console.log("Attempting login");
+		const response = await fetch(`/api/auth/login`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json; charset=utf-8"
+			},
+			body: JSON.stringify({ username: user, password: password })
+		});
+
+		console.log("Response status:", response.status);
+
+		if (!response.ok) {
+			console.log("Login failed");
+			// Throw an error if response is not ok
+			throw new Error(`Login failed with status ${response.status}`);
+		}
+
+		const responseData = await response.json();
+
+		const { accessToken, tokenType } = responseData;
+
+		console.log(`Access Token: ${accessToken}`);
+		console.log(`Token Type: ${tokenType}`);
 
 
-// async function loginUser(){
-// 	try{
-// 		const response = await fetch("http://localhost:8081/api/auth/login",
-// 			{
-// 			"method": "POST",
-// 			"headers": {
-// 				"Content-Type": "application/json; charset=utf-8"
-// 			},
-// 			"body": "{\"username\":\"dshiland\",\"password\":\"password\"}"
-// 		})
-//
-// 		if(!response.ok){
-// 			throw new Error("Unable to login")
-// 		}
-//
-// 		const {accessToken} = await response.json()
-// 	}
-// }
+		//save to session storage
+
+		//check for access token
+		let aToken = sessionStorage.getItem(accessToken);
+
+		if(aToken){
+			console.log("token exist")
+		}
+		else{
+			sessionStorage.setItem('accessToken', accessToken)
+		}
 
 
-// fetch("http://localhost:8081/api/auth/login", {
-// 	"method": "POST",
-// 	"headers": {
-// 		"Content-Type": "application/json; charset=utf-8"
-// 	},
-// 	"body": "{\"username\":\"dshiland\",\"password\":\"password\"}"
-// })
-// 	.then((res) => res.text())
-// 	.then(console.log.bind(console))
-// 	.catch(console.error.bind(console));
+	} catch (error) {
+		console.error("Login error:", error);
+	}
+}
+
+
+loginUser("admin", "tempPassword").then(r => {})
+
+
+
