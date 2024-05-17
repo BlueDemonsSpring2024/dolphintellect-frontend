@@ -41,15 +41,16 @@
                 <td id="cumulativeGPA"></td>
             </tr>
         </table>
-        <div class="dropdown-container">
-            <label for="termdropdown">Current Term</label>
-            <select id="termdropdown">
-                <option value="" disabled selected>Term</option>
-            </select>
-        </div>
+        <button type="submit" class="history-button"><a href="CourseHistory.html">Course History</a></button>
     </div>
-    <button type="submit" class="history-button"><a href="CourseHistory.html">Course History</a></button>
     <div class="bottom-container">
+        <div class="bottom-left-container">
+            <div class="dropdown-container">
+                <label for="termdropdown">Current Term</label>
+                <select id="termdropdown">
+                    <option value="" disabled selected>Term</option>
+                </select>
+            </div>
         <div class="create-term">
             <label for="seasondropdown">Add Course</label>
             <select id="seasondropdown">
@@ -67,6 +68,7 @@
             </select>
             <button type="submit" class="btn create-btn">Add</button>
         </div>
+    </div>
         <div id="table-container">
             <table id='tbl' class="table">
                 <!--table goes here-->

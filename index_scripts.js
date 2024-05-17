@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Function to add a new course to the table
 function addCourse() {
     var courseName = document.getElementById('courseName').value.trim();
-    var grade = document.getElementById('grade').value.trim().toUpperCase();
+    var grade = document.getElementById('grade').value;
     var table = document.getElementById('tbl').getElementsByTagName('tbody')[0];
     var courseNameError = document.getElementById('courseNameError');
     var gradeError = document.getElementById('gradeError');
@@ -65,7 +65,7 @@ function addCourse() {
     } else if (!grade) {
         displayPopup('Invalid Entry: Missing Course Grade');
         gradeError.innerHTML = 'Missing Course Grade';
-    } else if (!['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'F'].includes(grade)) {
+    } else if (!['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-','F'].includes(grade)) {
         displayPopup('Invalid Entry: Please Enter A Valid Grade'); // Specific validation for the grade
         gradeError.innerHTML = 'Invalid Grade Entered';
     } else {
@@ -127,6 +127,7 @@ function updateGPA() {
         'C-': 1.7,
         'D+': 1.3,
         'D': 1.0,
+        'D-':0.67,
         'F': 0.0
     };
     const rows = document.querySelectorAll('#tbl tbody tr');

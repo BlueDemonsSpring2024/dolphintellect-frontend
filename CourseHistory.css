@@ -21,17 +21,6 @@ html, body {
     overflow-x: hidden;
 }
 
-/* Styling for text */
-.brand-name {
-    font-family: 'Pacifico', cursive;
-    color: white;
-    padding: 20px;
-    font-size: 32px;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
-
 /* Header styling */
 header {
     display: flex;
@@ -42,6 +31,12 @@ header {
     background: transparent;
     position: relative;
     box-sizing: border-box;
+}
+
+/* Brand logo styling */
+.brand-logo img {
+    width: 120px;
+    margin-right: auto;
 }
 
 /* Navigation container styling */
@@ -95,10 +90,9 @@ header {
 /* Styling for the motto section */
 .motto {
     color: white;
-    font-size: 32px;
-    font-family: 'Permanent Marker', cursive;
+    font-size: 45px;
+    font-family: 'Merriweather',cursive;
     text-align: center;
-    margin: 40px 0;
 }
 
 /* Styling for the motto container */

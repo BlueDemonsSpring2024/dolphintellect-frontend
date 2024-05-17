@@ -12,8 +12,10 @@
 <body class="home-page">
 <!-- Header Section Start -->
 <header>
-    <!-- Brand name -->
-    <div class="brand-name">Dolphintellect</div>
+    <!-- Brand logo -->
+    <div class="brand-logo">
+        <img src="images/dolphintellect.png" alt="Dolphintellect Logo">
+    </div>
     <!-- Navigation menu -->
     <nav>
         <div class="nav-links">
@@ -40,7 +42,7 @@
         <div class="line"></div>
     </div>
     <!-- Subtext -->
-    <p class="subtext">Add your courses and grades and calculate your GPA</p>
+    <p class="subtext">Add your courses and grades to calculate your GPA</p>
     <!-- GPA Box Start -->
     <div class="gpa-box">
         <h2>GPA: <span id="gpa">--</span></h2>
@@ -63,10 +65,24 @@
                     <!-- Error message for course name -->
                     <div id="courseNameError" class="error-text"></div>
                 </div>
-                <div class="input-section">
-                    <label for="grade" class="input-label">Course Grade</label>
-                    <input type="text" name="grade" id="grade" placeholder="Ex: A" class="input-text">
+                <div class="select-section">
+                    <label for="grade" class="select-label">Course Grade</label>
                     <!-- Error message for course grade -->
+                    <select name = "grade" id="grade" class="select-grade">
+                        <option value="" disabled selected>Select Grade</option>
+                        <option value="A">A</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B">B</option>
+                        <option value="B-">B-</option>
+                        <option value="C+">C+</option>
+                        <option value="C">C</option>
+                        <option value="C-">C-</option>
+                        <option value="D+">D+</option>
+                        <option value="D">D</option>
+                        <option value="D-">D-</option>
+                        <option value="F">F</option>
+                    </select>
                     <div id="gradeError" class="error-text"></div>
                 </div>
                 <!-- Button to add course -->

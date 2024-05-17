@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
-/* General styles for the whole page */
+/* General styles for the whole page 
 html, body {
     height: 100%;
     margin: 0;
@@ -19,17 +19,8 @@ html, body {
     flex-direction: column;
     overflow-x: hidden;
 }
-
-/* Styling for the brand name at the top of the page */
-.brand-name {
-    font-family: 'Pacifico', cursive;
-    color: white;
-    padding: 20px;
-    font-size: 32px;
-    align-self: center;
-}
-
-/* Header styling */
+*/
+/* Header styling 
 .header {
     display: flex;
     justify-content: center;
@@ -37,6 +28,41 @@ html, body {
     padding: 20px;
     background-color: #000066;
     width: 100%;
+}
+*/
+/* General styles for the whole page */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('images/vector-abstract-gradiente-background-blue-wallpaper_901408-861.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Header styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background: transparent;
+    position: relative;
+    box-sizing: border-box;
+}
+/* Brand logo styling */
+.brand-logo img {
+    width: 120px;
+    margin-right: auto;
 }
 
 /* Navigation container styling */
@@ -157,9 +183,9 @@ html, body {
     margin-bottom: 5px;
     color: white;
     font-size: 20px;
+    text-align: center;
 }
 
-/* Input field styling, ensuring they are centered and styled consistently */
 .input-text {
     width: 100%;
     padding: 15px;
@@ -171,8 +197,34 @@ html, body {
     text-align: center;
 }
 
+.select-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.select-label {
+    margin-bottom: 5px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
+/* Input field styling, ensuring they are centered and styled consistently */
+.select-grade {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+    color: #333;
+    text-align: center;
+}
+
 /* Focus styling for input fields to enhance visibility */
-.input-text:focus {
+.select-grade:focus {
     outline: none;
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
@@ -293,10 +345,9 @@ html, body {
 /* Styling for the motto section, aligned and styled to fit the page's theme */
 .motto {
     color: white;
-    font-size: 32px;
-    font-family: 'Permanent Marker', cursive;
+    font-size: 45px;
+    font-family: 'Merriweather',cursive;
     text-align: center;
-    margin: 40px 0;
 }
 
 /* Styling for the motto and logo container */
