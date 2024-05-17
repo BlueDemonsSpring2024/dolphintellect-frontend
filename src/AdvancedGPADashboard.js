@@ -1,19 +1,122 @@
 document.addEventListener('DOMContentLoaded', function() {
-            
+    const token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdHVkZW50IiwiaWF0IjoxNzE1OTg1OTIyLCJleHAiOjE3MTU5ODk1MjJ9.hG2Z04mwO7-6Lqo1kPLbDm9kpkWQ131CZeMZu302J-rkHOfNolDWlXlMxDGJ92mfVB3kR-XE61iUBS2XW1wGCA"
+    
+        var options = {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token
+                }
+    
+        }
+
+    function fetchData(url) {
+        console.log("api connected")
+        return fetch(url)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json(); 
+          })
+          .then(data => {
+            return data; 
+          })
+        }
+
+        function fetchDataWithAuth(url,options) {
+            console.log("api connected")
+            return fetch(url,options)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                return response.json(); 
+              })
+              .then(data => {
+                return data; 
+              })
+    }
+    //Get list of all courses from Database
+    let allCoursesUrl = "/api/courses"
+    fetchData(allCoursesUrl).then(
+    data => {
+        let coursesFromApi = data;
+        var coursedropdown = document.getElementById("coursedropdown");
+        coursesFromApi.forEach(course => {
+        var option = document.createElement("option");
+        option.text = course.subject + '' + course.number;
+        coursedropdown.add(option);
+    }
+)
+    })
+    /*
     var terms = ["Fall 2020", "Winter 2021", "Spring 2021", "Fall 2021"];
     var termdropdown = document.getElementById("termdropdown");
     for (var i = 0; i < terms.length; i++) {
         var option = document.createElement("option");
         option.text = terms[i];
         termdropdown.add(option);
+    }*/
+
+    let studentUrl = "/api/student"
+    fetchDataWithAuth(studentUrl,options).then(
+    student => {
+        // Set Student Name and GPA
+        document.getElementById('studentName').innerText = student.name;
+        document.getElementById('cumulativeGPA').innerText = student.gpa;
+        //Get Unique Terms
+        const Terms = new Set();
+        student.enrolledCourses.forEach(
+            course => {
+                Terms.add(course.term + ' ' + course.year);
+            }
+        )
+        const TermsArray = Array.from(Terms)
+        var termdropdown = document.getElementById("termdropdown");
+        for (var i = 0; i < TermsArray.length; i++) {
+        var option = document.createElement("option");
+        option.text = TermsArray[i];
+        termdropdown.add(option);
     }
+    }
+);   
+
+
+    const termDropdown = document.getElementById('termdropdown');
+    termDropdown.addEventListener('change', onDropdownChange);
+    function onDropdownChange(event) {
+        removeDashboardTable();
+        currentTerm = event.target.value;
+        fetchDataWithAuth(studentUrl,options).then(
+            student => { 
+                let courseArray = []
+                student.enrolledCourses.forEach(
+                    course => {
+                        if ((course.term + ' ' + course.year) == currentTerm) {
+                            courseArray.push(course);
+                        }
+                    }
+                )
+                //creaste table for term if not exist, otherwise add row for corresponding term
+            courseArray.forEach(course => {
+            let table = document.getElementById(`table-${course.term} ${course.year}`);
+            if (!table) {
+            table = createTable(course.term + ' ' + course.year);
+            container.appendChild(table);
+            }
+            addRow(table, course);
+    });
+
+            });
+    }
+    /*
     var courses = ["CSC 241", "CSC 242", "CSC 243", "CSC 299","CSC 300","CSC 301","CSC 321","CSC 347","CSC 373","CSC 374"];
     var coursedropdown = document.getElementById("coursedropdown");
     for (var i = 0; i < courses.length; i++) {
         var option = document.createElement("option");
         option.text = courses[i];
         coursedropdown.add(option);
-    }
+    }*/
     const addCourseButton = document.querySelector('.bottom-container .create-btn');
     addCourseButton.addEventListener('click', function() {
         const term = document.getElementById("seasondropdown").value;
@@ -63,6 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 */
 //current classlist tables item
+/*
 const courseArray = [
         { term: 'Winter 2021', course: 'CSC373', progress: '20%', grade: 'Select Final Grade' },
         { term: 'Winter 2021', course: 'CSC374', progress: '20%', grade: 'Select Final Grade' },
@@ -70,13 +174,13 @@ const courseArray = [
         { term: 'Winter 2021', course: 'CSC347', progress: '20%', grade: 'Select Final Grade' }
 ];
 sortCoursesByTerm(courseArray)
-
+*/
 const container = document.getElementById('table-container');
 
 
 //create modal for each course
 function EditGradeCourseModal(course) {
-    document.getElementById('modal-course-number').innerText = course.course;
+    document.getElementById('modal-course-number').innerText = course.course.subject + ' ' + course.course.number;
     document.getElementById('modal').style.display = 'flex';
     document.querySelector('.close').addEventListener('click', function() {
         document.getElementById('modal').style.display = 'none';
@@ -85,6 +189,7 @@ function EditGradeCourseModal(course) {
 }
 
 //creaste table for term if not exist, otherwise add row for corresponding term
+/*
 courseArray.forEach(course => {
 let table = document.getElementById(`table-${course.term}`);
 if (!table) {
@@ -93,7 +198,7 @@ if (!table) {
 }
 addRow(table, course);
 });
-
+*/
 function createTable(term) {
 //build table
 const table = document.createElement('table');
@@ -122,9 +227,10 @@ const cellProgress = row.insertCell(1);
 const cellGrade = row.insertCell(2);
 const cellSave = row.insertCell(3);
 const cellDelete = row.insertCell(4);
-cellCourse.textContent = course.course;
+cellCourse.textContent = course.course.subject + ' ' + course.course.number;
 cellCourse.classList.add('clickable');
-cellProgress.textContent = course.progress;
+if (isNaN(course.calculatedGrade)) {cellProgress.textContent = "0"}
+else {cellProgress.textContent = course.calculatedGrade;}
 //select dropdown for course grade
 const selectGrade = document.createElement('select');
 const gradeOptions = ['Select Final Grade','A','A-','B+', 'B', 'B-','C+','C','C-','D+','D','D-','F'];
@@ -206,6 +312,8 @@ secondYear = b.term.split(' ');
                 { item: 'Quiz 1', score: '75/100', weight: '20%' },
                 { item: 'Assignment 3', score: '80/100', weight: '10%' }
             ];
+
+
             
             const itemArrayContainer = document.getElementById('grade-table-container');
             
@@ -316,14 +424,19 @@ secondYear = b.term.split(' ');
             });
             itemArrayContainer.appendChild(addNewRowButton);
             
-            // Remove table
-            function removeTable() {
+            // Remove table FOR MAIN DASHBOARD
+            function removeDashboardTable() {
+                const container = document.getElementById('table-container');
+                container.removeChild(container.lastChild);
+            }
+            
+             // Remove table FOR POPUP
+             function removeTable() {
                 const table = document.getElementById('grade-table');
                 if (table) {
                     table.remove();
                 }
             }
-            
 
 
 /*

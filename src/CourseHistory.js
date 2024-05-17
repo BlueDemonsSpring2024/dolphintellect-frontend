@@ -61,13 +61,15 @@ function addRow(table, course) {
     const cellProgress = row.insertCell(1);
     const cellGrade = row.insertCell(2);
     cellCourse.textContent = course.course.subject + ' ' + course.course.number;
-    cellProgress.textContent = course.calculatedGrade;
+    if (isNaN(course.calculatedGrade)) {cellProgress.textContent = "0"}
+    else {cellProgress.textContent = course.calculatedGrade;}
     cellGrade.textContent = course.finalGrade;
 }
 
 // Function to handle DOMContentLoaded event
 document.addEventListener('DOMContentLoaded', function() {
-    const token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdHVkZW50IiwiaWF0IjoxNzE1OTczOTEwLCJleHAiOjE3MTU5Nzc1MTB9.oQolQVAdbuEK5oVWzMMpvoEZkqUxLdJDw7VHleUZLHU63uxh3QqOh3IoE0Ye4h40UG9AYMWXgRMtAiXroMmtIw"
+    const token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdHVkZW50IiwiaWF0IjoxNzE1OTg1OTIyLCJleHAiOjE3MTU5ODk1MjJ9.hG2Z04mwO7-6Lqo1kPLbDm9kpkWQ131CZeMZu302J-rkHOfNolDWlXlMxDGJ92mfVB3kR-XE61iUBS2XW1wGCA"
+    
     var options = {
         method: 'GET',
         headers: {
@@ -78,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const url ="/api/student"
     
     function fetchData(url, options) {
+        console.log(token);
         console.log(options)
         return fetch(url, options)
         .then(response => {
