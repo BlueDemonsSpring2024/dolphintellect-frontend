@@ -92,6 +92,8 @@ function addCourse() {
 
 // Function to delete a row from the table
 function deleteRow(row) {
+    console.log("CLICKED")
+    console.log(row)
     var rowIndex = row.parentNode.parentNode.rowIndex;
     document.getElementById('tbl').deleteRow(rowIndex);
     // Update GPA after deleting a course
