@@ -2,7 +2,7 @@ import {getAllCourses} from "./getAllCourses.js";
 import {getStudent} from "./getStudent.js";
 import {enrollCourse} from "./enrollCourse.js"
 import {deleteCourse} from "./deleteCourse.js";
-import {updateCourse} from "./updateCourse"
+import {updateCourse} from "./updateCourse.js"
 
 
 
@@ -32,24 +32,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     // const TermsArray = Array.from(Terms)
 
 
-
-    let termdropdown = document.getElementById("termdropdown");
-    // termdropdown.empty()
-
-    Terms.forEach(term => {
-        let option = document.createElement("option");
-        option.setAttribute("data_term", term.term)
-        option.setAttribute("data_year", term.year)
-
-        option.text = `${term.term} ${term.year}`
-        termdropdown.add(option);
-    })
-
-
-
-    // DONE
-
+    let termdropdown = renderCurrentTermDropDown(Terms)
     termdropdown.addEventListener('change', onDropdownChange);
+
     function onDropdownChange(event) {
         removeDashboardTable();
 
@@ -108,6 +93,36 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
 
+    // Render current Term Dropdown
+    function renderCurrentTermDropDown(terms){
+        console.log("rendering term")
+        // get the dropdown
+        let dropdown = document.getElementById("termdropdown");
+
+        //clear the elements
+        dropdown.innerHTML = '';
+
+        //set new elements
+        terms.forEach(term => {
+            let option = document.createElement("option");
+            option.setAttribute("data_term", term.term)
+            option.setAttribute("data_year", term.year)
+
+            option.text = `${term.term} ${term.year}`
+            dropdown.add(option);
+        })
+
+        return dropdown
+    }
+
+
+
+
+
+
+
+
+
 
     //TODO: CREATING A ROW FOR COURSE HISTORY TABLE
 
@@ -133,11 +148,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         const cellGrade = row.insertCell(2);
 
         const finalGradeSelect = createGradeDropDown(['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'], enrolledCourse.finalGrade)
+        cellGrade.appendChild(finalGradeSelect)
 
         //save
         const cellSave = row.insertCell(3);
         cellSave.innerHTML = "<button class= 'savebtn'><i class='bx bx-save'></i></button>";
-        cellSave.addEventListener("click",() => updateEnrolledCourseFinalGrade(course, finalGradeSelect.value))
+        cellSave.addEventListener("click",() => updateEnrolledCourseFinalGrade(enrolledCourse, finalGradeSelect.value))
 
         //delete
         const cellDelete = row.insertCell(4);
@@ -148,8 +164,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         return row;
     }
 
-
     function createGradeDropDown(options, defaultOption=null){
+        console.log("default val", defaultOption)
         const select = document.createElement('select')
 
         if(!defaultOption){
@@ -164,12 +180,20 @@ document.addEventListener('DOMContentLoaded', async function () {
             optionElement.value = option
             optionElement.textContent = option
 
-            if(defaultOption === option.value){
+            if(defaultOption === option){
                 optionElement.selected = true
             }
+            // if(defaultOption === option.value){
+            //     optionElement.selected = true
+            // }
 
             select.appendChild(optionElement)
         })
+
+
+
+
+
 
         return select;
     }
@@ -187,7 +211,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.log("UP")
         console.log(grade)
         course.finalGrade = grade;
-        // await updateCourse(course)
+        await updateCourse(course)
     }
 
 

@@ -4,9 +4,9 @@ export async function deleteCourse(courseID) {
 
 		console.log(courseID)
 
-		const params = new URLSearchParams({id: courseID}).toString()
+		// const params = new URLSearchParams({id: courseID}).toString()
 
-		const response = await fetch(`/api/student/enrolled-course?${params}`, {
+		const response = await fetch(`/api/student/enrolled-course/${courseID}`, {
 			method: "DELETE",
 			headers: {
 				Authorization: `Bearer ${token}`,
