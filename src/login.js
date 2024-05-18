@@ -22,8 +22,8 @@ async function loginUser(user, password) {
 
 		const { accessToken, tokenType } = responseData;
 
-		console.log(`Access Token: ${accessToken}`);
-		console.log(`Token Type: ${tokenType}`);
+		// console.log(`Access Token: ${accessToken}`);
+		// console.log(`Token Type: ${tokenType}`);
 
 		return accessToken
 		//save to session storage
@@ -58,15 +58,13 @@ async function handleFormSubmit(event) {
 
 	const userName = event.target[0].value
 	const password = event.target[1].value
-	console.log("USER", event.target[0].value)
-	console.log("PASS", event.target[1].value)
 
 	let token = await loginUser(userName, password)
 	await setToken(token)
 
 	console.log('accessToken', sessionStorage.getItem('accessToken'))
 	//need to handle bad login
-	this.submit()
+	event.target.submit()
 
 }
 

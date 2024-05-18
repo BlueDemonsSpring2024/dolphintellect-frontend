@@ -1,130 +1,358 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdHVkZW50IiwiaWF0IjoxNzE1OTg1OTIyLCJleHAiOjE3MTU5ODk1MjJ9.hG2Z04mwO7-6Lqo1kPLbDm9kpkWQ131CZeMZu302J-rkHOfNolDWlXlMxDGJ92mfVB3kR-XE61iUBS2XW1wGCA"
-    
-        var options = {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + token
-                }
-    
+import {getAllCourses} from "./getAllCourses.js";
+import {getStudent} from "./getStudent.js";
+import {enrollCourse} from "./enrollCourse.js"
+import {deleteCourse} from "./deleteCourse.js";
+import {updateCourse} from "./updateCourse.js"
+
+
+
+document.addEventListener('DOMContentLoaded', async function () {
+
+    //get courses list
+    let coursesListLocal = await getAllCourses();
+    let student = await getStudent()
+
+    //get student info
+    document.getElementById('studentName').innerText = student["name"];
+    document.getElementById('cumulativeGPA').innerText = student["gpa"];
+
+
+    //populate current term list
+
+    const Terms = new Set();
+    student["enrolledCourses"].forEach(
+        course => {
+            const termObj = {term: course.term, year: course.year}
+            Terms.add(termObj);
         }
+    )
 
-    function fetchData(url) {
-        console.log("api connected")
-        return fetch(url)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json(); 
-          })
-          .then(data => {
-            return data; 
-          })
-        }
+    console.log(Terms)
 
-        function fetchDataWithAuth(url,options) {
-            console.log("api connected")
-            return fetch(url,options)
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error('Network response was not ok');
-                }
-                return response.json(); 
-              })
-              .then(data => {
-                return data; 
-              })
-    }
-    //Get list of all courses from Database
-    let allCoursesUrl = "/api/courses"
-    fetchData(allCoursesUrl).then(
-    data => {
-        let coursesFromApi = data;
-        var coursedropdown = document.getElementById("coursedropdown");
-        coursesFromApi.forEach(course => {
-        var option = document.createElement("option");
-        option.text = course.subject + '' + course.number;
-        coursedropdown.add(option);
-    }
-)
-    })
-    /*
-    var terms = ["Fall 2020", "Winter 2021", "Spring 2021", "Fall 2021"];
-    var termdropdown = document.getElementById("termdropdown");
-    for (var i = 0; i < terms.length; i++) {
-        var option = document.createElement("option");
-        option.text = terms[i];
-        termdropdown.add(option);
-    }*/
-
-    let studentUrl = "/api/student"
-    fetchDataWithAuth(studentUrl,options).then(
-    student => {
-        // Set Student Name and GPA
-        document.getElementById('studentName').innerText = student.name;
-        document.getElementById('cumulativeGPA').innerText = student.gpa;
-        //Get Unique Terms
-        const Terms = new Set();
-        student.enrolledCourses.forEach(
-            course => {
-                Terms.add(course.term + ' ' + course.year);
-            }
-        )
-        const TermsArray = Array.from(Terms)
-        var termdropdown = document.getElementById("termdropdown");
-        for (var i = 0; i < TermsArray.length; i++) {
-        var option = document.createElement("option");
-        option.text = TermsArray[i];
-        termdropdown.add(option);
-    }
-    }
-);   
+    // const TermsArray = Array.from(Terms)
 
 
-    const termDropdown = document.getElementById('termdropdown');
-    termDropdown.addEventListener('change', onDropdownChange);
+    let termdropdown = renderCurrentTermDropDown(Terms)
+    termdropdown.addEventListener('change', onDropdownChange);
+
     function onDropdownChange(event) {
         removeDashboardTable();
-        currentTerm = event.target.value;
-        fetchDataWithAuth(studentUrl,options).then(
-            student => { 
-                let courseArray = []
-                student.enrolledCourses.forEach(
-                    course => {
-                        if ((course.term + ' ' + course.year) == currentTerm) {
-                            courseArray.push(course);
-                        }
-                    }
-                )
-                //creaste table for term if not exist, otherwise add row for corresponding term
-            courseArray.forEach(course => {
+
+        let selectedOption;
+        let options = event.target.options;
+        console.log(options)
+
+        for (const option of options) {
+            if(option.selected){
+                selectedOption = option;
+            }
+        }
+
+        let selectedTerm = {}
+
+        //get term data attribute
+        selectedTerm.term = selectedOption.getAttribute("data_term")
+
+        //get year data attribute
+        selectedTerm.year = parseInt(selectedOption.getAttribute("data_year"))
+
+        let courseArray = []
+
+        student["enrolledCourses"].forEach(course => {
+
+                let termMatch = course.term === selectedTerm.term;
+                let yearMatch = course.year === selectedTerm.year;
+
+                let courseMatch = termMatch && yearMatch;
+
+                if(courseMatch){
+                    courseArray.push(course)
+                }
+                else{
+                    console.log("no match")
+                }
+
+        })
+
+
+        courseArray.forEach(course => {
             let table = document.getElementById(`table-${course.term} ${course.year}`);
             if (!table) {
-            table = createTable(course.term + ' ' + course.year);
-            container.appendChild(table);
+                table = createTable(course.term + ' ' + course.year);
+                container.appendChild(table);
             }
-            addRow(table, course);
-    });
+            // addRow(table, course);
 
-            });
+            let courseRow = renderCourseRow(course)
+            table.appendChild(courseRow)
+
+
+        });
+
+
     }
-    /*
-    var courses = ["CSC 241", "CSC 242", "CSC 243", "CSC 299","CSC 300","CSC 301","CSC 321","CSC 347","CSC 373","CSC 374"];
-    var coursedropdown = document.getElementById("coursedropdown");
-    for (var i = 0; i < courses.length; i++) {
-        var option = document.createElement("option");
-        option.text = courses[i];
-        coursedropdown.add(option);
-    }*/
+
+
+    // Render current Term Dropdown
+    function renderCurrentTermDropDown(terms){
+        console.log("rendering term")
+        // get the dropdown
+        let dropdown = document.getElementById("termdropdown");
+
+        //clear the elements
+        dropdown.innerHTML = '';
+
+        //set new elements
+        terms.forEach(term => {
+            let option = document.createElement("option");
+            option.setAttribute("data_term", term.term)
+            option.setAttribute("data_year", term.year)
+
+            option.text = `${term.term} ${term.year}`
+            dropdown.add(option);
+        })
+
+        return dropdown
+    }
+
+
+
+
+
+
+
+
+
+
+    //TODO: CREATING A ROW FOR COURSE HISTORY TABLE
+
+    //needs: subject,number,calcgrade,finalgrade,savebutton,delete button
+
+    function renderCourseRow(enrolledCourse){
+
+        let row = document.createElement('tr')
+        row.setAttribute("data_id", enrolledCourse.id)
+
+        //create table data elements
+
+        //courseName
+        const cellCourse = row.insertCell(0);
+        cellCourse.textContent=`${enrolledCourse.course.subject} ${enrolledCourse.course.number}`
+        cellCourse.classList.add('clickable')
+
+        //calc grade
+
+        const cellProgress = row.insertCell(1);
+        cellProgress.textContent = isNaN(enrolledCourse.calculatedGrade) ? 0 : enrolledCourse.calculatedGrade
+
+        const cellGrade = row.insertCell(2);
+
+        const finalGradeSelect = createGradeDropDown(['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'], enrolledCourse.finalGrade)
+        cellGrade.appendChild(finalGradeSelect)
+
+        //save
+        const cellSave = row.insertCell(3);
+        cellSave.innerHTML = "<button class= 'savebtn'><i class='bx bx-save'></i></button>";
+        cellSave.addEventListener("click",() => updateEnrolledCourseFinalGrade(enrolledCourse, finalGradeSelect.value))
+
+        //delete
+        const cellDelete = row.insertCell(4);
+        cellDelete.innerHTML = '<span class="delete-btn">X</span>';
+        cellDelete.addEventListener("click", () => deleteEnrolledCourse(enrolledCourse.id))
+
+
+        return row;
+    }
+
+    function createGradeDropDown(options, defaultOption=null){
+        console.log("default val", defaultOption)
+        const select = document.createElement('select')
+
+        if(!defaultOption){
+            let disabledOption = document.createElement('option')
+            disabledOption.disabled = true
+            disabledOption.text = "Select Final Grade"
+            select.appendChild(disabledOption)
+        }
+
+        options.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option
+            optionElement.textContent = option
+
+            if(defaultOption === option){
+                optionElement.selected = true
+            }
+            // if(defaultOption === option.value){
+            //     optionElement.selected = true
+            // }
+
+            select.appendChild(optionElement)
+        })
+
+
+
+
+
+
+        return select;
+    }
+
+
+
+
+    async function deleteEnrolledCourse(id) {
+        console.log("DEL")
+        console.log(id)
+        await deleteCourse(id)
+    }
+
+    async function updateEnrolledCourseFinalGrade(course, grade) {
+        console.log("UP")
+        console.log(grade)
+        course.finalGrade = grade;
+        await updateCourse(course)
+    }
+
+
+
+    //TODO: Rename course to enrolled-Course
+//     function addRow(table, course) {
+//         const tbody = table.getElementsByTagName('tbody')[0];
+//         const row = tbody.insertRow();
+//
+//         //set course id for row
+//         row.setAttribute("data_id", course.id)
+//
+//
+//
+//         const cellCourse = row.insertCell(0);
+//         const cellProgress = row.insertCell(1);
+//         const cellGrade = row.insertCell(2);
+//         const cellSave = row.insertCell(3);
+//         const cellDelete = row.insertCell(4);
+//         cellCourse.textContent = course.course.subject + ' ' + course.course.number;
+//         cellCourse.classList.add('clickable');
+//         if (isNaN(course.calculatedGrade)) {
+//             cellProgress.textContent = "0"
+//         } else {
+//             cellProgress.textContent = course.calculatedGrade;
+//         }
+// //select dropdown for course grade
+//         const selectGrade = document.createElement('select');
+//         const gradeOptions = ['Select Final Grade', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'];
+//         gradeOptions.forEach(grade => {
+//             const option = document.createElement('option');
+//             option.value = grade;
+//             option.textContent = grade;
+//             if (course.grade == grade) {
+//                 option.selected = true;
+//             }
+//             selectGrade.appendChild(option);
+//         });
+//         cellGrade.appendChild(selectGrade);
+//         cellDelete.innerHTML = '<span class="delete-btn" onclick=deleteRow(this)>X</span>';
+//         cellSave.innerHTML = "<button class= 'savebtn'><i class='bx bx-save'></i></button>";
+// //displays modal when clicked
+//         cellCourse.addEventListener('click', function () {
+//             EditGradeCourseModal(course);
+//             initTable();
+//         });
+//
+//         cellSave.querySelector('.savebtn').addEventListener('click', function () {
+//             const selectedGrade = selectGrade.value;
+//             if (selectedGrade !== 'Select Final Grade') {
+//                 window.location.href = 'courseHistory.html';
+//             } else {
+//                 alert('Please select a final grade.');
+//             }
+//         });
+//
+//
+//         console.log('Event listener added to cellCourse');
+//     }
+
+
+
+
+
+//     function deleteRow(button) {
+//         const row = button.closest('tr');
+//         const tbody = row.parentNode;
+//         const table = row.parentNode.parentNode;
+//
+// //delete row
+//         tbody.removeChild(row);
+//         if (tbody.rows.length == 0){
+//             table.parentNode.removeChild(table);
+//         }
+//     }
+
+
+    function deleteRow(button) {
+
+        console.log(button)
+
+        const row = button.closest('tr');
+        console.log(row)
+
+//         const tbody = row.parentNode;
+//         const table = row.parentNode.parentNode;
+//
+// //delete row
+//         tbody.removeChild(row);
+//         if (tbody.rows.length == 0){
+//             table.parentNode.removeChild(table);
+//         }
+    }
+
+
+
+    //FILLS COURSE DROP DOWN
+
+    let coursedropdown = document.getElementById("coursedropdown");
+
+    coursesListLocal.forEach(course => {
+        let option = document.createElement("option");
+        option.text = `${course["subject"]} ${course["number"]}`;
+
+        option.value = course["id"]
+            coursedropdown.add(option);
+        }
+    )
+
+
+    ///////////////////////
+
+
     const addCourseButton = document.querySelector('.bottom-container .create-btn');
-    addCourseButton.addEventListener('click', function() {
+    addCourseButton.addEventListener('click', async function () {
+        console.log("add button clicked")
+
         const term = document.getElementById("seasondropdown").value;
-        const year = document.getElementById("yeartext").value;
-        const termyear = term + " " + year;
-        const coursename = document.getElementById("coursedropdown").value;
-        courseArray.push({ term: termyear, course: coursename, progress: '0%', grade: '-' });
-        updateTerms();
+        let year = parseInt(document.getElementById("yeartext").value);
+
+        // year = parseInt(year)
+
+        const courseID = document.getElementById("coursedropdown").value;
+
+        let courseObj = {term, year, courseID, finalGrade: 'C', credits: 4}
+
+        console.log(courseObj)
+
+        let success = await enrollCourse(courseObj)
+
+        if(success){
+
+        }
+
+
+
+        // enrollCourse(courseObj).then(r => {})
+
+
+        // courseArray.push({ term: termyear, course: coursename, progress: '0%', grade: '-' });
+        // updateTerms();
     });
 
 
@@ -138,154 +366,106 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-/*
-    function createTable(term) {
-        const table = document.createElement('table');
-        table.id = `table-${term}`;
-        table.classList.add('course-table');
-        const thead = table.createTHead();
-        const row = thead.insertRow();
-        const headers = ['Course', 'Progress', 'Final Grade'];
-        headers.forEach(headerText => {
-            const th = document.createElement('th');
-            th.textContent = headerText;
-            row.appendChild(th);
-        });
-        return table;
-    }
 
-    function addRow(table, course) {
-        const tbody = table.createTBody();
-        const row = tbody.insertRow();
-        const values = [course.course, course.progress, course.grade];
-        values.forEach(value => {
-            const cell = row.insertCell();
-            cell.textContent = value;
-        });
-    }
-});
-*/
+    /*
+		function createTable(term) {
+			const table = document.createElement('table');
+			table.id = `table-${term}`;
+			table.classList.add('course-table');
+			const thead = table.createTHead();
+			const row = thead.insertRow();
+			const headers = ['Course', 'Progress', 'Final Grade'];
+			headers.forEach(headerText => {
+				const th = document.createElement('th');
+				th.textContent = headerText;
+				row.appendChild(th);
+			});
+			return table;
+		}
+
+		function addRow(table, course) {
+			const tbody = table.createTBody();
+			const row = tbody.insertRow();
+			const values = [course.course, course.progress, course.grade];
+			values.forEach(value => {
+				const cell = row.insertCell();
+				cell.textContent = value;
+			});
+		}
+	});
+	*/
 //current classlist tables item
-/*
-const courseArray = [
-        { term: 'Winter 2021', course: 'CSC373', progress: '20%', grade: 'Select Final Grade' },
-        { term: 'Winter 2021', course: 'CSC374', progress: '20%', grade: 'Select Final Grade' },
-        { term: 'Winter 2021', course: 'CSC394', progress: '20%', grade: 'Select Final Grade' },
-        { term: 'Winter 2021', course: 'CSC347', progress: '20%', grade: 'Select Final Grade' }
-];
-sortCoursesByTerm(courseArray)
-*/
-const container = document.getElementById('table-container');
+    /*
+	const courseArray = [
+			{ term: 'Winter 2021', course: 'CSC373', progress: '20%', grade: 'Select Final Grade' },
+			{ term: 'Winter 2021', course: 'CSC374', progress: '20%', grade: 'Select Final Grade' },
+			{ term: 'Winter 2021', course: 'CSC394', progress: '20%', grade: 'Select Final Grade' },
+			{ term: 'Winter 2021', course: 'CSC347', progress: '20%', grade: 'Select Final Grade' }
+	];
+	sortCoursesByTerm(courseArray)
+	*/
+    const container = document.getElementById('table-container');
 
 
 //create modal for each course
-function EditGradeCourseModal(course) {
-    document.getElementById('modal-course-number').innerText = course.course.subject + ' ' + course.course.number;
-    document.getElementById('modal').style.display = 'flex';
-    document.querySelector('.close').addEventListener('click', function() {
-        document.getElementById('modal').style.display = 'none';
-        removeTable();
-    });
-}
+    function EditGradeCourseModal(course) {
+        document.getElementById('modal-course-number').innerText = course.course.subject + ' ' + course.course.number;
+        document.getElementById('modal').style.display = 'flex';
+        document.querySelector('.close').addEventListener('click', function () {
+            document.getElementById('modal').style.display = 'none';
+            removeTable();
+        });
+    }
 
 //creaste table for term if not exist, otherwise add row for corresponding term
-/*
-courseArray.forEach(course => {
-let table = document.getElementById(`table-${course.term}`);
-if (!table) {
-    table = createTable(course.term);
-    container.appendChild(table);
-}
-addRow(table, course);
-});
-*/
-function createTable(term) {
+    /*
+	courseArray.forEach(course => {
+	let table = document.getElementById(`table-${course.term}`);
+	if (!table) {
+		table = createTable(course.term);
+		container.appendChild(table);
+	}
+	addRow(table, course);
+	});
+	*/
+    function createTable(term) {
 //build table
-const table = document.createElement('table');
-table.id = `table-${term}`;
-table.className = 'table';
-const thead = document.createElement('thead');
+        const table = document.createElement('table');
+        table.id = `table-${term}`;
+        table.className = 'table';
+        const thead = document.createElement('thead');
 //build initial row
-const tr = document.createElement('tr');
-['Course','Calculated Grade', 'Final Grade', 'Save', 'Delete'].forEach(text => {
-    const th = document.createElement('th');
-    th.textContent = text;
-    tr.appendChild(th);
-});
-thead.appendChild(tr);
-table.appendChild(thead);
-const tbody = document.createElement('tbody');
-table.appendChild(tbody);
-return table;
-}
-
-function addRow(table, course) {
-const tbody = table.getElementsByTagName('tbody')[0];
-const row = tbody.insertRow();
-const cellCourse = row.insertCell(0);
-const cellProgress = row.insertCell(1);
-const cellGrade = row.insertCell(2);
-const cellSave = row.insertCell(3);
-const cellDelete = row.insertCell(4);
-cellCourse.textContent = course.course.subject + ' ' + course.course.number;
-cellCourse.classList.add('clickable');
-if (isNaN(course.calculatedGrade)) {cellProgress.textContent = "0"}
-else {cellProgress.textContent = course.calculatedGrade;}
-//select dropdown for course grade
-const selectGrade = document.createElement('select');
-const gradeOptions = ['Select Final Grade','A','A-','B+', 'B', 'B-','C+','C','C-','D+','D','D-','F'];
-gradeOptions.forEach(grade => {
-    const option = document.createElement('option');
-    option.value = grade;
-    option.textContent = grade;
-    if (course.grade == grade) {
-        option.selected = true; 
+        const tr = document.createElement('tr');
+        ['Course', 'Calculated Grade', 'Final Grade', 'Save', 'Delete'].forEach(text => {
+            const th = document.createElement('th');
+            th.textContent = text;
+            tr.appendChild(th);
+        });
+        thead.appendChild(tr);
+        table.appendChild(thead);
+        const tbody = document.createElement('tbody');
+        table.appendChild(tbody);
+        return table;
     }
-    selectGrade.appendChild(option);
-});
-cellGrade.appendChild(selectGrade);
-cellDelete.innerHTML = '<span class="delete-btn" onclick="deleteRow(this)">X</span>';
-cellSave.innerHTML = "<button class= 'savebtn'><i class='bx bx-save'></i></button>" ;
-//displays modal when clicked
-cellCourse.addEventListener('click', function() {
-    EditGradeCourseModal(course);
-    initTable();
-});
 
-cellSave.querySelector('.savebtn').addEventListener('click', function() {
-    const selectedGrade = selectGrade.value;
-    if (selectedGrade !== 'Select Final Grade') {
-        window.location.href = 'courseHistory.html';
-    } else {
-        alert('Please select a final grade.');
-    }
+
 });
 
 
 
-console.log('Event listener added to cellCourse');
-}
-});
 
-function deleteRow(button) {
-const row = button.closest('tr');
-const tbody = row.parentNode;
-const table = row.parentNode.parentNode;
-//delete row
-tbody.removeChild(row);
-if (tbody.rows.length == 0){
-table.parentNode.removeChild(table);
-}
-}
+
+
+
 
 function sortCoursesByTerm(courses) {
 var quarters = ['Winter', 'Spring', 'Fall'];
 courses.sort(function(a, b) {
 //get Years from the Term
-firstYear = parseInt(a.term.split(' ')[1],10);
-secondYear = parseInt(b.term.split(' ')[1],10);
-firstQuarter = a.term.split(' ')[0];
-secondQuarter = b.term.split(' ')[0];
+let firstYear = parseInt(a.term.split(' ')[1],10);
+let secondYear = parseInt(b.term.split(' ')[1],10);
+let firstQuarter = a.term.split(' ')[0];
+let secondQuarter = b.term.split(' ')[0];
 if(firstYear !== secondYear){
     return firstYear - secondYear;}
 else {
@@ -296,8 +476,8 @@ else {
 }
 function sortCoursesByYear(courses) {
 courses.sort(function(a, b) {
-firstYear = a.term.split(' ');
-secondYear = b.term.split(' ');
+let firstYear = a.term.split(' ');
+let secondYear = b.term.split(' ');
  return sortOrder.indexOf(a.term) - sortOrder.indexOf(b.term);
 });
 
