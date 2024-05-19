@@ -19,13 +19,18 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     //populate current term list
 
-    const Terms = new Set();
+    const termSet = new Set();
+
     student["enrolledCourses"].forEach(
         course => {
             const termObj = {term: course.term, year: course.year}
-            Terms.add(termObj);
+            termSet.add(JSON.stringify(termObj));
         }
     )
+
+    const Terms = Array.from(termSet).map(termStr => JSON.parse(termStr));
+
+
 
     console.log(Terms)
 
@@ -100,7 +105,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         let dropdown = document.getElementById("termdropdown");
 
         //clear the elements
-        dropdown.innerHTML = '';
+        dropdown.innerHTML
 
         //set new elements
         terms.forEach(term => {
