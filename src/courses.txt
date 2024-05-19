@@ -1,4 +1,4 @@
-let courseArray = [
+ [
         {
                 course: 'CSC 200',
                 name: 'Survey of Computing',
@@ -172,8 +172,15 @@ let courseArray = [
                 name: 'Concepts of Programming Languages',
                 description: 'This course examines concepts and programming paradigms that are found in multiple programming languages. Topics include but are not limited to functional programming, type systems, and runtime systems.',
                 credits: '4.00'
-            },
-            {
+            }]
+  
+
+
+
+
+
+
+[          {
                 course: 'CSC 348',
                 name: 'Introduction to Compiler Design',
                 description: 'An overview of the design of a compiler for a general purpose programming language; tools for designing the components of the compiler; implementing the compiler; run time environments.',
@@ -353,7 +360,6 @@ let courseArray = [
                 description: 'Students will work on the design, implementation, and testing of an AI project.',
                 credits: '4.00'
             }
-        ];
+        ]
 
 
-*/
