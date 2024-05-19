@@ -270,6 +270,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const cellCourse = row.insertCell(0);
         cellCourse.textContent=`${enrolledCourse.course.subject} ${enrolledCourse.course.number}`
         cellCourse.classList.add('clickable')
+        cellCourse.addEventListener('click', displayGradeItems )
 
         //calc grade
 
@@ -395,43 +396,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     }
 
-    /*
-		function createTable(term) {
-			const table = document.createElement('table');
-			table.id = `table-${term}`;
-			table.classList.add('course-table');
-			const thead = table.createTHead();
-			const row = thead.insertRow();
-			const headers = ['Course', 'Progress', 'Final Grade'];
-			headers.forEach(headerText => {
-				const th = document.createElement('th');
-				th.textContent = headerText;
-				row.appendChild(th);
-			});
-			return table;
-		}
 
-		function addRow(table, course) {
-			const tbody = table.createTBody();
-			const row = tbody.insertRow();
-			const values = [course.course, course.progress, course.grade];
-			values.forEach(value => {
-				const cell = row.insertCell();
-				cell.textContent = value;
-			});
-		}
-	});
-	*/
-//current classlist tables item
-    /*
-	const courseArray = [
-			{ term: 'Winter 2021', course: 'CSC373', progress: '20%', grade: 'Select Final Grade' },
-			{ term: 'Winter 2021', course: 'CSC374', progress: '20%', grade: 'Select Final Grade' },
-			{ term: 'Winter 2021', course: 'CSC394', progress: '20%', grade: 'Select Final Grade' },
-			{ term: 'Winter 2021', course: 'CSC347', progress: '20%', grade: 'Select Final Grade' }
-	];
-	sortCoursesByTerm(courseArray)
-	*/
+
     const container = document.getElementById('table-container');
 
 
@@ -445,17 +411,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     }
 
-//creaste table for term if not exist, otherwise add row for corresponding term
-    /*
-	courseArray.forEach(course => {
-	let table = document.getElementById(`table-${course.term}`);
-	if (!table) {
-		table = createTable(course.term);
-		container.appendChild(table);
-	}
-	addRow(table, course);
-	});
-	*/
+
     function createTable(term) {
 //build table
         const table = document.createElement('table');
@@ -511,7 +467,29 @@ let secondYear = b.term.split(' ');
 
 }
 
-//------------------------------This is popup table when they click on the cpurse------------------------------------------------------//
+//------------------------------This is popup table when they click on the course------------------------------------------------------//
+
+            function displayGradeItems(){
+                document.getElementById('modal').style.display = 'flex';
+                initTable()
+            }
+
+
+            //get current grade items for course
+
+
+            function closeGradeItems(){
+                document.getElementById('modal').style.display = 'none';
+
+            }
+
+
+
+
+
+
+
+
 
             // List of items
             const itemArray = [
@@ -618,6 +596,7 @@ let secondYear = b.term.split(' ');
             
             // Initialize the table and add rows
             function initTable() {
+                console.log("Table init")
                 const table = createTable();
                 itemArrayContainer.appendChild(table);
                 itemArray.forEach(item => addRow(table, item));
