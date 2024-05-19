@@ -26,6 +26,7 @@ async function loginUser(user, password) {
 		// console.log(`Token Type: ${tokenType}`);
 
 		return accessToken
+		// return true
 		//save to session storage
 
 		//check for access token
@@ -60,11 +61,20 @@ async function handleFormSubmit(event) {
 	const password = event.target[1].value
 
 	let token = await loginUser(userName, password)
-	await setToken(token)
 
-	console.log('accessToken', sessionStorage.getItem('accessToken'))
-	//need to handle bad login
-	event.target.submit()
+	if(token){
+		await setToken(token)
+		event.target.submit()
+	}
+	else{
+		alert("Invalid Login")
+	}
+
+
+	// console.log('accessToken', sessionStorage.getItem('accessToken'))
+
+
+
 
 }
 

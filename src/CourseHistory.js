@@ -1,6 +1,8 @@
 // JavaScript for Course History Page
 
 // Function to sort courses by term
+import {getStudent} from "./getStudent.js";
+
 function sortCoursesByTerm(courses) {
     var quarters = ['Winter', 'Spring', 'Summer I', 'Summer II', 'Fall', 'December Intersession'];
     courses.sort(function(a, b) {
@@ -68,39 +70,8 @@ function addRow(table, course) {
 
 // Function to handle DOMContentLoaded event
 document.addEventListener('DOMContentLoaded', function() {
-    const token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdHVkZW50IiwiaWF0IjoxNzE1OTg1OTIyLCJleHAiOjE3MTU5ODk1MjJ9.hG2Z04mwO7-6Lqo1kPLbDm9kpkWQ131CZeMZu302J-rkHOfNolDWlXlMxDGJ92mfVB3kR-XE61iUBS2XW1wGCA"
-    
-    var options = {
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + token
-            }
 
-    }
-    const url ="/api/student"
-    
-    function fetchData(url, options) {
-        console.log(token);
-        console.log(options)
-        return fetch(url, options)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            return data;
-        });
-    }
-    // List of courses
-    /*const courseArray = [
-        { term: 'December Intersession 2024', course: 'CSC373', progress: '95%', grade: 'A' },
-        { term: 'Fall 1998', course: 'CSC374', progress: '85%', grade: 'B' },
-        { term: 'Spring 2001', course: 'CSC394', progress: '90%', grade: 'A-' },
-        { term: 'Spring 2004', course: 'CSC347', progress: '89%', grade: 'B+' }
-    ];*/
-    fetchData(url,options).then(
+        getStudent().then(
         data => {
             const courseArray = data.enrolledCourses;
          // Sort courses by term

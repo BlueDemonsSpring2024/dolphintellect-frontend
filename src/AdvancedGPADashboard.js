@@ -13,40 +13,63 @@ document.addEventListener('DOMContentLoaded', async function () {
     let student = await getStudent()
 
     //get student info
-    document.getElementById('studentName').innerText = student["name"];
-    document.getElementById('cumulativeGPA').innerText = student["gpa"];
+
+    setStudentInfo()
+
+    function setStudentInfo(){
+        document.getElementById('studentName').innerText = student["name"];
+        document.getElementById('cumulativeGPA').innerText = student["gpa"];
+    }
 
 
-    //populate current term list
+    function getEnrolledTerms(){
+        const termSet = new Set();
 
-    const Terms = new Set();
-    student["enrolledCourses"].forEach(
-        course => {
-            const termObj = {term: course.term, year: course.year}
-            Terms.add(termObj);
-        }
-    )
+        student["enrolledCourses"].forEach(
+            course => {
+                const termObj = {term: course.term, year: course.year}
+                termSet.add(JSON.stringify(termObj));
+            }
+        )
 
-    console.log(Terms)
+        let Terms = Array.from(termSet).map(termStr => JSON.parse(termStr));
 
-    // const TermsArray = Array.from(Terms)
+        //SORT THE TERMS
+        Terms = sortTerms(Terms)
 
+        return Terms
+    }
+
+
+
+
+    let Terms = getEnrolledTerms()
 
     let termdropdown = renderCurrentTermDropDown(Terms)
+
+
+
+    if(Terms.length > 0){
+        let currentOptionElement =  setDefaultCurrentTerm(Terms[Terms.length-1])
+        renderCurrentCourseTable(currentOptionElement)
+
+        let selectedTerm = getCurrentlySelectedTerm()
+    }
+    else{
+        setDefaultCurrentTerm()
+    }
+
+
+
+
+
     termdropdown.addEventListener('change', onDropdownChange);
 
-    function onDropdownChange(event) {
+
+    function renderCurrentCourseTable(currentSelection){
         removeDashboardTable();
 
-        let selectedOption;
-        let options = event.target.options;
-        console.log(options)
-
-        for (const option of options) {
-            if(option.selected){
-                selectedOption = option;
-            }
-        }
+        let selectedOption = currentSelection;
 
         let selectedTerm = {}
 
@@ -59,20 +82,17 @@ document.addEventListener('DOMContentLoaded', async function () {
         let courseArray = []
 
         student["enrolledCourses"].forEach(course => {
+            let termMatch = course.term === selectedTerm.term;
+            let yearMatch = course.year === selectedTerm.year;
 
-                let termMatch = course.term === selectedTerm.term;
-                let yearMatch = course.year === selectedTerm.year;
+            let courseMatch = termMatch && yearMatch;
 
-                let courseMatch = termMatch && yearMatch;
-
-                if(courseMatch){
-                    courseArray.push(course)
-                }
-                else{
-                    console.log("no match")
-                }
-
+            if(courseMatch){
+                courseArray.push(course)
+            }
         })
+
+        const container = document.getElementById('table-container');
 
 
         courseArray.forEach(course => {
@@ -81,26 +101,58 @@ document.addEventListener('DOMContentLoaded', async function () {
                 table = createTable(course.term + ' ' + course.year);
                 container.appendChild(table);
             }
-            // addRow(table, course);
 
             let courseRow = renderCourseRow(course)
             table.appendChild(courseRow)
-
-
         });
 
 
     }
 
 
+    function onDropdownChange(event) {
+
+        let options = event.target.options;
+        let selectedOption
+
+        for (const option of options) {
+            if(option.selected){
+                selectedOption = option;
+            }
+        }
+
+        renderCurrentCourseTable(selectedOption)
+
+
+    }
+
+
+
+    function getCurrentlySelectedTerm(){
+        let dropdown = document.getElementById("termdropdown");
+        let selectedOption;
+
+        for(let i = 0; i< dropdown.options.length; i++){
+            let optionElement = dropdown.options[i];
+
+            if(optionElement.selected ===true){
+                selectedOption = optionElement
+            }
+
+        }
+
+        return selectedOption
+    }
+
+
+
     // Render current Term Dropdown
     function renderCurrentTermDropDown(terms){
-        console.log("rendering term")
         // get the dropdown
         let dropdown = document.getElementById("termdropdown");
 
         //clear the elements
-        dropdown.innerHTML = '';
+        dropdown.innerHTML = ''
 
         //set new elements
         terms.forEach(term => {
@@ -117,10 +169,89 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
 
+    // sort current term
+    function sortTerms(termArray){
+
+        const seasonOrder = ["Autumn", "Winter",  "December Intersession", "Spring" ,"Summer I" , "Summer II" ]
+
+        termArray.sort((a,b)=>{
+            let indexA = seasonOrder.indexOf(a.term)
+            let indexB = seasonOrder.indexOf(b.term)
+
+            if(indexA !== indexB){
+                return indexA - indexB
+            }
+            else {
+                return a.year - b.year
+            }
+
+
+        })
+
+        return termArray
+
+    }
+
+
+    function setDefaultCurrentTerm(currentTerm= null){
+        // get the dropdown
+        let dropdown = document.getElementById("termdropdown");
+
+        //get options
+
+
+        if(currentTerm){
+
+            for(let i = 0; i< dropdown.options.length; i++){
+                let optionElement = dropdown.options[i];
+
+                let data_year = optionElement.getAttribute("data_year")
+                let data_term =  optionElement.getAttribute("data_term")
+
+                if(data_year == currentTerm.year && data_term == currentTerm.term){
+                    optionElement.selected = true;
+
+                    return optionElement
+
+                }
+
+            }
+
+        }
+
+
+    }
 
 
 
+    async function refetchStudent() {
+        student = await getStudent()
+    }
 
+
+    //FUNCTION RERENDER ELEMENTS
+
+    function reRenderUpdatedElements(){
+        // get currently selected term
+        let selectedTerm = getCurrentlySelectedTerm()
+
+        let termObject = {
+            term: selectedTerm.getAttribute('data_term'),
+            year: selectedTerm.getAttribute('data_year')
+        }
+
+        let terms = getEnrolledTerms()
+        renderCurrentTermDropDown(terms)
+
+        setDefaultCurrentTerm(termObject)
+
+        renderCurrentCourseTable(selectedTerm)
+
+        setStudentInfo()
+
+
+
+    }
 
 
 
@@ -139,6 +270,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const cellCourse = row.insertCell(0);
         cellCourse.textContent=`${enrolledCourse.course.subject} ${enrolledCourse.course.number}`
         cellCourse.classList.add('clickable')
+        cellCourse.addEventListener('click', displayGradeItems )
 
         //calc grade
 
@@ -165,7 +297,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     function createGradeDropDown(options, defaultOption=null){
-        console.log("default val", defaultOption)
         const select = document.createElement('select')
 
         if(!defaultOption){
@@ -183,9 +314,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             if(defaultOption === option){
                 optionElement.selected = true
             }
-            // if(defaultOption === option.value){
-            //     optionElement.selected = true
-            // }
 
             select.appendChild(optionElement)
         })
@@ -202,109 +330,19 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
     async function deleteEnrolledCourse(id) {
-        console.log("DEL")
-        console.log(id)
         await deleteCourse(id)
+
+        refetchStudent().then(() => reRenderUpdatedElements())
+
     }
 
     async function updateEnrolledCourseFinalGrade(course, grade) {
-        console.log("UP")
-        console.log(grade)
         course.finalGrade = grade;
         await updateCourse(course)
+
+        refetchStudent().then(() => reRenderUpdatedElements())
     }
 
-
-
-    //TODO: Rename course to enrolled-Course
-//     function addRow(table, course) {
-//         const tbody = table.getElementsByTagName('tbody')[0];
-//         const row = tbody.insertRow();
-//
-//         //set course id for row
-//         row.setAttribute("data_id", course.id)
-//
-//
-//
-//         const cellCourse = row.insertCell(0);
-//         const cellProgress = row.insertCell(1);
-//         const cellGrade = row.insertCell(2);
-//         const cellSave = row.insertCell(3);
-//         const cellDelete = row.insertCell(4);
-//         cellCourse.textContent = course.course.subject + ' ' + course.course.number;
-//         cellCourse.classList.add('clickable');
-//         if (isNaN(course.calculatedGrade)) {
-//             cellProgress.textContent = "0"
-//         } else {
-//             cellProgress.textContent = course.calculatedGrade;
-//         }
-// //select dropdown for course grade
-//         const selectGrade = document.createElement('select');
-//         const gradeOptions = ['Select Final Grade', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'];
-//         gradeOptions.forEach(grade => {
-//             const option = document.createElement('option');
-//             option.value = grade;
-//             option.textContent = grade;
-//             if (course.grade == grade) {
-//                 option.selected = true;
-//             }
-//             selectGrade.appendChild(option);
-//         });
-//         cellGrade.appendChild(selectGrade);
-//         cellDelete.innerHTML = '<span class="delete-btn" onclick=deleteRow(this)>X</span>';
-//         cellSave.innerHTML = "<button class= 'savebtn'><i class='bx bx-save'></i></button>";
-// //displays modal when clicked
-//         cellCourse.addEventListener('click', function () {
-//             EditGradeCourseModal(course);
-//             initTable();
-//         });
-//
-//         cellSave.querySelector('.savebtn').addEventListener('click', function () {
-//             const selectedGrade = selectGrade.value;
-//             if (selectedGrade !== 'Select Final Grade') {
-//                 window.location.href = 'courseHistory.html';
-//             } else {
-//                 alert('Please select a final grade.');
-//             }
-//         });
-//
-//
-//         console.log('Event listener added to cellCourse');
-//     }
-
-
-
-
-
-//     function deleteRow(button) {
-//         const row = button.closest('tr');
-//         const tbody = row.parentNode;
-//         const table = row.parentNode.parentNode;
-//
-// //delete row
-//         tbody.removeChild(row);
-//         if (tbody.rows.length == 0){
-//             table.parentNode.removeChild(table);
-//         }
-//     }
-
-
-    function deleteRow(button) {
-
-        console.log(button)
-
-        const row = button.closest('tr');
-        console.log(row)
-
-//         const tbody = row.parentNode;
-//         const table = row.parentNode.parentNode;
-//
-// //delete row
-//         tbody.removeChild(row);
-//         if (tbody.rows.length == 0){
-//             table.parentNode.removeChild(table);
-//         }
-    }
 
 
 
@@ -322,12 +360,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     )
 
 
-    ///////////////////////
-
 
     const addCourseButton = document.querySelector('.bottom-container .create-btn');
     addCourseButton.addEventListener('click', async function () {
-        console.log("add button clicked")
 
         const term = document.getElementById("seasondropdown").value;
         let year = parseInt(document.getElementById("yeartext").value);
@@ -338,21 +373,15 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         let courseObj = {term, year, courseID, finalGrade: 'C', credits: 4}
 
-        console.log(courseObj)
 
         let success = await enrollCourse(courseObj)
 
         if(success){
-
+            refetchStudent().then(()=> reRenderUpdatedElements())
+            // reRenderUpdatedElements()
         }
 
 
-
-        // enrollCourse(courseObj).then(r => {})
-
-
-        // courseArray.push({ term: termyear, course: coursename, progress: '0%', grade: '-' });
-        // updateTerms();
     });
 
 
@@ -367,43 +396,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     }
 
-    /*
-		function createTable(term) {
-			const table = document.createElement('table');
-			table.id = `table-${term}`;
-			table.classList.add('course-table');
-			const thead = table.createTHead();
-			const row = thead.insertRow();
-			const headers = ['Course', 'Progress', 'Final Grade'];
-			headers.forEach(headerText => {
-				const th = document.createElement('th');
-				th.textContent = headerText;
-				row.appendChild(th);
-			});
-			return table;
-		}
 
-		function addRow(table, course) {
-			const tbody = table.createTBody();
-			const row = tbody.insertRow();
-			const values = [course.course, course.progress, course.grade];
-			values.forEach(value => {
-				const cell = row.insertCell();
-				cell.textContent = value;
-			});
-		}
-	});
-	*/
-//current classlist tables item
-    /*
-	const courseArray = [
-			{ term: 'Winter 2021', course: 'CSC373', progress: '20%', grade: 'Select Final Grade' },
-			{ term: 'Winter 2021', course: 'CSC374', progress: '20%', grade: 'Select Final Grade' },
-			{ term: 'Winter 2021', course: 'CSC394', progress: '20%', grade: 'Select Final Grade' },
-			{ term: 'Winter 2021', course: 'CSC347', progress: '20%', grade: 'Select Final Grade' }
-	];
-	sortCoursesByTerm(courseArray)
-	*/
+
     const container = document.getElementById('table-container');
 
 
@@ -417,17 +411,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     }
 
-//creaste table for term if not exist, otherwise add row for corresponding term
-    /*
-	courseArray.forEach(course => {
-	let table = document.getElementById(`table-${course.term}`);
-	if (!table) {
-		table = createTable(course.term);
-		container.appendChild(table);
-	}
-	addRow(table, course);
-	});
-	*/
+
     function createTable(term) {
 //build table
         const table = document.createElement('table');
@@ -483,7 +467,29 @@ let secondYear = b.term.split(' ');
 
 }
 
-//------------------------------This is popup table when they click on the cpurse------------------------------------------------------//
+//------------------------------This is popup table when they click on the course------------------------------------------------------//
+
+            function displayGradeItems(){
+                document.getElementById('modal').style.display = 'flex';
+                initTable()
+            }
+
+
+            //get current grade items for course
+
+
+            function closeGradeItems(){
+                document.getElementById('modal').style.display = 'none';
+
+            }
+
+
+
+
+
+
+
+
 
             // List of items
             const itemArray = [
@@ -590,6 +596,7 @@ let secondYear = b.term.split(' ');
             
             // Initialize the table and add rows
             function initTable() {
+                console.log("Table init")
                 const table = createTable();
                 itemArrayContainer.appendChild(table);
                 itemArray.forEach(item => addRow(table, item));
